@@ -220,7 +220,7 @@ export default function ContactPage() {
             </div>
             <div data-reveal="scale" className="rounded-3xl overflow-hidden border border-neutral-200 shadow-[0_8px_40px_rgba(0,0,0,0.07)] hover:shadow-[0_16px_60px_rgba(0,40,255,0.1)] transition-shadow duration-500">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.1234!2d50.4937!3d26.2154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDEyJzU1LjQiTiA1MMKwMjknMzcuMiJF!5e0!3m2!1sen!2sbh!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.562!2d50.49152!3d26.21389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49af36e43e1c57%3A0x6b4b1b1de87f1a0b!2sSaar%2C%20Bahrain!5e0!3m2!1sen!2sbh!4v1700000000000!5m2!1sen!2sbh"
                 width="100%"
                 height="420"
                 style={{ border: 0, display: 'block' }}

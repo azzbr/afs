@@ -105,17 +105,17 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
         <div className="container-custom flex items-center justify-between">
           <div className={clsx('flex items-center gap-6', isRTL && 'flex-row-reverse')}>
             <a
-              href="tel:+97317550011"
+              href="tel:+97317612221"
               className="flex items-center gap-1.5 hover:text-brand-gold transition-colors"
             >
               <Phone size={12} />
-              <span>+973 17550011</span>
+              <span>+973 1761 2221</span>
             </a>
             <a
-              href="mailto:contact@afs.edu.bh"
+              href="mailto:info@afs.edu.bh"
               className="hover:text-brand-gold transition-colors"
             >
-              contact@afs.edu.bh
+              info@afs.edu.bh
             </a>
           </div>
           <div className={clsx('flex items-center gap-4', isRTL && 'flex-row-reverse')}>

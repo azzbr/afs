@@ -34,8 +34,8 @@ const content = {
     contact: {
       title: 'Get in Touch',
       address: 'Budaiya Highway, Barbar, Bahrain',
-      phone: '+973 17550011',
-      email: 'contact@afs.edu.bh',
+      phone: '+973 1761 2221',
+      email: 'info@afs.edu.bh',
       hours: 'Sun – Thu: 7:00 AM – 3:00 PM',
     },
     social: 'Follow Us',
@@ -71,8 +71,8 @@ const content = {
     contact: {
       title: 'تواصل معنا',
       address: 'طريق البديع، بربر، البحرين',
-      phone: '+973 17550011',
-      email: 'contact@afs.edu.bh',
+      phone: '+973 1761 2221',
+      email: 'info@afs.edu.bh',
       hours: 'الأحد – الخميس: 7:00 ص – 3:00 م',
     },
     social: 'تابعونا',
@@ -219,8 +219,8 @@ export default function Footer({ lang = 'en' }: FooterProps) {
             <ul className="space-y-4">
               {[
                 { icon: MapPin, text: t.contact.address },
-                { icon: Phone, text: t.contact.phone, href: 'tel:+97317550011' },
-                { icon: Mail, text: t.contact.email, href: 'mailto:contact@afs.edu.bh' },
+                { icon: Phone, text: t.contact.phone, href: 'tel:+97317612221' },
+                { icon: Mail, text: t.contact.email, href: 'mailto:info@afs.edu.bh' },
               ].map(({ icon: Icon, text, href }) => (
                 <li key={text}>
                   {href ? (

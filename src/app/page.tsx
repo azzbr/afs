@@ -4,11 +4,81 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
-import { ArrowRight, ArrowLeft, BookOpen, Globe, Star, Users, MapPin, Phone, Mail, Sparkles, GraduationCap, Trophy, Zap } from 'lucide-react'
+import { ArrowRight, ArrowLeft, BookOpen, Globe, Star, Users, MapPin, Phone, Mail, Sparkles, GraduationCap, Trophy, Zap, ChevronDown, Calendar, Clock, CheckCircle, Shield, Award } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useScrollReveal, useTilt, useSpotlight } from '@/hooks/useScrollReveal'
 import { useTypewriter } from '@/hooks/useTypewriter'
 import { useMagneticButton } from '@/hooks/useMagneticButton'
+
+/* ── Trust / accreditation signals ── */
+const trustItems = {
+  en: [
+    { icon: Shield,      label: 'Bahrain MOE Licensed' },
+    { icon: Award,       label: 'American Curriculum' },
+    { icon: Star,        label: 'STAR 360 Assessment' },
+    { icon: CheckCircle, label: 'Non-Profit Institution' },
+    { icon: Globe,       label: 'Trilingual Education' },
+    { icon: Users,       label: 'KG to Grade 5' },
+  ],
+  ar: [
+    { icon: Shield,      label: 'مرخصة من وزارة التربية' },
+    { icon: Award,       label: 'المنهج الأمريكي' },
+    { icon: Star,        label: 'تقييم STAR 360' },
+    { icon: CheckCircle, label: 'مؤسسة غير ربحية' },
+    { icon: Globe,       label: 'تعليم ثلاثي اللغات' },
+    { icon: Users,       label: 'من الروضة حتى الصف 5' },
+  ],
+}
+
+/* ── Upcoming Events ── */
+const eventsData = {
+  en: [
+    { date: 'Aug 28', month: 'AUG', title: 'Open Day & School Tour', desc: 'Visit classrooms, meet teachers, and learn about our programs.', color: 'from-brand-blue to-blue-700', emoji: '🏫' },
+    { date: 'Sep 1',  month: 'SEP', title: 'First Day of School 2025–26', desc: 'Academic year begins for all grades KG1 through Grade 5.', color: 'from-amber-400 to-orange-500', emoji: '🎒' },
+    { date: 'Sep 15', month: 'SEP', title: 'Parent Welcome Night', desc: "Meet your child's teachers and discover the year's learning plan.", color: 'from-emerald-400 to-teal-600', emoji: '🤝' },
+    { date: 'Oct 5',  month: 'OCT', title: 'Cultural Day 2025', desc: 'Celebrate diversity with costumes, food, and performances.', color: 'from-violet-400 to-purple-600', emoji: '🌍' },
+  ],
+  ar: [
+    { date: '28 أغ', month: 'أغسطس', title: 'اليوم المفتوح وجولة المدرسة', desc: 'زيارة الفصول والالتقاء بالمعلمين والتعرف على برامجنا.', color: 'from-brand-blue to-blue-700', emoji: '🏫' },
+    { date: '1 سبت', month: 'سبتمبر', title: 'أول يوم دراسي 2025–26', desc: 'يبدأ العام الدراسي لجميع الصفوف من KG1 حتى الصف الخامس.', color: 'from-amber-400 to-orange-500', emoji: '🎒' },
+    { date: '15 سبت', month: 'سبتمبر', title: 'ليلة ترحيب بالوالدين', desc: 'التعرف على معلمي أطفالكم والاطلاع على خطة التعلم للعام.', color: 'from-emerald-400 to-teal-600', emoji: '🤝' },
+    { date: '5 أكت', month: 'أكتوبر', title: 'يوم الثقافة 2025', desc: 'الاحتفال بالتنوع بالأزياء والطعام والعروض الثقافية.', color: 'from-violet-400 to-purple-600', emoji: '🌍' },
+  ],
+}
+
+/* ── News preview ── */
+const newsPreviews = {
+  en: [
+    { cat: 'Achievement', title: 'AFS Students Excel in STAR 360 Assessment', excerpt: 'Our students surpassed national benchmarks in reading and mathematics in the latest assessment cycle.', date: 'Mar 2025', color: 'from-brand-blue to-blue-700', emoji: '⭐' },
+    { cat: 'Event', title: 'Annual Graduation Ceremony 2024–2025', excerpt: 'We proudly celebrated our Grade 5 graduates at a heartwarming ceremony attended by families and staff.', date: 'Jun 2025', color: 'from-amber-400 to-orange-500', emoji: '🎓' },
+    { cat: 'Community', title: 'Cultural Day Celebrates Diversity', excerpt: 'Students, parents, and teachers came together to celebrate the rich cultural tapestry of our school community.', date: 'Feb 2025', color: 'from-rose-400 to-pink-600', emoji: '🌍' },
+  ],
+  ar: [
+    { cat: 'إنجاز', title: 'طلاب الفجر يتفوقون في تقييم STAR 360', excerpt: 'تجاوز طلابنا المعايير الوطنية في القراءة والرياضيات في دورة التقييم الأخيرة.', date: 'مارس 2025', color: 'from-brand-blue to-blue-700', emoji: '⭐' },
+    { cat: 'فعالية', title: 'حفل التخرج السنوي 2024–2025', excerpt: 'احتفلنا بفخر بخريجي الصف الخامس في حفل دافئ حضره الأهالي وأعضاء هيئة التدريس.', date: 'يونيو 2025', color: 'from-amber-400 to-orange-500', emoji: '🎓' },
+    { cat: 'مجتمع', title: 'يوم الثقافة يحتفل بالتنوع', excerpt: 'اجتمع الطلاب والأهالي والمعلمون معاً للاحتفال بالنسيج الثقافي الغني لمجتمع مدرستنا.', date: 'فبراير 2025', color: 'from-rose-400 to-pink-600', emoji: '🌍' },
+  ],
+}
+
+/* ── FAQ ── */
+const faqData = {
+  en: [
+    { q: 'What age does KG1 accept?',           a: 'KG1 accepts children who are at least 2 years and 9 months old by September 1 of the enrollment year.' },
+    { q: 'What curriculum does AFS follow?',    a: 'AFS runs a dual curriculum — the American curriculum alongside the Bahrain Ministry of Education (MOE) curriculum, plus a trilingual program in Arabic, English, and French.' },
+    { q: 'Is there a school bus service?',      a: 'Yes, AFS provides a school bus service covering major areas across Bahrain. Contact the admissions office for current routes and fees.' },
+    { q: 'When does enrollment open?',          a: 'Enrollment for the 2025–2026 academic year is currently open. Seats are limited, so early application is strongly advised.' },
+    { q: 'How can I schedule a campus visit?',  a: 'Call us at +973 1761 2221 or email info@afs.edu.bh during school hours (Sun–Thu, 7:30 AM – 3:30 PM) to arrange a personal tour.' },
+    { q: 'Does AFS offer after-school clubs?',  a: 'Yes — AFS offers a variety of after-school programs including arts, sports, drama, and language enrichment activities.' },
+  ],
+  ar: [
+    { q: 'ما الحد الأدنى لعمر القبول في KG1؟',  a: 'يقبل KG1 الأطفال الذين لا يقل عمرهم عن سنتين و9 أشهر بحلول 1 سبتمبر من سنة التسجيل.' },
+    { q: 'ما المناهج التي تتبعها الفجر؟',        a: 'تتبع الفجر منهجاً مزدوجاً: المنهج الأمريكي إلى جانب منهج وزارة التربية البحرينية، إضافة إلى برنامج ثلاثي اللغات (عربي وإنجليزي وفرنسي).' },
+    { q: 'هل تتوفر خدمة الحافلة المدرسية؟',      a: 'نعم، تُوفر الفجر خدمة حافلة تغطي مناطق رئيسية في البحرين. تواصل مع مكتب القبول للاستفسار عن المسارات والرسوم.' },
+    { q: 'متى يفتح باب التسجيل؟',               a: 'التسجيل للعام الدراسي 2025–2026 مفتوح حالياً. المقاعد محدودة، لذا ننصح بالتقديم المبكر.' },
+    { q: 'كيف أرتب زيارة للحرم المدرسي؟',        a: 'اتصل بنا على +973 1761 2221 أو راسلنا على info@afs.edu.bh خلال ساعات الدوام (الأحد–الخميس، 7:30ص–3:30م).' },
+    { q: 'هل تُقدم الفجر أنشطة لامنهجية؟',       a: 'نعم — تُقدم الفجر برامج متنوعة بعد الدراسة منها الفنون والرياضة والمسرح وأنشطة إثراء اللغات.' },
+  ],
+}
 
 /* ── stat items with raw numeric target ── */
 const statsData = {
@@ -200,6 +270,7 @@ function addRipple(e: React.MouseEvent<HTMLElement>) {
 
 export default function HomePage() {
   const [lang, setLang] = useState<'en' | 'ar'>('en')
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
   const isRTL = lang === 'ar'
   const c = content[lang]
   const stats = statsData[lang]
@@ -336,6 +407,22 @@ export default function HomePage() {
             <svg viewBox="0 0 1440 90" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
               <path d="M0 90L1440 90L1440 35C1300 75 1060 5 720 38C380 71 130 10 0 42L0 90Z" />
             </svg>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════
+            TRUST BAR — accreditations
+        ═══════════════════════════════════════ */}
+        <section className="bg-white border-b border-neutral-100 py-5 overflow-hidden">
+          <div className="container-custom">
+            <div className={clsx('flex flex-wrap items-center justify-center gap-x-8 gap-y-3', isRTL && 'flex-row-reverse')}>
+              {trustItems[lang].map((item) => (
+                <div key={item.label} className={clsx('flex items-center gap-2 text-neutral-500 text-xs font-semibold', isRTL && 'flex-row-reverse')}>
+                  <item.icon size={14} className="text-brand-blue flex-shrink-0" />
+                  {item.label}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -588,6 +675,170 @@ export default function HomePage() {
                   <div className={clsx('text-xs mt-1 leading-tight', g.kg ? 'text-white/68' : 'text-neutral-400')}>{g.a}</div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════
+            UPCOMING EVENTS
+        ═══════════════════════════════════════ */}
+        <section className="section-padding bg-white relative overflow-hidden">
+          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-brand-gold/4 rounded-full blur-3xl pointer-events-none" />
+          <div className="container-custom relative z-10">
+            <div className={clsx('mb-10 flex items-end justify-between gap-4', isRTL && 'flex-row-reverse')} data-reveal="fade">
+              <div className={isRTL ? 'text-right' : ''}>
+                <span className="section-tag">{isRTL ? 'الفعاليات القادمة' : 'Upcoming Events'}</span>
+                <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>
+                  {isRTL ? 'ما الذي ينتظرك في الفجر' : "What's Coming at AFS"}
+                </h2>
+              </div>
+              <Link href="/news" className={clsx('hidden md:inline-flex items-center gap-2 text-brand-blue text-sm font-semibold hover:gap-3 transition-all duration-200 flex-shrink-0', isRTL && 'flex-row-reverse')}>
+                {isRTL ? 'كل الأخبار' : 'All News'} <Arr size={14} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {eventsData[lang].map((ev, i) => (
+                <div
+                  key={ev.title}
+                  data-reveal
+                  data-delay={String(i * 100)}
+                  className={clsx('group relative rounded-3xl overflow-hidden border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 cursor-default', isRTL && 'text-right')}
+                >
+                  {/* Color top bar */}
+                  <div className={clsx('h-1.5 bg-gradient-to-r', ev.color)} />
+                  <div className="p-5">
+                    {/* Date badge */}
+                    <div className={clsx('flex items-center gap-3 mb-4', isRTL && 'flex-row-reverse')}>
+                      <div className={clsx('w-11 h-11 rounded-2xl bg-gradient-to-br flex items-center justify-center flex-shrink-0 shadow-sm text-white text-lg', ev.color)}>
+                        {ev.emoji}
+                      </div>
+                      <div className={isRTL ? 'text-right' : ''}>
+                        <div className="text-xs font-bold text-brand-blue uppercase tracking-wider">{ev.month}</div>
+                        <div className="text-sm font-bold text-neutral-800">{ev.date}</div>
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-neutral-900 text-sm mb-1.5 leading-snug">{ev.title}</h3>
+                    <p className="text-neutral-500 text-xs leading-relaxed">{ev.desc}</p>
+                  </div>
+                  <div className={clsx('absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-400', ev.color)} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════
+            NEWS PREVIEW
+        ═══════════════════════════════════════ */}
+        <section className="section-padding bg-neutral-50 relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-brand-blue/4 blur-3xl rounded-full pointer-events-none" />
+          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
+          <div className="container-custom relative z-10">
+            <div className={clsx('mb-10 flex items-end justify-between gap-4', isRTL && 'flex-row-reverse')} data-reveal="fade">
+              <div className={isRTL ? 'text-right' : ''}>
+                <span className="section-tag">{isRTL ? 'أخبار المدرسة' : 'School News'}</span>
+                <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>
+                  {isRTL ? 'آخر أخبار الفجر' : 'Latest from AFS'}
+                </h2>
+              </div>
+              <Link href="/news" className={clsx('hidden md:inline-flex items-center gap-2 text-brand-blue text-sm font-semibold hover:gap-3 transition-all duration-200 flex-shrink-0', isRTL && 'flex-row-reverse')}>
+                {isRTL ? 'كل الأخبار' : 'View All Stories'} <Arr size={14} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {newsPreviews[lang].map((item, i) => (
+                <Link
+                  key={item.title}
+                  href="/news"
+                  data-reveal
+                  data-delay={String(i * 120)}
+                  className={clsx('group relative rounded-3xl overflow-hidden border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500', isRTL && 'text-right')}
+                >
+                  <div className={clsx('relative h-36 flex items-center justify-center bg-gradient-to-br overflow-hidden', item.color)}>
+                    <div className="animate-spin-slow absolute -top-8 -right-8 w-28 h-28 rounded-full border border-white/10 pointer-events-none" />
+                    <span className="text-5xl">{item.emoji}</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  </div>
+                  <div className="p-5">
+                    <div className={clsx('flex items-center gap-2 mb-2', isRTL && 'flex-row-reverse')}>
+                      <span className="text-xs font-bold text-brand-blue bg-brand-blue/8 px-2.5 py-1 rounded-full">{item.cat}</span>
+                      <span className="flex items-center gap-1 text-xs text-neutral-400"><Calendar size={10} />{item.date}</span>
+                    </div>
+                    <h3 className={clsx('font-bold text-neutral-900 text-sm mb-2 leading-snug group-hover:text-brand-blue transition-colors', !isRTL && 'font-playfair')}>{item.title}</h3>
+                    <p className="text-neutral-500 text-xs leading-relaxed line-clamp-2">{item.excerpt}</p>
+                    <div className={clsx('flex items-center gap-1.5 mt-3 text-brand-blue text-xs font-semibold group-hover:gap-2.5 transition-all', isRTL && 'flex-row-reverse')}>
+                      {isRTL ? 'اقرأ المزيد' : 'Read More'} <Arr size={11} />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                </Link>
+              ))}
+            </div>
+            <div className="mt-6 text-center md:hidden">
+              <Link href="/news" className="inline-flex items-center gap-2 text-brand-blue text-sm font-semibold">
+                {isRTL ? 'كل الأخبار' : 'View All Stories'} <Arr size={13} />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════
+            FAQ
+        ═══════════════════════════════════════ */}
+        <section className="section-padding bg-white relative overflow-hidden">
+          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
+          <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-blue/3 rounded-full blur-3xl pointer-events-none" />
+          <div className="container-custom relative z-10">
+            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
+              <span className="section-tag">{isRTL ? 'أسئلة شائعة' : 'FAQ'}</span>
+              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>
+                {isRTL ? 'أسئلة يسألها الأهالي' : 'Common Parent Questions'}
+              </h2>
+              <p className={clsx('section-subtitle mx-auto', isRTL ? '' : 'text-center')}>
+                {isRTL ? 'إجابات للأسئلة الأكثر شيوعاً حول مدرستنا.' : 'Quick answers to the questions we hear most from families.'}
+              </p>
+            </div>
+            <div className="max-w-3xl mx-auto space-y-3">
+              {faqData[lang].map((item, i) => (
+                <div
+                  key={i}
+                  data-reveal
+                  data-delay={String(i * 70)}
+                  className="group rounded-2xl border border-neutral-100 bg-white overflow-hidden hover:border-brand-blue/20 transition-colors duration-300"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className={clsx(
+                      'w-full flex items-center justify-between gap-4 px-6 py-5 text-left font-semibold text-sm transition-colors duration-200',
+                      openFaq === i ? 'text-brand-blue' : 'text-neutral-800 hover:text-brand-blue',
+                      isRTL && 'text-right flex-row-reverse',
+                    )}
+                  >
+                    <span>{item.q}</span>
+                    <ChevronDown
+                      size={16}
+                      className={clsx(
+                        'flex-shrink-0 text-neutral-400 transition-transform duration-300',
+                        openFaq === i ? 'rotate-180 text-brand-blue' : 'group-hover:text-brand-blue',
+                      )}
+                    />
+                  </button>
+                  <div className={clsx(
+                    'overflow-hidden transition-all duration-400 ease-in-out',
+                    openFaq === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0',
+                  )}>
+                    <p className={clsx('px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-50 pt-3', isRTL && 'text-right')}>
+                      {item.a}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={clsx('mt-10 flex justify-center', isRTL && 'flex-row-reverse')} data-reveal="fade">
+              <Link href="/admissions#faq" className={clsx('inline-flex items-center gap-2 text-brand-blue text-sm font-semibold hover:gap-3 transition-all duration-200', isRTL && 'flex-row-reverse')}>
+                {isRTL ? 'عرض كل الأسئلة الشائعة' : 'View All FAQs on Admissions Page'} <Arr size={14} />
+              </Link>
             </div>
           </div>
         </section>
