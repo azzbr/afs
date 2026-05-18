@@ -31,9 +31,10 @@ const navLinks = {
       label: 'Admissions',
       href: '/admissions',
       children: [
-        { label: 'How to Apply',   href: '/admissions' },
-        { label: 'School Fees',    href: '/fees' },
-        { label: 'FAQ',            href: '/admissions#faq' },
+        { label: 'How to Apply',      href: '/admissions' },
+        { label: 'Start Application', href: '/apply' },
+        { label: 'School Fees',       href: '/fees' },
+        { label: 'FAQ',               href: '/admissions#faq' },
       ],
     },
     {
@@ -44,6 +45,13 @@ const navLinks = {
         { label: 'School Calendar',  href: '/calendar' },
         { label: 'News & Stories',   href: '/news' },
         { label: 'Photo Gallery',    href: '/gallery' },
+      ],
+    },
+    {
+      label: 'Our Team',
+      href: '/staff',
+      children: [
+        { label: 'Staff & Faculty',  href: '/staff' },
       ],
     },
     { label: 'Contact', href: '/contact' },
@@ -72,9 +80,10 @@ const navLinks = {
       label: 'القبول',
       href: '/admissions',
       children: [
-        { label: 'كيفية التقديم', href: '/admissions' },
+        { label: 'كيفية التقديم',   href: '/admissions' },
+        { label: 'تقديم الطلب',     href: '/apply' },
         { label: 'الرسوم الدراسية', href: '/fees' },
-        { label: 'أسئلة شائعة',   href: '/admissions#faq' },
+        { label: 'أسئلة شائعة',    href: '/admissions#faq' },
       ],
     },
     {
@@ -85,6 +94,13 @@ const navLinks = {
         { label: 'التقويم المدرسي', href: '/calendar' },
         { label: 'الأخبار',        href: '/news' },
         { label: 'معرض الصور',     href: '/gallery' },
+      ],
+    },
+    {
+      label: 'فريقنا',
+      href: '/staff',
+      children: [
+        { label: 'الكادر التعليمي', href: '/staff' },
       ],
     },
     { label: 'تواصل معنا', href: '/contact' },
