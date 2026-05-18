@@ -4,6 +4,7 @@ import './globals.css'
 import ScrollProgress from '@/components/ScrollProgress/ScrollProgress'
 import FloatingCTA from '@/components/FloatingCTA/FloatingCTA'
 import AnnouncementBanner from '@/components/AnnouncementBanner/AnnouncementBanner'
+import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -89,7 +90,9 @@ export default function RootLayout({
       <body className="antialiased">
         <AnnouncementBanner />
         <ScrollProgress />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
         <FloatingCTA />
       </body>
     </html>
