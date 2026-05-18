@@ -10,7 +10,7 @@ import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const newsItems = [
   {
-    id: 1,
+    id: 1, slug: 'star-360-assessment-results',
     category: 'Achievement', categoryAr: 'إنجاز',
     title: 'AFS Students Excel in STAR 360 Assessment',
     titleAr: 'طلاب الفجر يتفوقون في تقييم STAR 360',
@@ -20,7 +20,7 @@ const newsItems = [
     color: 'from-brand-blue to-blue-700', emoji: '⭐', featured: true, readMin: 3,
   },
   {
-    id: 2,
+    id: 2, slug: 'graduation-ceremony-2025',
     category: 'Event', categoryAr: 'فعالية',
     title: 'Annual Graduation Ceremony 2024–2025',
     titleAr: 'حفل التخرج السنوي 2024–2025',
@@ -30,7 +30,7 @@ const newsItems = [
     color: 'from-amber-400 to-orange-500', emoji: '🎓', featured: false, readMin: 2,
   },
   {
-    id: 3,
+    id: 3, slug: 'enrollment-open-2025-2026',
     category: 'Admissions', categoryAr: 'القبول',
     title: 'Enrollment Now Open for 2025–2026',
     titleAr: 'التسجيل مفتوح للعام 2025–2026',
@@ -40,7 +40,7 @@ const newsItems = [
     color: 'from-emerald-400 to-teal-600', emoji: '📋', featured: false, readMin: 2,
   },
   {
-    id: 4,
+    id: 4, slug: 'cultural-day-2025',
     category: 'Event', categoryAr: 'فعالية',
     title: 'Cultural Day Celebrates Diversity',
     titleAr: 'يوم الثقافة يحتفل بالتنوع',
@@ -50,7 +50,7 @@ const newsItems = [
     color: 'from-rose-400 to-pink-600', emoji: '🌍', featured: false, readMin: 3,
   },
   {
-    id: 5,
+    id: 5, slug: 'french-program-expands',
     category: 'Achievement', categoryAr: 'إنجاز',
     title: 'French Language Program Expands to KG',
     titleAr: 'برنامج اللغة الفرنسية يمتد إلى الروضة',
@@ -60,7 +60,7 @@ const newsItems = [
     color: 'from-violet-400 to-purple-600', emoji: '🇫🇷', featured: false, readMin: 2,
   },
   {
-    id: 6,
+    id: 6, slug: 'parent-teacher-day',
     category: 'Community', categoryAr: 'مجتمع',
     title: 'Parent-Teacher Collaboration Day',
     titleAr: 'يوم التعاون بين الأهالي والمعلمين',
@@ -159,7 +159,7 @@ export default function NewsPage() {
 
             {/* Featured Post */}
             <div data-reveal="scale" className="mb-14">
-              <div className={clsx('group relative rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.14)] transition-all duration-500 cursor-pointer border border-neutral-100', isRTL && 'text-right')}>
+              <Link href={`/news/${featured.slug}`} className={clsx('group relative rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.14)] transition-all duration-500 block border border-neutral-100', isRTL && 'text-right')}>
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-blue via-brand-gold to-brand-blue" />
                 <div className="grid grid-cols-1 md:grid-cols-5">
                   {/* Visual */}
@@ -192,7 +192,7 @@ export default function NewsPage() {
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* Category filter tabs */}
@@ -225,11 +225,12 @@ export default function NewsPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.map((item, i) => (
-                  <div
+                  <Link
                     key={item.id}
+                    href={`/news/${item.slug}`}
                     data-reveal
                     data-delay={String((i % 3) * 120)}
-                    className={clsx('group relative rounded-3xl overflow-hidden border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:border-neutral-200 hover:-translate-y-2 transition-all duration-500 cursor-pointer', isRTL && 'text-right')}
+                    className={clsx('group relative rounded-3xl overflow-hidden border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:border-neutral-200 hover:-translate-y-2 transition-all duration-500 block', isRTL && 'text-right')}
                   >
                     {/* Visual */}
                     <div className={clsx('relative h-44 flex items-center justify-center bg-gradient-to-br overflow-hidden', item.color)}>
@@ -261,7 +262,7 @@ export default function NewsPage() {
                       </span>
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

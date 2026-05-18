@@ -262,7 +262,7 @@ export default function AdmissionsPage() {
         </section>
 
         {/* ── FAQ Accordion ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
+        <section id="faq" className="section-padding bg-white relative overflow-hidden">
           <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
           <div className="container-custom relative z-10">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
@@ -323,7 +323,7 @@ export default function AdmissionsPage() {
             </span>
             <h2 className={clsx('text-3xl md:text-5xl font-bold text-white mb-4', !isRTL && 'font-playfair')}>{c.cta.title}</h2>
             <p className="text-white/55 mb-10 max-w-md mx-auto">{c.cta.subtitle}</p>
-            <Link href="/contact" className="shimmer-btn ripple-btn inline-flex items-center gap-2 px-10 py-4 bg-brand-gold text-neutral-900 font-bold rounded-2xl text-sm hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-1">
+            <Link href="/apply" className="shimmer-btn ripple-btn inline-flex items-center gap-2 px-10 py-4 bg-brand-gold text-neutral-900 font-bold rounded-2xl text-sm hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-1">
               {c.cta.btn} <Arr size={16} />
             </Link>
           </div>

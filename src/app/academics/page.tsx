@@ -42,6 +42,15 @@ const t = {
         { grade: 'Grade 5', age: '9y 9m+', desc: 'Preparation for middle school, independent learning.' },
       ],
     },
+    kg: {
+      tag: 'Early Childhood', title: 'Our Kindergarten Programs',
+      subtitle: 'AFS offers three KG levels designed to provide a warm, structured, and stimulating start to every child\'s educational journey.',
+      items: [
+        { grade: 'KG1', age: '2y 9m+', emoji: '🌱', color: 'from-pink-400 to-rose-500', desc: 'Play-based exploration, sensory learning, and early social development in a nurturing environment.' },
+        { grade: 'KG2', age: '3y 9m+', emoji: '🌟', color: 'from-amber-400 to-orange-500', desc: 'Structured activities, early phonics, number sense, and building independence through guided play.' },
+        { grade: 'KG3', age: '4y 9m+', emoji: '🚀', color: 'from-brand-blue to-indigo-600', desc: 'Pre-academic foundations: reading readiness, writing, mathematics, and bilingual immersion.' },
+      ],
+    },
     cta: { title: 'Enroll Your Child Today', btn: 'Apply for Admission' },
     learnLabel: 'What Students Learn',
   },
@@ -76,6 +85,15 @@ const t = {
         { grade: 'الصف 3', age: '+سبع 9م', desc: 'التفكير النقدي في جميع المواد.' },
         { grade: 'الصف 4', age: '+ثماني 9م', desc: 'الفهم القرائي المتقدم وحل المشكلات.' },
         { grade: 'الصف 5', age: '+تسع 9م', desc: 'الاستعداد للمرحلة المتوسطة.' },
+      ],
+    },
+    kg: {
+      tag: 'الطفولة المبكرة', title: 'برامج رياض الأطفال',
+      subtitle: 'تقدم الفجر ثلاثة مستويات للروضة مصممة لتوفير بداية دافئة ومنظمة ومحفزة لكل طفل.',
+      items: [
+        { grade: 'KG1', age: '+سنتان 9م', emoji: '🌱', color: 'from-pink-400 to-rose-500', desc: 'استكشاف قائم على اللعب وتعلم حسي وتنمية اجتماعية مبكرة في بيئة حنونة.' },
+        { grade: 'KG2', age: '+ثلاث 9م', emoji: '🌟', color: 'from-amber-400 to-orange-500', desc: 'أنشطة منظمة وصوتيات مبكرة وحس الأرقام وبناء الاستقلالية من خلال اللعب الموجّه.' },
+        { grade: 'KG3', age: '+أربع 9م', emoji: '🚀', color: 'from-brand-blue to-indigo-600', desc: 'أسس ما قبل الأكاديمية: الاستعداد للقراءة والكتابة والرياضيات والانغماس ثنائي اللغة.' },
       ],
     },
     cta: { title: 'سجّل طفلك اليوم', btn: 'تقدم بطلب القبول' },
@@ -228,8 +246,42 @@ export default function AcademicsPage() {
           </div>
         </section>
 
+        {/* KG Programs */}
+        <section id="kg" className="section-padding bg-white relative overflow-hidden">
+          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
+          <div className="container-custom relative z-10">
+            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
+              <span className="section-tag mx-auto">{c.kg.tag}</span>
+              <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.kg.title}</h2>
+              <p className="section-subtitle mx-auto text-center">{c.kg.subtitle}</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {c.kg.items.map((item, i) => (
+                <div
+                  key={item.grade}
+                  data-reveal="scale"
+                  data-delay={String(i * 100)}
+                  className="group relative rounded-3xl overflow-hidden hover:-translate-y-2 hover:shadow-[0_24px_64px_rgba(0,0,0,0.12)] transition-all duration-500"
+                >
+                  <div className={clsx('relative h-40 bg-gradient-to-br flex items-center justify-center', item.color)}>
+                    <span className="text-6xl">{item.emoji}</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  </div>
+                  <div className={clsx('p-6 bg-white border border-neutral-100 border-t-0 rounded-b-3xl', isRTL && 'text-right')}>
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <span className="text-lg font-bold font-playfair text-neutral-900">{item.grade}</span>
+                      <span className="text-xs text-neutral-400 font-medium">{item.age}</span>
+                    </div>
+                    <p className="text-sm text-neutral-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Grades */}
-        <section id="grades" className="section-padding bg-white relative overflow-hidden">
+        <section id="grades" className="section-padding bg-neutral-50 relative overflow-hidden">
           <div className="absolute inset-0 dot-pattern opacity-30 pointer-events-none" />
           <div className="container-custom relative z-10">
             <div className={clsx('mb-10', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
