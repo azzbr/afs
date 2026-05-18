@@ -53,11 +53,37 @@ const MSG_MAX = 500
 export default function ContactPage() {
   const [lang, setLang] = useState<'en' | 'ar'>('en')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [msgLen, setMsgLen] = useState(0)
   const [focused, setFocused] = useState<string | null>(null)
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: t.en.form.subjects[0], message: '' })
   const isRTL = lang === 'ar'
   const c = t[lang]
   useScrollReveal()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || 'Something went wrong. Please try again.')
+        setLoading(false)
+      } else {
+        setSubmitted(true)
+      }
+    } catch {
+      setError('Network error. Please check your connection and try again.')
+      setLoading(false)
+    }
+  }
 
   const inputBase = (f: string, extra = '') =>
     clsx(
@@ -147,18 +173,22 @@ export default function ContactPage() {
                     <p className="text-neutral-500 text-sm">{c.sent.body}</p>
                   </div>
                 ) : (
-                  <form className="mt-6 space-y-4" onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}>
+                  <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
 
                     {/* Name + Email row */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="relative">
                         <input id="f-name" type="text" required placeholder=" "
+                          value={formData.name}
+                          onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                           onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
                           className={inputBase('name')} />
                         <label htmlFor="f-name" className={labelBase}>{c.form.fields.name}</label>
                       </div>
                       <div className="relative">
                         <input id="f-email" type="email" required placeholder=" "
+                          value={formData.email}
+                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                           onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
                           className={inputBase('email')} />
                         <label htmlFor="f-email" className={labelBase}>{c.form.fields.email}</label>
@@ -168,6 +198,8 @@ export default function ContactPage() {
                     {/* Phone */}
                     <div className="relative">
                       <input id="f-phone" type="tel" placeholder=" "
+                        value={formData.phone}
+                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                         onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)}
                         className={inputBase('phone')} />
                       <label htmlFor="f-phone" className={labelBase}>{c.form.fields.phone}</label>
@@ -176,6 +208,8 @@ export default function ContactPage() {
                     {/* Subject */}
                     <div className="relative">
                       <select
+                        value={formData.subject}
+                        onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
                         onFocus={() => setFocused('subject')} onBlur={() => setFocused(null)}
                         className={clsx(inputBase('subject', 'appearance-none cursor-pointer'))}
                       >
@@ -188,8 +222,9 @@ export default function ContactPage() {
                     {/* Message + char counter */}
                     <div className="relative">
                       <textarea id="f-msg" rows={5} required maxLength={MSG_MAX} placeholder=" "
+                        value={formData.message}
                         onFocus={() => setFocused('msg')} onBlur={() => setFocused(null)}
-                        onChange={(e) => setMsgLen(e.target.value.length)}
+                        onChange={(e) => { setMsgLen(e.target.value.length); setFormData(prev => ({ ...prev, message: e.target.value })) }}
                         className={clsx(inputBase('msg', 'pt-7 resize-none'))} />
                       <label htmlFor="f-msg" className={labelBase}>{c.form.fields.message}</label>
                       <span className={clsx(
@@ -201,7 +236,22 @@ export default function ContactPage() {
                       </span>
                     </div>
 
-                    <button type="submit" className="shimmer-btn ripple-btn w-full py-4 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-brand-blue-dark hover:shadow-[0_8px_30px_rgba(0,40,255,0.35)] transition-all duration-300 hover:-translate-y-0.5">
+                    {error && (
+                      <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-9v4a1 1 0 102 0V9a1 1 0 10-2 0zm0-4a1 1 0 112 0 1 1 0 01-2 0z" clipRule="evenodd" />
+                        </svg>
+                        <span>{error}</span>
+                      </div>
+                    )}
+
+                    <button type="submit" disabled={loading} className="shimmer-btn ripple-btn w-full py-4 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-brand-blue-dark hover:shadow-[0_8px_30px_rgba(0,40,255,0.35)] transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                      {loading && (
+                        <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                      )}
                       {c.form.fields.btn}
                     </button>
                   </form>
