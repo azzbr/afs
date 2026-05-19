@@ -1,0 +1,83 @@
+[
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "titleEn": "English Language Arts Teacher",
+    "titleAr": "معلم اللغة الإنجليزية والفنون الأدبية",
+    "departmentEn": "English Department",
+    "departmentAr": "قسم اللغة الإنجليزية",
+    "typeEn": "Full-time",
+    "typeAr": "دوام كامل",
+    "descriptionEn": "We are seeking an enthusiastic and experienced English Language Arts Teacher to join our growing team. The ideal candidate will deliver engaging lessons aligned with the American curriculum for students in Grades 1–5, fostering a love of reading, writing, and communication.",
+    "descriptionAr": "نبحث عن معلم متحمس وذو خبرة في اللغة الإنجليزية والفنون الأدبية للانضمام إلى فريقنا المتنامي. سيقدم المرشح المثالي دروسًا جذابة متوافقة مع المنهج الأمريكي لطلاب الصفوف من الأول إلى الخامس.",
+    "requirementsEn": [
+      "Bachelor's degree in English, Education, or related field",
+      "Minimum 2 years teaching experience in an international school",
+      "Native or near-native English proficiency",
+      "Experience with the American curriculum preferred",
+      "Strong classroom management skills"
+    ],
+    "requirementsAr": [
+      "درجة البكالوريوس في اللغة الإنجليزية أو التعليم أو مجال ذي صلة",
+      "خبرة تدريسية لا تقل عن سنتين في مدرسة دولية",
+      "إتقان اللغة الإنجليزية كلغة أم أو شبه أم",
+      "يُفضل الخبرة في المنهج الأمريكي",
+      "مهارات قوية في إدارة الفصل الدراسي"
+    ],
+    "active": true,
+    "postedAt": "2025-07-15T08:00:00.000Z"
+  },
+  {
+    "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "titleEn": "KG Lead Teacher",
+    "titleAr": "معلمة رائدة لمرحلة الروضة",
+    "departmentEn": "Early Childhood Education",
+    "departmentAr": "تعليم الطفولة المبكرة",
+    "typeEn": "Full-time",
+    "typeAr": "دوام كامل",
+    "descriptionEn": "Al Fajer Private School is looking for a dedicated KG Lead Teacher to nurture and educate our youngest learners. You will design and implement a stimulating early childhood curriculum, create a safe and inclusive classroom environment, and communicate effectively with parents.",
+    "descriptionAr": "تبحث مدرسة الفجر الخاصة عن معلمة رائدة مخلصة لمرحلة الروضة لرعاية وتعليم أصغر متعلمينا. ستقومين بتصميم وتنفيذ منهج محفز لتعليم الطفولة المبكرة وخلق بيئة صفية آمنة وشاملة.",
+    "requirementsEn": [
+      "Bachelor's degree in Early Childhood Education or equivalent",
+      "Minimum 3 years experience in a KG setting",
+      "Strong knowledge of child development principles",
+      "Patient, nurturing, and creative personality",
+      "First Aid certification is an advantage"
+    ],
+    "requirementsAr": [
+      "درجة البكالوريوس في تعليم الطفولة المبكرة أو ما يعادلها",
+      "خبرة لا تقل عن 3 سنوات في بيئة الروضة",
+      "معرفة قوية بمبادئ نمو الطفل",
+      "شخصية صبورة ومشجعة وخلاقة",
+      "شهادة الإسعافات الأولية ميزة إضافية"
+    ],
+    "active": true,
+    "postedAt": "2025-07-20T08:00:00.000Z"
+  },
+  {
+    "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    "titleEn": "IT & STEM Coordinator",
+    "titleAr": "منسق تقنية المعلومات والعلوم والتكنولوجيا والهندسة والرياضيات",
+    "departmentEn": "STEM & Technology",
+    "departmentAr": "العلوم والتكنولوجيا والهندسة والرياضيات",
+    "typeEn": "Full-time",
+    "typeAr": "دوام كامل",
+    "descriptionEn": "We are seeking an innovative IT & STEM Coordinator to lead our technology integration and STEM programs across all grade levels. The successful candidate will manage IT infrastructure, develop engaging STEM curricula, run after-school coding clubs, and support teachers in integrating technology into their lessons.",
+    "descriptionAr": "نبحث عن منسق مبتكر لتقنية المعلومات ومواد العلوم والتكنولوجيا والهندسة والرياضيات لقيادة دمج التكنولوجيا وبرامج STEM عبر جميع المراحل الدراسية. سيدير المرشح الناجح البنية التحتية لتقنية المعلومات.",
+    "requirementsEn": [
+      "Bachelor's degree in Computer Science, IT, or STEM Education",
+      "Experience coordinating STEM or technology programs in a school setting",
+      "Proficiency in programming languages (Python, Scratch) and robotics",
+      "Strong project management and organizational skills",
+      "Excellent communication skills in English; Arabic is a plus"
+    ],
+    "requirementsAr": [
+      "درجة البكالوريوس في علوم الحاسوب أو تقنية المعلومات أو تعليم STEM",
+      "خبرة في تنسيق برامج STEM أو التكنولوجيا في بيئة مدرسية",
+      "إتقان لغات البرمجة (Python وScratch) والروبوتيات",
+      "مهارات قوية في إدارة المشاريع والتنظيم",
+      "مهارات تواصل ممتازة بالإنجليزية؛ العربية ميزة إضافية"
+    ],
+    "active": true,
+    "postedAt": "2025-08-01T08:00:00.000Z"
+  }
+]

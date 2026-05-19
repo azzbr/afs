@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
@@ -183,11 +183,19 @@ function FAQItem({ q, a, isRTL }: { q: string; a: string; isRTL: boolean }) {
   )
 }
 
+interface FeeGrade { grade: string; gradeAr: string; annualFee: number; registrationFee: number }
+interface FeesData { currency: string; siblingDiscount: string; paymentTerms: string; noteEn: string; noteAr: string; grades: FeeGrade[] }
+
 export default function FeesPage() {
   const [lang, setLang] = useState<'en' | 'ar'>('en')
+  const [feesData, setFeesData] = useState<FeesData | null>(null)
   const isRTL = lang === 'ar'
   const c = t[lang]
   useScrollReveal()
+
+  useEffect(() => {
+    fetch('/api/content/fees').then(r => r.json()).then(setFeesData).catch(() => {})
+  }, [])
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen">
@@ -371,6 +379,52 @@ export default function FeesPage() {
             </div>
           </div>
         </section>
+
+        {/* ── Live Fee Table ── */}
+        {feesData && (
+          <section className="section-padding bg-neutral-50 relative overflow-hidden">
+            <div className="container-custom relative z-10">
+              <div className={clsx('mb-10', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
+                <span className="section-tag mx-auto">{isRTL ? 'جدول الرسوم' : 'Fee Schedule'}</span>
+                <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>
+                  {isRTL ? 'رسوم العام الدراسي 2025–2026' : '2025–2026 Academic Year Fees'}
+                </h2>
+              </div>
+              <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white shadow-sm" data-reveal="scale">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-neutral-100 bg-neutral-50">
+                      <th className={clsx('px-6 py-4 text-xs font-bold text-neutral-500 uppercase tracking-wider', isRTL ? 'text-right' : 'text-left')}>{isRTL ? 'الصف' : 'Grade'}</th>
+                      <th className={clsx('px-6 py-4 text-xs font-bold text-neutral-500 uppercase tracking-wider', isRTL ? 'text-right' : 'text-left')}>{isRTL ? 'الرسوم السنوية' : 'Annual Tuition'}</th>
+                      <th className={clsx('px-6 py-4 text-xs font-bold text-neutral-500 uppercase tracking-wider', isRTL ? 'text-right' : 'text-left')}>{isRTL ? 'رسوم التسجيل' : 'Registration Fee'}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {feesData.grades.map((g, i) => (
+                      <tr key={g.grade} className={clsx('border-b border-neutral-50 last:border-0', i % 2 === 0 ? 'bg-white' : 'bg-neutral-50/50')}>
+                        <td className={clsx('px-6 py-4 text-sm font-semibold text-neutral-800', isRTL && 'text-right')}>{isRTL ? g.gradeAr : g.grade}</td>
+                        <td className={clsx('px-6 py-4', isRTL && 'text-right')}>
+                          <span className="text-sm font-bold text-brand-blue">{feesData.currency} {g.annualFee.toLocaleString()}</span>
+                          <span className="text-xs text-neutral-400 ml-1">{isRTL ? '/سنة' : '/year'}</span>
+                        </td>
+                        <td className={clsx('px-6 py-4 text-sm text-neutral-600', isRTL && 'text-right')}>
+                          {feesData.currency} {g.registrationFee.toLocaleString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className={clsx('mt-4 flex flex-wrap gap-x-8 gap-y-2 text-xs text-neutral-500', isRTL ? 'justify-end' : 'justify-start')}>
+                <span>{isRTL ? 'خصم الأشقاء:' : 'Sibling discount:'} <strong className="text-neutral-700">{feesData.siblingDiscount}</strong></span>
+                <span>{isRTL ? 'شروط الدفع:' : 'Payment terms:'} <strong className="text-neutral-700">{feesData.paymentTerms}</strong></span>
+              </div>
+              {(isRTL ? feesData.noteAr : feesData.noteEn) && (
+                <p className={clsx('mt-3 text-xs text-neutral-400 italic', isRTL && 'text-right')}>{isRTL ? feesData.noteAr : feesData.noteEn}</p>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* ── FAQ ── */}
         <section className="section-padding bg-white relative overflow-hidden">

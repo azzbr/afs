@@ -52,6 +52,7 @@ const navLinks = {
       href: '/staff',
       children: [
         { label: 'Staff & Faculty',  href: '/staff' },
+        { label: 'Careers',          href: '/careers' },
       ],
     },
     { label: 'Contact', href: '/contact' },
@@ -101,6 +102,7 @@ const navLinks = {
       href: '/staff',
       children: [
         { label: 'الكادر التعليمي', href: '/staff' },
+        { label: 'الوظائف',         href: '/careers' },
       ],
     },
     { label: 'تواصل معنا', href: '/contact' },

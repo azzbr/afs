@@ -1,0 +1,18 @@
+{
+  "currency": "BHD",
+  "siblingDiscount": "10%",
+  "paymentTerms": "Two equal installments",
+  "noteEn": "Fees are subject to change. Contact admissions for the most current information.",
+  "noteAr": "الرسوم قابلة للتغيير. تواصل مع القبول للحصول على أحدث المعلومات.",
+  "updatedAt": "2025-08-01T00:00:00.000Z",
+  "grades": [
+    { "grade": "KG1", "gradeAr": "روضة 1", "annualFee": 1800, "registrationFee": 150 },
+    { "grade": "KG2", "gradeAr": "روضة 2", "annualFee": 1800, "registrationFee": 150 },
+    { "grade": "KG3", "gradeAr": "روضة 3", "annualFee": 1900, "registrationFee": 150 },
+    { "grade": "Grade 1", "gradeAr": "الصف الأول", "annualFee": 2000, "registrationFee": 175 },
+    { "grade": "Grade 2", "gradeAr": "الصف الثاني", "annualFee": 2000, "registrationFee": 175 },
+    { "grade": "Grade 3", "gradeAr": "الصف الثالث", "annualFee": 2100, "registrationFee": 175 },
+    { "grade": "Grade 4", "gradeAr": "الصف الرابع", "annualFee": 2100, "registrationFee": 175 },
+    { "grade": "Grade 5", "gradeAr": "الصف الخامس", "annualFee": 2200, "registrationFee": 200 }
+  ]
+}

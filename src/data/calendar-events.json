@@ -1,0 +1,57 @@
+[
+  {
+    "id": "evt-001-2025",
+    "titleEn": "First Day of School – Academic Year 2025/2026",
+    "titleAr": "أول يوم دراسي – العام الأكاديمي 2025/2026",
+    "date": "2025-09-01",
+    "endDate": null,
+    "typeEn": "Event",
+    "typeAr": "حدث",
+    "descriptionEn": "Welcome back! The first day of the new academic year for all students from KG1 through Grade 5.",
+    "descriptionAr": "مرحبًا بعودتكم! أول يوم دراسي للعام الأكاديمي الجديد لجميع الطلاب من روضة 1 حتى الصف الخامس."
+  },
+  {
+    "id": "evt-002-2025",
+    "titleEn": "National Day Holiday",
+    "titleAr": "عطلة اليوم الوطني",
+    "date": "2025-12-16",
+    "endDate": "2025-12-17",
+    "typeEn": "Holiday",
+    "typeAr": "إجازة",
+    "descriptionEn": "School will be closed in observance of Bahrain National Day and Accession Day.",
+    "descriptionAr": "ستكون المدرسة مغلقة بمناسبة اليوم الوطني البحريني وذكرى الجلوس."
+  },
+  {
+    "id": "evt-003-2025",
+    "titleEn": "Term 1 Assessments",
+    "titleAr": "اختبارات الفصل الدراسي الأول",
+    "date": "2025-11-10",
+    "endDate": "2025-11-14",
+    "typeEn": "Assessment",
+    "typeAr": "تقييم",
+    "descriptionEn": "End-of-term assessments for all grade levels. Students are encouraged to review their coursework and prepare accordingly.",
+    "descriptionAr": "اختبارات نهاية الفصل لجميع المراحل الدراسية. يُشجع الطلاب على مراجعة موادهم الدراسية والاستعداد بشكل مناسب."
+  },
+  {
+    "id": "evt-004-2025",
+    "titleEn": "Parent-Teacher Conferences",
+    "titleAr": "مقابلات أولياء الأمور والمعلمين",
+    "date": "2025-10-22",
+    "endDate": "2025-10-23",
+    "typeEn": "Meeting",
+    "typeAr": "اجتماع",
+    "descriptionEn": "Scheduled meetings between parents and teachers to discuss student progress, academic performance, and areas for improvement.",
+    "descriptionAr": "اجتماعات مجدولة بين أولياء الأمور والمعلمين لمناقشة تقدم الطلاب والأداء الأكاديمي ومجالات التحسين."
+  },
+  {
+    "id": "evt-005-2025",
+    "titleEn": "Winter Break",
+    "titleAr": "إجازة الشتاء",
+    "date": "2025-12-21",
+    "endDate": "2026-01-04",
+    "typeEn": "Holiday",
+    "typeAr": "إجازة",
+    "descriptionEn": "School will be closed for the winter holiday. Classes resume on January 5, 2026.",
+    "descriptionAr": "ستكون المدرسة مغلقة خلال إجازة الشتاء. تستأنف الدراسة في 5 يناير 2026."
+  }
+]
