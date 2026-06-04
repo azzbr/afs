@@ -34,20 +34,20 @@ const content = {
       tag: 'Quick Actions',
       title: 'What Can We Help With?',
       items: [
-        { icon: GraduationCap, label: 'Enroll a Child',   desc: 'Apply for the 2025–2026 academic year',   href: '/admissions',  color: 'from-brand-blue to-blue-700',    bg: 'bg-brand-blue/8',  text: 'text-brand-blue' },
-        { icon: MessageCircle, label: 'WhatsApp Us',      desc: 'Chat with the school office directly',     href: WA_URL,         color: 'from-[#25D366] to-[#1aad55]',   bg: 'bg-[#25D366]/10', text: 'text-[#25D366]', external: true },
-        { icon: Phone,         label: 'Call the Office',  desc: '+973 1761 2221  ·  Sun–Thu 7AM–3:30PM',  href: 'tel:+97317612221', color: 'from-emerald-500 to-teal-600', bg: 'bg-emerald-50',  text: 'text-emerald-700', external: true },
-        { icon: Calendar,      label: 'View Calendar',    desc: 'Academic dates, holidays & events',        href: '/calendar',    color: 'from-violet-500 to-purple-600',  bg: 'bg-violet-50',   text: 'text-violet-700' },
+        { icon: GraduationCap, label: 'Enroll a Child',   desc: 'Apply for the 2025–2026 academic year',   href: '/admissions',  text: 'text-[var(--brand-navy)]' },
+        { icon: MessageCircle, label: 'WhatsApp Us',      desc: 'Chat with the school office directly',     href: WA_URL,         text: 'text-[#25D366]', external: true },
+        { icon: Phone,         label: 'Call the Office',  desc: '+973 1761 2221  ·  Sun–Thu 7AM–3:30PM',  href: 'tel:+97317612221', text: 'text-[var(--brand-navy)]', external: true },
+        { icon: Calendar,      label: 'View Calendar',    desc: 'Academic dates, holidays & events',        href: '/calendar',    text: 'text-[var(--brand-navy)]' },
       ],
     },
     essentials: {
       tag: 'Essential Info',
       title: 'Daily School Life',
       items: [
-        { icon: Clock,          title: 'School Hours',    color: 'from-brand-blue to-blue-700',   detail: 'Students: 7:00 AM – 2:30 PM\nAdmin Office: 7:00 AM – 3:30 PM\nSunday – Thursday' },
-        { icon: Bus,            title: 'School Bus',      color: 'from-amber-400 to-orange-500',  detail: 'Available for major Bahrain areas.\nContact the office for current routes,\ntimetables, and fees.' },
-        { icon: Shirt,          title: 'Uniform',         color: 'from-violet-500 to-purple-600', detail: 'School uniform is required for all\nstudents. Available from the school\noffice at nominal cost.' },
-        { icon: UtensilsCrossed,title: 'Canteen',         color: 'from-emerald-400 to-teal-600',  detail: 'On-campus canteen offers healthy\ndaily options. Lunch orders can be\nplaced at the start of each week.' },
+        { icon: Clock,          title: 'School Hours',       detail: 'Students: 7:00 AM – 2:30 PM\nAdmin Office: 7:00 AM – 3:30 PM\nSunday – Thursday' },
+        { icon: Bus,            title: 'School Bus',         detail: 'Available for major Bahrain areas.\nContact the office for current routes,\ntimetables, and fees.' },
+        { icon: Shirt,          title: 'Uniform',            detail: 'School uniform is required for all\nstudents. Available from the school\noffice at nominal cost.' },
+        { icon: UtensilsCrossed,title: 'Canteen',            detail: 'On-campus canteen offers healthy\ndaily options. Lunch orders can be\nplaced at the start of each week.' },
       ],
     },
     contacts: {
@@ -108,20 +108,20 @@ const content = {
       tag: 'إجراءات سريعة',
       title: 'كيف يمكننا مساعدتك؟',
       items: [
-        { icon: GraduationCap, label: 'تسجيل طفل',     desc: 'تقدم للعام الدراسي 2025–2026',             href: '/admissions',  color: 'from-brand-blue to-blue-700',  bg: 'bg-brand-blue/8', text: 'text-brand-blue' },
-        { icon: MessageCircle, label: 'واتساب',          desc: 'تحدث مع مكتب المدرسة مباشرة',              href: WA_URL,         color: 'from-[#25D366] to-[#1aad55]', bg: 'bg-[#25D366]/10', text: 'text-[#25D366]', external: true },
-        { icon: Phone,         label: 'اتصل بالمكتب',   desc: '+973 1761 2221  ·  الأحد–الخميس 7ص–3:30م', href: 'tel:+97317612221', color: 'from-emerald-500 to-teal-600', bg: 'bg-emerald-50', text: 'text-emerald-700', external: true },
-        { icon: Calendar,      label: 'التقويم المدرسي', desc: 'المواعيد والإجازات والفعاليات',              href: '/calendar',    color: 'from-violet-500 to-purple-600', bg: 'bg-violet-50', text: 'text-violet-700' },
+        { icon: GraduationCap, label: 'تسجيل طفل',     desc: 'تقدم للعام الدراسي 2025–2026',             href: '/admissions',  text: 'text-[var(--brand-navy)]' },
+        { icon: MessageCircle, label: 'واتساب',          desc: 'تحدث مع مكتب المدرسة مباشرة',              href: WA_URL,         text: 'text-[#25D366]', external: true },
+        { icon: Phone,         label: 'اتصل بالمكتب',   desc: '+973 1761 2221  ·  الأحد–الخميس 7ص–3:30م', href: 'tel:+97317612221', text: 'text-[var(--brand-navy)]', external: true },
+        { icon: Calendar,      label: 'التقويم المدرسي', desc: 'المواعيد والإجازات والفعاليات',              href: '/calendar',    text: 'text-[var(--brand-navy)]' },
       ],
     },
     essentials: {
       tag: 'معلومات أساسية',
       title: 'الحياة اليومية في المدرسة',
       items: [
-        { icon: Clock,          title: 'أوقات الدوام',  color: 'from-brand-blue to-blue-700',   detail: 'الطلاب: 7:00 ص – 2:30 م\nالمكتب الإداري: 7:00 ص – 3:30 م\nالأحد – الخميس' },
-        { icon: Bus,            title: 'الحافلة المدرسية', color: 'from-amber-400 to-orange-500', detail: 'متاحة لمناطق رئيسية في البحرين.\nتواصل مع المكتب للاستفسار عن المسارات\nوالجداول الزمنية والرسوم.' },
-        { icon: Shirt,          title: 'الزي المدرسي',  color: 'from-violet-500 to-purple-600', detail: 'الزي المدرسي إلزامي لجميع الطلاب.\nمتاح من مكتب المدرسة\nبتكلفة رمزية.' },
-        { icon: UtensilsCrossed,title: 'الكافيتيريا',   color: 'from-emerald-400 to-teal-600',  detail: 'تقدم الكافيتيريا خيارات صحية يومية.\nيمكن طلب الغداء في بداية\nكل أسبوع.' },
+        { icon: Clock,          title: 'أوقات الدوام',     detail: 'الطلاب: 7:00 ص – 2:30 م\nالمكتب الإداري: 7:00 ص – 3:30 م\nالأحد – الخميس' },
+        { icon: Bus,            title: 'الحافلة المدرسية', detail: 'متاحة لمناطق رئيسية في البحرين.\nتواصل مع المكتب للاستفسار عن المسارات\nوالجداول الزمنية والرسوم.' },
+        { icon: Shirt,          title: 'الزي المدرسي',     detail: 'الزي المدرسي إلزامي لجميع الطلاب.\nمتاح من مكتب المدرسة\nبتكلفة رمزية.' },
+        { icon: UtensilsCrossed,title: 'الكافيتيريا',      detail: 'تقدم الكافيتيريا خيارات صحية يومية.\nيمكن طلب الغداء في بداية\nكل أسبوع.' },
       ],
     },
     contacts: {
@@ -187,39 +187,28 @@ export default function ParentsPage() {
       <main>
 
         {/* ── Hero ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-28 lg:py-36">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full bg-brand-gold/8 blur-[90px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
+        <section className="hero-dark relative overflow-hidden py-28 lg:py-36">
           <div className="container-custom relative z-10">
             <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Sparkles size={11} className="text-brand-gold" />{c.hero.tag}
-                </span>
+              <div className={clsx('mb-5', isRTL && 'flex justify-end')}>
+                <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>
+                  {c.hero.tag}
+                </div>
               </div>
               <h1 className={clsx('font-bold leading-tight mb-5', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>{c.hero.title}</span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-gradient-gold text-glow animate-slide-up" style={{ animationDelay: '250ms' }}>{c.hero.titleAccent}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92">{c.hero.title}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-[var(--brand-gold)]">{c.hero.titleAccent}</span>
               </h1>
-              <p className="text-white/60 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>{c.hero.subtitle}</p>
+              <p className="text-white/60 text-lg leading-relaxed">{c.hero.subtitle}</p>
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
           </div>
         </section>
 
         {/* ── Quick Actions ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-[var(--cream)]">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.quickActions.tag}</span>
+              <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>{c.quickActions.tag}</div>
               <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.quickActions.title}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -231,14 +220,14 @@ export default function ParentsPage() {
                   rel={item.external ? 'noopener noreferrer' : undefined}
                   data-reveal="scale"
                   data-delay={String(i * 100)}
-                  className={clsx('group relative rounded-3xl p-6 border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 overflow-hidden', isRTL && 'text-right')}
+                  className={clsx('group rounded-2xl p-6 border border-[var(--border)] bg-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300', isRTL && 'text-right')}
                 >
-                  <div className={clsx('w-12 h-12 rounded-2xl bg-gradient-to-br flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm', item.color)}>
+                  <div className="w-11 h-11 rounded-lg bg-[var(--brand-navy)] flex items-center justify-center mb-4">
                     <item.icon size={20} className="text-white" />
                   </div>
-                  <h3 className="font-bold text-neutral-900 text-sm mb-1">{item.label}</h3>
+                  <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{item.label}</h3>
                   <p className="text-neutral-500 text-xs leading-relaxed">{item.desc}</p>
-                  <div className={clsx('flex items-center gap-1.5 mt-3 font-semibold text-xs group-hover:gap-2.5 transition-all duration-200', item.text, isRTL && 'flex-row-reverse')}>
+                  <div className={clsx('flex items-center gap-1.5 mt-3 font-semibold text-xs group-hover:gap-2.5 transition-all duration-200 text-[var(--brand-gold)]', isRTL && 'flex-row-reverse')}>
                     {isRTL ? 'انتقل' : 'Go'} <Arr size={11} />
                   </div>
                 </a>
@@ -248,11 +237,10 @@ export default function ParentsPage() {
         </section>
 
         {/* ── Daily Essentials ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-brand-blue/3 rounded-full blur-3xl pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-white">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.essentials.tag}</span>
+              <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>{c.essentials.tag}</div>
               <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.essentials.title}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -261,14 +249,13 @@ export default function ParentsPage() {
                   key={item.title}
                   data-reveal
                   data-delay={String(i * 100)}
-                  className={clsx('group relative rounded-3xl p-6 bg-white border border-neutral-100 hover:shadow-[0_20px_60px_rgba(0,0,0,0.09)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden cursor-default', isRTL && 'text-right')}
+                  className={clsx('rounded-2xl p-6 border border-[var(--border)] bg-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300 cursor-default', isRTL && 'text-right')}
                 >
-                  <div className={clsx('w-12 h-12 rounded-2xl bg-gradient-to-br flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm', item.color)}>
+                  <div className="w-11 h-11 rounded-lg bg-[var(--brand-navy)] flex items-center justify-center mb-4">
                     <item.icon size={20} className="text-white" />
                   </div>
-                  <h3 className="font-bold text-neutral-900 text-sm mb-2">{item.title}</h3>
+                  <h3 className="font-bold text-[var(--ink)] text-sm mb-2">{item.title}</h3>
                   <p className="text-neutral-500 text-xs leading-relaxed whitespace-pre-line">{item.detail}</p>
-                  <div className={clsx('absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-400', item.color)} />
                 </div>
               ))}
             </div>
@@ -276,11 +263,10 @@ export default function ParentsPage() {
         </section>
 
         {/* ── Contacts ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-[var(--cream)]">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.contacts.tag}</span>
+              <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>{c.contacts.tag}</div>
               <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.contacts.title}</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -289,18 +275,17 @@ export default function ParentsPage() {
                   key={item.role}
                   data-reveal
                   data-delay={String(i * 120)}
-                  className={clsx('group relative rounded-3xl p-7 bg-white border border-neutral-100 hover:shadow-[0_20px_60px_rgba(0,40,255,0.08)] hover:border-brand-blue/20 hover:-translate-y-1.5 transition-all duration-500 overflow-hidden', isRTL && 'text-right')}
+                  className={clsx('rounded-2xl p-7 bg-white border border-[var(--border)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300', isRTL && 'text-right')}
                 >
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-blue/25 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                  <h3 className="font-bold text-neutral-900 text-sm mb-1">{item.role}</h3>
+                  <div className="w-2 h-8 bg-[var(--brand-gold)] rounded-full mb-4" />
+                  <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{item.role}</h3>
                   <p className="text-neutral-500 text-xs mb-4">{item.desc}</p>
                   <div className="space-y-2">
-                    <a href={`tel:${item.phone.replace(/\s/g, '')}`} className={clsx('flex items-center gap-2 text-xs text-neutral-600 hover:text-brand-blue transition-colors', isRTL && 'flex-row-reverse')}>
-                      <Phone size={12} className="text-brand-blue flex-shrink-0" /> {item.phone}
+                    <a href={`tel:${item.phone.replace(/\s/g, '')}`} className={clsx('flex items-center gap-2 text-xs text-neutral-600 hover:text-[var(--brand-navy)] transition-colors', isRTL && 'flex-row-reverse')}>
+                      <Phone size={12} className="text-[var(--brand-gold)] flex-shrink-0" /> {item.phone}
                     </a>
-                    <a href={`mailto:${item.email}`} className={clsx('flex items-center gap-2 text-xs text-neutral-600 hover:text-brand-blue transition-colors', isRTL && 'flex-row-reverse')}>
-                      <Mail size={12} className="text-brand-blue flex-shrink-0" /> {item.email}
+                    <a href={`mailto:${item.email}`} className={clsx('flex items-center gap-2 text-xs text-neutral-600 hover:text-[var(--brand-navy)] transition-colors', isRTL && 'flex-row-reverse')}>
+                      <Mail size={12} className="text-[var(--brand-gold)] flex-shrink-0" /> {item.email}
                     </a>
                     <div className={clsx('flex items-center gap-2 text-xs text-neutral-400', isRTL && 'flex-row-reverse')}>
                       <Clock size={12} className="flex-shrink-0" /> {item.hours}
@@ -313,11 +298,10 @@ export default function ParentsPage() {
         </section>
 
         {/* ── School Policies ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-blue/3 rounded-full blur-3xl pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-white">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.policies.tag}</span>
+              <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>{c.policies.tag}</div>
               <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.policies.title}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -326,15 +310,14 @@ export default function ParentsPage() {
                   key={item.title}
                   data-reveal
                   data-delay={String((i % 3) * 100)}
-                  className={clsx('group relative rounded-2xl p-6 bg-white border border-neutral-100 hover:border-brand-blue/20 hover:shadow-[0_12px_40px_rgba(0,40,255,0.07)] transition-all duration-400 hover:-translate-y-1 overflow-hidden', isRTL && 'text-right')}
+                  className={clsx('rounded-2xl p-6 bg-white border border-[var(--border)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300', isRTL && 'text-right')}
                 >
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                   <div className={clsx('flex items-start gap-3', isRTL && 'flex-row-reverse')}>
-                    <div className="w-9 h-9 rounded-xl bg-brand-blue/8 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-blue/15 transition-colors">
-                      <item.icon size={15} className="text-brand-blue" />
+                    <div className="w-9 h-9 rounded-lg bg-[var(--brand-navy)] flex items-center justify-center flex-shrink-0">
+                      <item.icon size={15} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-neutral-900 text-sm mb-1">{item.title}</h3>
+                      <h3 className="font-bold text-[var(--ink)] text-sm mb-1">{item.title}</h3>
                       <p className="text-neutral-500 text-xs leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -345,11 +328,10 @@ export default function ParentsPage() {
         </section>
 
         {/* ── FAQ ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-[var(--cream)]">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.faq.tag}</span>
+              <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>{c.faq.tag}</div>
               <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.faq.title}</h2>
             </div>
             <div className="max-w-3xl mx-auto space-y-3">
@@ -358,21 +340,21 @@ export default function ParentsPage() {
                   key={i}
                   data-reveal
                   data-delay={String(i * 70)}
-                  className="group rounded-2xl border border-neutral-100 bg-white overflow-hidden hover:border-brand-blue/20 transition-colors duration-300"
+                  className="rounded-2xl border border-[var(--border)] bg-white overflow-hidden"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className={clsx(
                       'w-full flex items-center justify-between gap-4 px-6 py-5 text-left font-semibold text-sm transition-colors duration-200',
-                      openFaq === i ? 'text-brand-blue' : 'text-neutral-800 hover:text-brand-blue',
+                      openFaq === i ? 'text-[var(--brand-navy)]' : 'text-[var(--ink)] hover:text-[var(--brand-navy)]',
                       isRTL && 'text-right flex-row-reverse',
                     )}
                   >
                     <span>{item.q}</span>
-                    <ChevronDown size={16} className={clsx('flex-shrink-0 text-neutral-400 transition-transform duration-300', openFaq === i ? 'rotate-180 text-brand-blue' : 'group-hover:text-brand-blue')} />
+                    <ChevronDown size={16} className={clsx('flex-shrink-0 text-neutral-400 transition-transform duration-300', openFaq === i && 'rotate-180 text-[var(--brand-gold)]')} />
                   </button>
                   <div className={clsx('overflow-hidden transition-all duration-400', openFaq === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0')}>
-                    <p className={clsx('px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-50 pt-3', isRTL && 'text-right')}>{item.a}</p>
+                    <p className={clsx('px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-[var(--border)] pt-3', isRTL && 'text-right')}>{item.a}</p>
                   </div>
                 </div>
               ))}
@@ -381,10 +363,10 @@ export default function ParentsPage() {
         </section>
 
         {/* ── Helpful Links ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-white">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.links.tag}</span>
+              <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>{c.links.tag}</div>
               <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.links.title}</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -394,13 +376,12 @@ export default function ParentsPage() {
                   href={item.href}
                   data-reveal="scale"
                   data-delay={String(i * 60)}
-                  className={clsx('group flex flex-col items-center gap-3 p-5 rounded-2xl bg-white border border-neutral-100 hover:border-brand-blue/25 hover:shadow-[0_12px_40px_rgba(0,40,255,0.08)] hover:-translate-y-1.5 transition-all duration-400 text-center overflow-hidden relative', isRTL && 'text-center')}
+                  className="group flex flex-col items-center gap-3 p-5 rounded-2xl bg-white border border-[var(--border)] hover:border-[var(--brand-gold)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300 text-center"
                 >
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                  <div className="w-10 h-10 rounded-xl bg-brand-blue/8 flex items-center justify-center group-hover:bg-brand-blue/15 group-hover:scale-110 transition-all duration-300">
-                    <item.icon size={16} className="text-brand-blue" />
+                  <div className="w-10 h-10 rounded-lg bg-[var(--brand-navy)] flex items-center justify-center group-hover:opacity-80 transition-opacity">
+                    <item.icon size={16} className="text-white" />
                   </div>
-                  <span className="text-xs font-bold text-neutral-700 group-hover:text-brand-blue transition-colors leading-tight">{item.label}</span>
+                  <span className="text-xs font-bold text-[var(--ink)] group-hover:text-[var(--brand-navy)] transition-colors leading-tight">{item.label}</span>
                 </Link>
               ))}
             </div>
@@ -408,11 +389,7 @@ export default function ParentsPage() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-24">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-pulse-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-blue/18 blur-[100px] rounded-full" />
-            <div className="absolute inset-0 dot-pattern opacity-18" />
-          </div>
+        <section className="hero-dark relative overflow-hidden py-24">
           <div className="container-custom relative z-10 text-center" data-reveal="scale">
             <h2 className={clsx('text-3xl md:text-4xl font-bold text-white mb-4', !isRTL && 'font-playfair')}>{c.cta.title}</h2>
             <p className="text-white/60 mb-10 max-w-md mx-auto">{c.cta.subtitle}</p>
@@ -421,13 +398,13 @@ export default function ParentsPage() {
                 href={WA_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shimmer-btn inline-flex items-center gap-2.5 px-8 py-4 bg-[#25D366] text-white font-bold rounded-2xl text-sm hover:shadow-[0_0_50px_rgba(37,211,102,0.5)] transition-all duration-300 hover:-translate-y-1"
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl text-sm hover:opacity-90 transition-all duration-200 hover:-translate-y-0.5"
               >
                 <WhatsAppIcon size={16} /> {c.cta.wa}
               </a>
               <a
                 href="mailto:info@afs.edu.bh"
-                className="inline-flex items-center gap-2 px-8 py-4 border border-white/25 text-white font-semibold rounded-2xl text-sm hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-8 py-4 border border-white/25 text-white font-semibold rounded-xl text-sm hover:bg-white/10 transition-all duration-200 hover:-translate-y-0.5"
               >
                 <Mail size={15} /> {c.cta.email}
               </a>

@@ -168,10 +168,10 @@ const articles = [
 ]
 
 const categoryColors: Record<string, string> = {
-  Achievement: 'bg-brand-blue/8 text-brand-blue',
-  Event:       'bg-amber-50 text-amber-600',
-  Admissions:  'bg-emerald-50 text-emerald-600',
-  Community:   'bg-cyan-50 text-cyan-600',
+  Achievement: 'border border-[rgba(146,112,42,0.3)] text-[var(--brand-gold)]',
+  Event:       'border border-neutral-200 text-neutral-600',
+  Admissions:  'border border-neutral-200 text-neutral-600',
+  Community:   'border border-neutral-200 text-neutral-600',
 }
 
 export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -199,34 +199,30 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
       <main className="flex-1">
 
         {/* Hero */}
-        <section className={clsx('relative bg-gradient-to-br overflow-hidden py-24', article.color)}>
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] opacity-5 select-none pointer-events-none">
-              {article.emoji}
-            </div>
-          </div>
-          <div className="relative container-custom">
+        <section className="hero-dark relative overflow-hidden py-24">
+          <div className="container-custom relative z-10">
             {/* Breadcrumb */}
-            <div className={clsx('flex items-center gap-2 text-white/60 text-xs mb-6', isRTL && 'flex-row-reverse')}>
+            <div className={clsx('flex items-center gap-2 text-white/40 text-xs mb-8', isRTL && 'flex-row-reverse')}>
               <Link href="/" className="hover:text-white transition-colors">{isRTL ? 'الرئيسية' : 'Home'}</Link>
               <ChevronRight size={12} className={clsx(isRTL && 'rotate-180')} />
               <Link href="/news" className="hover:text-white transition-colors">{isRTL ? 'الأخبار' : 'News'}</Link>
               <ChevronRight size={12} className={clsx(isRTL && 'rotate-180')} />
-              <span className="text-white/40 truncate max-w-[200px]">{isRTL ? article.titleAr : article.title}</span>
+              <span className="truncate max-w-[200px]">{isRTL ? article.titleAr : article.title}</span>
             </div>
 
             <div className={clsx('max-w-3xl', isRTL && 'text-right')}>
-              <div className={clsx('flex flex-wrap items-center gap-3 mb-5', isRTL && 'flex-row-reverse')}>
-                <span className={clsx('inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-white/20 text-white border border-white/30')}>
-                  <Tag size={10} />
-                  {isRTL ? article.categoryAr : article.category}
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-white/70">
+              <div className={clsx('flex flex-wrap items-center gap-3 mb-6', isRTL && 'flex-row-reverse')}>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-6 h-px bg-[var(--brand-gold)]" />
+                  <span className="text-[var(--brand-gold-light)] text-[10px] font-bold uppercase tracking-widest">
+                    {isRTL ? article.categoryAr : article.category}
+                  </span>
+                </div>
+                <span className="flex items-center gap-1.5 text-xs text-white/40">
                   <Calendar size={10} />
                   {isRTL ? article.dateAr : article.date}
                 </span>
-                <span className="flex items-center gap-1 text-xs text-white/70">
+                <span className="flex items-center gap-1 text-xs text-white/40">
                   <Clock size={10} />
                   {article.readMin} {isRTL ? 'د قراءة' : 'min read'}
                 </span>
@@ -234,15 +230,10 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
               <h1 className={clsx('text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6', !isRTL && 'font-playfair')}>
                 {isRTL ? article.titleAr : article.title}
               </h1>
-              <p className="text-white/70 text-lg leading-relaxed">
+              <p className="text-white/55 text-lg leading-relaxed">
                 {isRTL ? article.excerptAr : article.excerpt}
               </p>
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 50" fill="white" className="w-full block" preserveAspectRatio="none" height="40">
-              <path d="M0,50 C360,0 1080,0 1440,50 L1440,50 L0,50 Z" />
-            </svg>
           </div>
         </section>
 
@@ -259,17 +250,17 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
               </div>
 
               {/* Share + back */}
-              <div className={clsx('flex flex-wrap items-center justify-between gap-4 mt-12 pt-8 border-t border-neutral-100', isRTL && 'flex-row-reverse')}>
+              <div className={clsx('flex flex-wrap items-center justify-between gap-4 mt-12 pt-8 border-t border-[var(--border)]', isRTL && 'flex-row-reverse')}>
                 <Link
                   href="/news"
-                  className={clsx('inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-brand-blue-dark transition-colors', isRTL && 'flex-row-reverse')}
+                  className={clsx('inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-navy)] hover:text-[var(--brand-blue)] transition-colors', isRTL && 'flex-row-reverse')}
                 >
                   <Arr size={14} />
                   {isRTL ? 'العودة إلى الأخبار' : 'Back to News'}
                 </Link>
                 <button
                   onClick={handleShare}
-                  className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-brand-blue transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-[var(--brand-navy)] transition-colors"
                 >
                   <Share2 size={14} />
                   {isRTL ? 'مشاركة المقال' : 'Share Article'}
@@ -281,9 +272,9 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
 
         {/* More articles */}
         {otherArticles.length > 0 && (
-          <section className="py-16 bg-neutral-50 border-t border-neutral-100">
+          <section className="py-16 section-cream border-t border-[var(--border)]">
             <div className="container-custom">
-              <h2 className={clsx('text-xl font-bold font-playfair text-neutral-900 mb-8', isRTL && 'text-right')}>
+              <h2 className={clsx('text-xl font-bold font-playfair text-[var(--ink)] mb-8', isRTL && 'text-right')}>
                 {isRTL ? 'مقالات أخرى' : 'More Stories'}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -291,16 +282,21 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
                   <Link
                     key={item.slug}
                     href={`/news/${item.slug}`}
-                    className={clsx('group rounded-2xl border border-neutral-100 bg-white hover:shadow-lg hover:border-brand-blue/20 transition-all duration-300 overflow-hidden hover:-translate-y-1', isRTL && 'text-right')}
+                    className={clsx('group border border-[var(--border)] bg-white hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden hover:-translate-y-1', isRTL && 'text-right')}
                   >
-                    <div className={clsx('h-28 bg-gradient-to-br flex items-center justify-center', item.color)}>
-                      <span className="text-4xl">{item.emoji}</span>
+                    <div className="h-28 bg-[var(--cream)] flex items-center justify-center border-b border-[var(--border)]">
+                      <div className="text-center">
+                        <div className="w-8 h-0.5 bg-[var(--brand-gold)] mx-auto mb-2" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--brand-gold)]">
+                          {isRTL ? item.categoryAr : item.category}
+                        </span>
+                      </div>
                     </div>
                     <div className="p-4">
-                      <span className={clsx('text-xs font-bold px-2 py-1 rounded-full mb-2 inline-block', categoryColors[item.category] || 'bg-neutral-100 text-neutral-600')}>
+                      <span className={clsx('text-[10px] font-bold uppercase tracking-widest px-2 py-1 mb-2 inline-block', categoryColors[item.category] || 'text-neutral-500')}>
                         {isRTL ? item.categoryAr : item.category}
                       </span>
-                      <h3 className={clsx('font-semibold text-sm text-neutral-900 group-hover:text-brand-blue transition-colors leading-snug', !isRTL && 'font-playfair')}>
+                      <h3 className={clsx('font-semibold text-sm text-[var(--ink)] group-hover:text-[var(--brand-navy)] transition-colors leading-snug', !isRTL && 'font-playfair')}>
                         {isRTL ? item.titleAr : item.title}
                       </h3>
                     </div>

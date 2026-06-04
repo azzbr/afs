@@ -6,26 +6,20 @@ export default function ScrollProgress() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => {
+    const fn = () => {
       const el = document.documentElement
-      const scrolled = el.scrollTop
       const total = el.scrollHeight - el.clientHeight
-      setProgress(total > 0 ? (scrolled / total) * 100 : 0)
+      setProgress(total > 0 ? (el.scrollTop / total) * 100 : 0)
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
   }, [])
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[200] h-[3px] bg-transparent pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 z-[200] h-[2px] bg-transparent pointer-events-none">
       <div
-        className="h-full bg-gradient-to-r from-brand-blue via-brand-gold to-brand-blue transition-none"
+        className="h-full bg-[var(--brand-gold)] transition-none"
         style={{ width: `${progress}%` }}
-      />
-      {/* Glowing tip */}
-      <div
-        className="absolute top-0 h-[3px] w-12 bg-white/60 blur-[3px] -translate-x-full"
-        style={{ left: `${progress}%` }}
       />
     </div>
   )

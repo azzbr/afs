@@ -260,22 +260,12 @@ const t = {
 /* ─────────────────────────── helpers ─────────────────────────── */
 type EventType = 'term' | 'break' | 'event' | 'assessment'
 
-const typeStyles: Record<EventType, { dot: string; badge: string; text: string }> = {
-  term:       { dot: 'bg-blue-500',   badge: 'bg-blue-50 border-blue-200 text-blue-700',   text: 'text-blue-600' },
-  break:      { dot: 'bg-amber-400',  badge: 'bg-amber-50 border-amber-200 text-amber-700', text: 'text-amber-600' },
-  event:      { dot: 'bg-violet-500', badge: 'bg-violet-50 border-violet-200 text-violet-700', text: 'text-violet-600' },
-  assessment: { dot: 'bg-rose-500',   badge: 'bg-rose-50 border-rose-200 text-rose-700',   text: 'text-rose-600' },
+const typeStyles: Record<EventType, { dot: string; rowStyle: string; dayColor: string }> = {
+  term:       { dot: 'bg-[var(--brand-navy)]',  rowStyle: 'border-[var(--border)] bg-white',                          dayColor: 'text-[var(--brand-navy)]' },
+  break:      { dot: 'bg-[var(--brand-gold)]',  rowStyle: 'border-[var(--border)] bg-white',                          dayColor: 'text-[var(--brand-gold)]' },
+  event:      { dot: 'bg-[var(--brand-navy)]',  rowStyle: 'border-[var(--border)] bg-white',                          dayColor: 'text-[var(--brand-navy)]' },
+  assessment: { dot: 'bg-neutral-400',           rowStyle: 'border-[var(--border)] bg-white',                          dayColor: 'text-neutral-500' },
 }
-
-const termCardStyle = (type: 'term' | 'break') =>
-  type === 'term'
-    ? 'border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50'
-    : 'border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50'
-
-const termIconStyle = (type: 'term' | 'break') =>
-  type === 'term'
-    ? 'bg-blue-500 text-white'
-    : 'bg-amber-400 text-white'
 
 /* ─────────────────────────── component ─────────────────────────── */
 export default function CalendarPage() {
@@ -291,43 +281,37 @@ export default function CalendarPage() {
       <main>
 
         {/* ── Hero ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-28 lg:py-36">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-indigo-500/15 blur-[100px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
+        <section className="hero-dark relative overflow-hidden py-28 lg:py-36">
           <div className="container-custom relative z-10">
             <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Calendar size={11} className="text-brand-gold" />
+              <div className={clsx('mb-5', isRTL && 'flex justify-end')}>
+                <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>
                   {c.hero.tag}
-                </span>
+                </div>
               </div>
               <h1 className={clsx('font-bold leading-tight mb-5', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92">
                   {c.hero.title}
                 </span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-gradient-gold animate-slide-up" style={{ animationDelay: '250ms' }}>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-[var(--brand-gold)]">
                   {c.hero.titleAccent}
                 </span>
               </h1>
-              <p className="text-white/60 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <p className="text-white/60 text-lg leading-relaxed">
                 {c.hero.subtitle}
               </p>
 
               {/* Legend inside hero */}
-              <div className="mt-8 animate-fade-in" style={{ animationDelay: '550ms' }}>
+              <div className="mt-8">
                 <p className="text-white/40 text-xs uppercase tracking-widest mb-3 font-semibold">{c.legend.title}</p>
                 <div className={clsx('flex flex-wrap gap-3', isRTL && 'justify-end')}>
                   {[
-                    { color: 'bg-blue-400',   label: c.legend.terms },
-                    { color: 'bg-amber-400',  label: c.legend.holidays },
-                    { color: 'bg-violet-400', label: c.legend.events },
-                    { color: 'bg-rose-400',   label: c.legend.assessments },
+                    { color: 'bg-[var(--brand-navy)]', label: c.legend.terms },
+                    { color: 'bg-[var(--brand-gold)]',  label: c.legend.holidays },
+                    { color: 'bg-[var(--brand-navy)]',  label: c.legend.events },
+                    { color: 'bg-neutral-400',           label: c.legend.assessments },
                   ].map(({ color, label }) => (
-                    <span key={label} className="inline-flex items-center gap-1.5 bg-white/8 border border-white/15 rounded-full px-3 py-1.5 text-white/70 text-xs font-medium backdrop-blur-sm">
+                    <span key={label} className="inline-flex items-center gap-1.5 bg-white/8 border border-white/15 rounded-full px-3 py-1.5 text-white/70 text-xs font-medium">
                       <span className={clsx('w-2 h-2 rounded-full', color)} />
                       {label}
                     </span>
@@ -336,18 +320,13 @@ export default function CalendarPage() {
               </div>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
-          </div>
         </section>
 
         {/* ── Academic Calendar Overview ── */}
         <section className="section-padding bg-white">
           <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.calSection.tag}</span>
+              <div className={clsx('section-tag mx-auto', isRTL && 'flex-row-reverse')}>{c.calSection.tag}</div>
               <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.calSection.title}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -357,18 +336,21 @@ export default function CalendarPage() {
                   data-reveal="scale"
                   data-delay={String(i * 80)}
                   className={clsx(
-                    'group relative rounded-3xl p-6 border-2 transition-all duration-400 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.09)] overflow-hidden cursor-default',
-                    termCardStyle(term.type as 'term' | 'break'),
+                    'rounded-2xl p-6 border border-[var(--border)] bg-[var(--cream)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300 cursor-default',
                     isRTL && 'text-right'
                   )}
                 >
-                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-white/40 blur-2xl pointer-events-none" />
-                  <div className={clsx('w-10 h-10 rounded-2xl flex items-center justify-center mb-4 shadow-sm', termIconStyle(term.type as 'term' | 'break'))}>
-                    {term.type === 'term' ? <BookOpen size={16} /> : <Sun size={16} />}
+                  <div className={clsx(
+                    'w-10 h-10 rounded-lg flex items-center justify-center mb-4',
+                    term.type === 'term' ? 'bg-[var(--brand-navy)]' : 'bg-[var(--brand-gold)]'
+                  )}>
+                    {term.type === 'term'
+                      ? <BookOpen size={16} className="text-white" />
+                      : <Sun size={16} className="text-white" />
+                    }
                   </div>
-                  <h3 className={clsx('font-bold text-neutral-900 text-base mb-2', !isRTL && 'font-playfair')}>{term.label}</h3>
-                  <p className={clsx('text-sm font-semibold', term.type === 'term' ? 'text-blue-600' : 'text-amber-600')}>{term.dates}</p>
-                  <div className={clsx('absolute bottom-0 left-0 right-0 h-1 transition-opacity duration-400 opacity-0 group-hover:opacity-100', term.type === 'term' ? 'bg-gradient-to-r from-blue-400 to-indigo-500' : 'bg-gradient-to-r from-amber-400 to-orange-400')} />
+                  <h3 className={clsx('font-bold text-[var(--ink)] text-base mb-2', !isRTL && 'font-playfair')}>{term.label}</h3>
+                  <p className={clsx('text-sm font-semibold', term.type === 'term' ? 'text-[var(--brand-navy)]' : 'text-[var(--brand-gold)]')}>{term.dates}</p>
                 </div>
               ))}
             </div>
@@ -376,12 +358,10 @@ export default function CalendarPage() {
         </section>
 
         {/* ── Public Holidays ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-300/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-[var(--cream)]">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.holidays.tag}</span>
+              <div className={clsx('section-tag mx-auto', isRTL && 'flex-row-reverse')}>{c.holidays.tag}</div>
               <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.holidays.title}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -391,16 +371,16 @@ export default function CalendarPage() {
                   data-reveal
                   data-delay={String(i * 80)}
                   className={clsx(
-                    'group flex items-start gap-4 rounded-2xl p-5 bg-white border border-amber-100 hover:border-amber-300 hover:shadow-[0_12px_40px_rgba(251,191,36,0.12)] transition-all duration-400 hover:-translate-y-1',
+                    'flex items-start gap-4 rounded-2xl p-5 bg-white border border-[var(--border)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300',
                     isRTL && 'flex-row-reverse text-right'
                   )}
                 >
-                  <div className="shrink-0 w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-200 flex items-center justify-center group-hover:bg-amber-400 group-hover:border-amber-400 transition-all duration-300">
-                    <Icon size={16} className="text-amber-600 group-hover:text-white transition-colors duration-300" />
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[var(--brand-navy)] flex items-center justify-center">
+                    <Icon size={16} className="text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-neutral-900 text-sm mb-1">{name}</p>
-                    <p className="text-amber-600 text-xs font-semibold">{date}</p>
+                    <p className="font-bold text-[var(--ink)] text-sm mb-1">{name}</p>
+                    <p className="text-[var(--brand-gold)] text-xs font-semibold">{date}</p>
                   </div>
                 </div>
               ))}
@@ -412,13 +392,13 @@ export default function CalendarPage() {
         <section className="section-padding bg-white">
           <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.events.tag}</span>
+              <div className={clsx('section-tag mx-auto', isRTL && 'flex-row-reverse')}>{c.events.tag}</div>
               <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.events.title}</h2>
             </div>
 
             <div className="relative">
               {/* Vertical line */}
-              <div className={clsx('hidden lg:block absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-blue/20 via-violet-300/40 to-brand-blue/10 pointer-events-none', isRTL ? 'right-1/2' : 'left-1/2')} />
+              <div className={clsx('hidden lg:block absolute top-0 bottom-0 w-px bg-[var(--border)] pointer-events-none', isRTL ? 'right-1/2' : 'left-1/2')} />
 
               <div className="space-y-8">
                 {c.events.months.map((monthBlock, mi) => (
@@ -434,8 +414,8 @@ export default function CalendarPage() {
                       mi % 2 === 0 ? 'lg:col-start-1 lg:justify-end' : 'lg:col-start-2 lg:justify-start lg:row-start-1',
                     )}>
                       <div className={clsx(
-                        'inline-flex items-center gap-2 rounded-2xl px-5 py-3 border bg-gradient-to-r font-bold text-sm shadow-sm',
-                        'from-brand-blue/5 to-indigo-50 border-brand-blue/15 text-brand-blue',
+                        'inline-flex items-center gap-2 rounded-xl px-5 py-3 border border-[var(--border)] bg-[var(--cream)] font-bold text-sm',
+                        'text-[var(--brand-navy)]',
                         mi % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8',
                       )}>
                         <Calendar size={14} />
@@ -454,13 +434,12 @@ export default function CalendarPage() {
                           <div
                             key={item.label}
                             className={clsx(
-                              'inline-flex items-center gap-3 rounded-xl px-4 py-3 border text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm cursor-default',
-                              styles.badge,
-                              isRTL && 'flex-row-reverse'
+                              'flex items-center gap-3 rounded-xl px-4 py-3 border text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-default border-l-4 border-[var(--brand-gold)] bg-white border-[var(--border)]',
+                              isRTL && 'flex-row-reverse border-l-0 border-r-4'
                             )}
                           >
                             <span className={clsx('shrink-0 w-2 h-2 rounded-full', styles.dot)} />
-                            <span className="font-bold">{item.day}</span>
+                            <span className={clsx('font-bold', styles.dayColor)}>{item.day}</span>
                             <span className="text-neutral-600">{item.label}</span>
                           </div>
                         )
@@ -474,19 +453,15 @@ export default function CalendarPage() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-24">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-pulse-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-blue/18 blur-[100px] rounded-full" />
-            <div className="absolute inset-0 dot-pattern opacity-18" />
-          </div>
+        <section className="hero-dark relative overflow-hidden py-24">
           <div className="container-custom relative z-10 text-center" data-reveal="scale">
             <h2 className={clsx('text-3xl md:text-4xl font-bold text-white mb-4', !isRTL && 'font-playfair')}>{c.cta.title}</h2>
             <p className="text-white/60 mb-8 max-w-xl mx-auto">{c.cta.subtitle}</p>
             <div className={clsx('flex flex-wrap gap-4 justify-center', isRTL && 'flex-row-reverse')}>
-              <Link href="/admissions" className="shimmer-btn ripple-btn inline-flex items-center gap-2 px-8 py-4 bg-brand-gold text-neutral-900 font-bold rounded-2xl text-sm hover:shadow-[0_0_50px_rgba(255,215,0,0.5)] transition-all duration-300 hover:-translate-y-1">
+              <Link href="/admissions" className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--brand-gold)] text-white font-bold rounded-xl text-sm hover:opacity-90 transition-all duration-200 hover:-translate-y-0.5">
                 {c.cta.btn1} <Arr size={16} />
               </Link>
-              <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 border border-white/25 text-white font-semibold rounded-2xl text-sm hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm">
+              <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 border border-white/25 text-white font-semibold rounded-xl text-sm hover:bg-white/10 transition-all duration-200 hover:-translate-y-0.5">
                 {c.cta.btn2}
               </Link>
             </div>

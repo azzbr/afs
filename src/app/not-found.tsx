@@ -41,22 +41,29 @@ export default function NotFound() {
   return (
     <div className={clsx('min-h-screen flex flex-col', isRTL && 'rtl')} dir={isRTL ? 'rtl' : 'ltr'}>
       <Header lang={lang} onLangChange={setLang} />
-      <main className="flex-1 flex items-center justify-center bg-gradient-to-b from-neutral-50 to-white py-24">
-        <div className="container-custom text-center max-w-2xl">
-          {/* Large 404 */}
+      <main className="flex-1 flex items-center justify-center hero-dark py-24">
+        <div className="container-custom text-center max-w-2xl text-white">
+
+          {/* Large code + logo mark */}
           <div className="relative inline-block mb-8">
-            <span className="text-[9rem] font-black font-playfair leading-none bg-gradient-to-br from-brand-blue/20 to-brand-blue/5 bg-clip-text text-transparent select-none">
+            <span
+              className="text-[9rem] font-black font-playfair leading-none select-none"
+              style={{ color: 'var(--brand-gold)', opacity: 0.15 }}
+            >
               {t.code}
             </span>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-blue to-brand-blue-dark flex items-center justify-center shadow-brand">
+              <div
+                className="w-24 h-24 flex items-center justify-center"
+                style={{ background: 'var(--brand-gold)' }}
+              >
                 <span className="text-white font-bold text-3xl font-playfair">A</span>
               </div>
             </div>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold font-playfair text-neutral-900 mb-4">{t.title}</h1>
-          <p className="text-neutral-500 text-lg mb-10 max-w-md mx-auto leading-relaxed">{t.subtitle}</p>
+          <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-4 text-white">{t.title}</h1>
+          <p className="text-white/60 text-lg mb-10 max-w-md mx-auto leading-relaxed">{t.subtitle}</p>
 
           {/* Quick links */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
@@ -64,7 +71,25 @@ export default function NotFound() {
               <Link
                 key={href}
                 href={href}
-                className="flex items-center gap-2 px-5 py-3 rounded-xl border border-neutral-200 bg-white hover:border-brand-blue hover:text-brand-blue hover:bg-blue-50 text-neutral-700 text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                className={clsx(
+                  'flex items-center gap-2 px-5 py-3 border text-sm font-medium transition-all duration-200',
+                  isRTL && 'flex-row-reverse',
+                )}
+                style={{
+                  borderColor: 'rgba(255,255,255,0.2)',
+                  color: 'rgba(255,255,255,0.8)',
+                  background: 'rgba(255,255,255,0.06)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--brand-gold)'
+                  e.currentTarget.style.color = 'white'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.10)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.8)'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
+                }}
               >
                 <Icon size={16} />
                 {label}
@@ -74,7 +99,7 @@ export default function NotFound() {
 
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-brand-blue transition-colors"
+            className={clsx('inline-flex items-center gap-2 text-sm transition-colors text-white/40 hover:text-white/80', isRTL && 'flex-row-reverse')}
           >
             <BackIcon size={14} />
             {t.back}

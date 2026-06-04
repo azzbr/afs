@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
-import { MapPin, Phone, Mail, Clock, Sparkles, ChevronDown } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, ChevronDown } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -13,10 +13,10 @@ const t = {
     info: {
       tag: 'Find Us', title: 'Get in Touch',
       items: [
-        { icon: MapPin, label: 'Address',      value: 'Building 1754, Road 4627, Block 346, Saar, Bahrain', color: 'from-brand-blue to-blue-700' },
-        { icon: Phone,  label: 'Phone',        value: '+973 1761 2221',                                      color: 'from-emerald-500 to-teal-600' },
-        { icon: Mail,   label: 'Email',        value: 'info@afs.edu.bh',                                     color: 'from-amber-400 to-orange-500' },
-        { icon: Clock,  label: 'Office Hours', value: 'Sunday – Thursday\n7:30 AM – 3:30 PM',                color: 'from-violet-500 to-purple-600' },
+        { icon: MapPin, label: 'Address',      value: 'Building 1754, Road 4627, Block 346, Saar, Bahrain' },
+        { icon: Phone,  label: 'Phone',        value: '+973 1761 2221' },
+        { icon: Mail,   label: 'Email',        value: 'info@afs.edu.bh' },
+        { icon: Clock,  label: 'Office Hours', value: 'Sunday – Thursday\n7:30 AM – 3:30 PM' },
       ],
     },
     form: {
@@ -32,10 +32,10 @@ const t = {
     info: {
       tag: 'موقعنا', title: 'تواصل معنا',
       items: [
-        { icon: MapPin, label: 'العنوان',          value: 'مبنى 1754، طريق 4627، مجمع 346، صار، البحرين', color: 'from-brand-blue to-blue-700' },
-        { icon: Phone,  label: 'الهاتف',           value: '+973 1761 2221',                                 color: 'from-emerald-500 to-teal-600' },
-        { icon: Mail,   label: 'البريد الإلكتروني', value: 'info@afs.edu.bh',                               color: 'from-amber-400 to-orange-500' },
-        { icon: Clock,  label: 'ساعات العمل',      value: 'الأحد – الخميس\n7:30 ص – 3:30 م',              color: 'from-violet-500 to-purple-600' },
+        { icon: MapPin, label: 'العنوان',           value: 'مبنى 1754، طريق 4627، مجمع 346، صار، البحرين' },
+        { icon: Phone,  label: 'الهاتف',            value: '+973 1761 2221' },
+        { icon: Mail,   label: 'البريد الإلكتروني', value: 'info@afs.edu.bh' },
+        { icon: Clock,  label: 'ساعات العمل',       value: 'الأحد – الخميس\n7:30 ص – 3:30 م' },
       ],
     },
     form: {
@@ -85,74 +85,74 @@ export default function ContactPage() {
     }
   }
 
-  const inputBase = (f: string, extra = '') =>
+  const inputCls = (f: string, extra = '') =>
     clsx(
-      'w-full px-4 pt-6 pb-2 rounded-xl border text-sm text-neutral-800 focus:outline-none focus:ring-2 focus:ring-brand-blue/15 transition-all duration-200 bg-white',
-      focused === f ? 'border-brand-blue' : 'border-neutral-200 hover:border-neutral-300',
+      'w-full px-4 pt-6 pb-2 border text-sm focus:outline-none transition-colors duration-200 bg-white',
+      focused === f
+        ? 'border-[var(--brand-navy)]'
+        : 'border-[var(--border)] hover:border-[var(--brand-gold)]',
       isRTL && 'text-right',
       extra,
     )
 
-  const labelBase = clsx('absolute top-2 text-[10px] font-bold uppercase tracking-wide text-brand-blue pointer-events-none px-4', isRTL ? 'right-0' : 'left-0')
+  const labelCls = clsx(
+    'absolute top-2 text-[10px] font-bold uppercase tracking-wide pointer-events-none px-4',
+    isRTL ? 'right-0' : 'left-0',
+  )
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen">
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
       <Header lang={lang} onLangChange={setLang} />
-      <main>
+      <main className="flex-1">
 
-        {/* ── Hero ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-28 lg:py-36">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full bg-brand-gold/8 blur-[90px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
-          <div className="container-custom relative z-10">
+        {/* Hero */}
+        <section className="hero-dark py-24">
+          <div className="container-custom">
             <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Sparkles size={11} className="text-brand-gold" />{c.hero.tag}
-                </span>
+              <div className={clsx('section-tag mb-6', isRTL && 'flex-row-reverse')}>
+                {c.hero.tag}
               </div>
-              <h1 className={clsx('font-bold leading-tight mb-5', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>{c.hero.title}</span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-gradient-gold text-glow animate-slide-up" style={{ animationDelay: '250ms' }}>{c.hero.titleAccent}</span>
+              <h1 className="font-bold font-playfair leading-tight mb-5">
+                <span className="block text-4xl md:text-5xl text-white">{c.hero.title}</span>
+                <span className="block text-4xl md:text-5xl" style={{ color: 'var(--brand-gold)' }}>{c.hero.titleAccent}</span>
               </h1>
-              <p className="text-white/60 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>{c.hero.subtitle}</p>
+              <p className="text-white/70 text-lg leading-relaxed">{c.hero.subtitle}</p>
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
           </div>
         </section>
 
-        {/* ── Info + Form ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-25 pointer-events-none" />
-          <div className="container-custom relative z-10">
+        {/* Info + Form */}
+        <section className="py-20 bg-white">
+          <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
 
               {/* Contact Info */}
-              <div data-reveal="left">
-                <span className="section-tag">{c.info.tag}</span>
-                <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.info.title}</h2>
-                <div className="space-y-4 mt-6">
-                  {c.info.items.map((item, i) => (
+              <div>
+                <div className={clsx('section-tag mb-4', isRTL && 'flex-row-reverse')}>
+                  {c.info.tag}
+                </div>
+                <h2 className={clsx('text-2xl font-bold font-playfair mb-6', isRTL && 'text-right')} style={{ color: 'var(--ink)' }}>
+                  {c.info.title}
+                </h2>
+                <div className="space-y-4">
+                  {c.info.items.map((item) => (
                     <div
                       key={item.label}
-                      data-reveal
-                      data-delay={String(i * 90)}
-                      className={clsx('group flex items-start gap-4 p-5 rounded-2xl bg-white border border-neutral-100 hover:border-brand-blue/20 hover:shadow-[0_12px_40px_rgba(0,40,255,0.07)] transition-all duration-400 hover:-translate-y-0.5 overflow-hidden relative', isRTL && 'flex-row-reverse')}
+                      className={clsx(
+                        'flex items-start gap-4 p-5 border bg-white hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300',
+                        isRTL && 'flex-row-reverse',
+                      )}
+                      style={{ borderColor: 'var(--border)' }}
                     >
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                      <div className={clsx('w-11 h-11 rounded-2xl bg-gradient-to-br flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300', item.color)}>
+                      <div
+                        className="w-11 h-11 flex items-center justify-center flex-shrink-0"
+                        style={{ background: 'var(--brand-navy)' }}
+                      >
                         <item.icon size={17} className="text-white" />
                       </div>
                       <div className={isRTL ? 'text-right' : ''}>
-                        <div className="text-xs text-neutral-400 font-bold uppercase tracking-wider mb-1">{item.label}</div>
-                        <div className="text-sm font-semibold text-neutral-800 whitespace-pre-line">{item.value}</div>
+                        <div className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--ink)', opacity: 0.45 }}>{item.label}</div>
+                        <div className="text-sm font-semibold whitespace-pre-line" style={{ color: 'var(--ink)' }}>{item.value}</div>
                       </div>
                     </div>
                   ))}
@@ -160,20 +160,30 @@ export default function ContactPage() {
               </div>
 
               {/* Contact Form */}
-              <div data-reveal="right">
-                <span className="section-tag">{c.form.tag}</span>
-                <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.form.title}</h2>
+              <div>
+                <div className={clsx('section-tag mb-4', isRTL && 'flex-row-reverse')}>
+                  {c.form.tag}
+                </div>
+                <h2 className={clsx('text-2xl font-bold font-playfair mb-6', isRTL && 'text-right')} style={{ color: 'var(--ink)' }}>
+                  {c.form.title}
+                </h2>
 
                 {submitted ? (
-                  <div className="mt-6 rounded-3xl p-10 bg-white border border-neutral-100 text-center animate-scale-in">
-                    <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-4">
-                      <Mail size={28} className="text-emerald-600" />
+                  <div
+                    className="p-10 border text-center"
+                    style={{ borderColor: 'var(--border)' }}
+                  >
+                    <div
+                      className="w-16 h-16 flex items-center justify-center mx-auto mb-4"
+                      style={{ background: 'var(--brand-navy)' }}
+                    >
+                      <Mail size={28} className="text-white" />
                     </div>
-                    <h3 className="font-bold text-neutral-900 text-lg mb-2">{c.sent.title}</h3>
-                    <p className="text-neutral-500 text-sm">{c.sent.body}</p>
+                    <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--ink)' }}>{c.sent.title}</h3>
+                    <p className="text-sm" style={{ color: 'var(--ink)', opacity: 0.55 }}>{c.sent.body}</p>
                   </div>
                 ) : (
-                  <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
 
                     {/* Name + Email row */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -182,16 +192,16 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                           onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
-                          className={inputBase('name')} />
-                        <label htmlFor="f-name" className={labelBase}>{c.form.fields.name}</label>
+                          className={inputCls('name')} />
+                        <label htmlFor="f-name" className={labelCls} style={{ color: 'var(--brand-navy)' }}>{c.form.fields.name}</label>
                       </div>
                       <div className="relative">
                         <input id="f-email" type="email" required placeholder=" "
                           value={formData.email}
                           onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                           onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
-                          className={inputBase('email')} />
-                        <label htmlFor="f-email" className={labelBase}>{c.form.fields.email}</label>
+                          className={inputCls('email')} />
+                        <label htmlFor="f-email" className={labelCls} style={{ color: 'var(--brand-navy)' }}>{c.form.fields.email}</label>
                       </div>
                     </div>
 
@@ -201,8 +211,8 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                         onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)}
-                        className={inputBase('phone')} />
-                      <label htmlFor="f-phone" className={labelBase}>{c.form.fields.phone}</label>
+                        className={inputCls('phone')} />
+                      <label htmlFor="f-phone" className={labelCls} style={{ color: 'var(--brand-navy)' }}>{c.form.fields.phone}</label>
                     </div>
 
                     {/* Subject */}
@@ -211,12 +221,12 @@ export default function ContactPage() {
                         value={formData.subject}
                         onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
                         onFocus={() => setFocused('subject')} onBlur={() => setFocused(null)}
-                        className={clsx(inputBase('subject', 'appearance-none cursor-pointer'))}
+                        className={clsx(inputCls('subject', 'appearance-none cursor-pointer'))}
                       >
                         {c.form.subjects.map((s) => <option key={s}>{s}</option>)}
                       </select>
-                      <label className={labelBase}>{c.form.fields.subject}</label>
-                      <ChevronDown size={14} className={clsx('absolute top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none', isRTL ? 'left-4' : 'right-4')} />
+                      <label className={labelCls} style={{ color: 'var(--brand-navy)' }}>{c.form.fields.subject}</label>
+                      <ChevronDown size={14} className={clsx('absolute top-1/2 -translate-y-1/2 pointer-events-none', isRTL ? 'left-4' : 'right-4')} style={{ color: 'var(--ink)', opacity: 0.4 }} />
                     </div>
 
                     {/* Message + char counter */}
@@ -225,19 +235,18 @@ export default function ContactPage() {
                         value={formData.message}
                         onFocus={() => setFocused('msg')} onBlur={() => setFocused(null)}
                         onChange={(e) => { setMsgLen(e.target.value.length); setFormData(prev => ({ ...prev, message: e.target.value })) }}
-                        className={clsx(inputBase('msg', 'pt-7 resize-none'))} />
-                      <label htmlFor="f-msg" className={labelBase}>{c.form.fields.message}</label>
+                        className={clsx(inputCls('msg', 'pt-7 resize-none'))} />
+                      <label htmlFor="f-msg" className={labelCls} style={{ color: 'var(--brand-navy)' }}>{c.form.fields.message}</label>
                       <span className={clsx(
                         'absolute bottom-3 text-[10px] font-medium tabular-nums',
-                        msgLen > MSG_MAX * 0.9 ? 'text-red-400' : 'text-neutral-400',
                         isRTL ? 'left-4' : 'right-4',
-                      )}>
+                      )} style={{ color: msgLen > MSG_MAX * 0.9 ? '#dc2626' : 'var(--ink)', opacity: msgLen > MSG_MAX * 0.9 ? 1 : 0.4 }}>
                         {msgLen}/{MSG_MAX}
                       </span>
                     </div>
 
                     {error && (
-                      <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+                      <div className="flex items-start gap-3 p-4 border border-red-200 bg-red-50 text-red-700 text-sm" style={{ borderRadius: 0 }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-9v4a1 1 0 102 0V9a1 1 0 10-2 0zm0-4a1 1 0 112 0 1 1 0 01-2 0z" clipRule="evenodd" />
                         </svg>
@@ -245,7 +254,12 @@ export default function ContactPage() {
                       </div>
                     )}
 
-                    <button type="submit" disabled={loading} className="shimmer-btn ripple-btn w-full py-4 bg-brand-blue text-white font-bold rounded-xl text-sm hover:bg-brand-blue-dark hover:shadow-[0_8px_30px_rgba(0,40,255,0.35)] transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-4 font-bold text-sm transition-opacity hover:opacity-90 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      style={{ background: 'var(--brand-navy)', color: 'white' }}
+                    >
                       {loading && (
                         <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -261,14 +275,16 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* ── Map ── */}
-        <section className="section-padding bg-neutral-50">
+        {/* Map */}
+        <section className="py-20" style={{ background: 'var(--cream)' }}>
           <div className="container-custom">
-            <div className={clsx('mb-10', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.map.tag}</span>
-              <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.map.title}</h2>
+            <div className={clsx('mb-10', isRTL ? 'text-right' : 'text-center')}>
+              <div className={clsx('section-tag mb-4', isRTL ? 'flex-row-reverse justify-end' : 'justify-center')}>
+                {c.map.tag}
+              </div>
+              <h2 className="text-2xl font-bold font-playfair" style={{ color: 'var(--brand-navy)' }}>{c.map.title}</h2>
             </div>
-            <div data-reveal="scale" className="rounded-3xl overflow-hidden border border-neutral-200 shadow-[0_8px_40px_rgba(0,0,0,0.07)] hover:shadow-[0_16px_60px_rgba(0,40,255,0.1)] transition-shadow duration-500">
+            <div className="border overflow-hidden" style={{ borderColor: 'var(--border)' }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.562!2d50.49152!3d26.21389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49af36e43e1c57%3A0x6b4b1b1de87f1a0b!2sSaar%2C%20Bahrain!5e0!3m2!1sen!2sbh!4v1700000000000!5m2!1sen!2sbh"
                 width="100%"

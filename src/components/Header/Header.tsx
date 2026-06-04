@@ -13,18 +13,18 @@ const navLinks = {
       label: 'Our School',
       href: '/about',
       children: [
-        { label: 'Who We Are',        href: '/about' },
-        { label: 'Vision & Values',   href: '/about#mission' },
-        { label: 'From the Principal',href: '/about#principal' },
+        { label: 'Who We Are',         href: '/about' },
+        { label: 'Vision & Values',    href: '/about#mission' },
+        { label: 'From the Principal', href: '/about#principal' },
       ],
     },
     {
       label: 'Learning',
       href: '/academics',
       children: [
-        { label: 'Our Curriculum',     href: '/academics' },
+        { label: 'Our Curriculum',      href: '/academics' },
         { label: 'Programs & Languages',href: '/academics#programs' },
-        { label: 'Assessment',         href: '/academics#star360' },
+        { label: 'Assessment',          href: '/academics#star360' },
       ],
     },
     {
@@ -41,18 +41,18 @@ const navLinks = {
       label: 'Families',
       href: '/parents',
       children: [
-        { label: 'Parent Hub',       href: '/parents' },
-        { label: 'School Calendar',  href: '/calendar' },
-        { label: 'News & Stories',   href: '/news' },
-        { label: 'Photo Gallery',    href: '/gallery' },
+        { label: 'Parent Hub',      href: '/parents' },
+        { label: 'School Calendar', href: '/calendar' },
+        { label: 'News & Stories',  href: '/news' },
+        { label: 'Photo Gallery',   href: '/gallery' },
       ],
     },
     {
       label: 'Our Team',
       href: '/staff',
       children: [
-        { label: 'Staff & Faculty',  href: '/staff' },
-        { label: 'Careers',          href: '/careers' },
+        { label: 'Staff & Faculty', href: '/staff' },
+        { label: 'Careers',         href: '/careers' },
       ],
     },
     { label: 'Contact', href: '/contact' },
@@ -72,29 +72,29 @@ const navLinks = {
       label: 'التعلّم',
       href: '/academics',
       children: [
-        { label: 'مناهجنا',        href: '/academics' },
-        { label: 'البرامج واللغات', href: '/academics#programs' },
-        { label: 'التقييم',        href: '/academics#star360' },
+        { label: 'مناهجنا',         href: '/academics' },
+        { label: 'البرامج واللغات',  href: '/academics#programs' },
+        { label: 'التقييم',          href: '/academics#star360' },
       ],
     },
     {
       label: 'القبول',
       href: '/admissions',
       children: [
-        { label: 'كيفية التقديم',   href: '/admissions' },
-        { label: 'تقديم الطلب',     href: '/apply' },
-        { label: 'الرسوم الدراسية', href: '/fees' },
-        { label: 'أسئلة شائعة',    href: '/admissions#faq' },
+        { label: 'كيفية التقديم',    href: '/admissions' },
+        { label: 'تقديم الطلب',      href: '/apply' },
+        { label: 'الرسوم الدراسية',  href: '/fees' },
+        { label: 'أسئلة شائعة',     href: '/admissions#faq' },
       ],
     },
     {
       label: 'الأسرة',
       href: '/parents',
       children: [
-        { label: 'مركز الأهالي',   href: '/parents' },
-        { label: 'التقويم المدرسي', href: '/calendar' },
-        { label: 'الأخبار',        href: '/news' },
-        { label: 'معرض الصور',     href: '/gallery' },
+        { label: 'مركز الأهالي',    href: '/parents' },
+        { label: 'التقويم المدرسي',  href: '/calendar' },
+        { label: 'الأخبار',          href: '/news' },
+        { label: 'معرض الصور',       href: '/gallery' },
       ],
     },
     {
@@ -102,7 +102,7 @@ const navLinks = {
       href: '/staff',
       children: [
         { label: 'الكادر التعليمي', href: '/staff' },
-        { label: 'الوظائف',         href: '/careers' },
+        { label: 'الوظائف',          href: '/careers' },
       ],
     },
     { label: 'تواصل معنا', href: '/contact' },
@@ -117,7 +117,6 @@ interface HeaderProps {
 export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const pathname = usePathname()
   const isRTL = lang === 'ar'
   const links = navLinks[lang]
@@ -126,7 +125,7 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 20)
+    setScrolled(window.scrollY > 24)
   }, [])
 
   useEffect(() => {
@@ -135,54 +134,39 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
   }, [handleScroll])
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  const toggleLang = () => {
-    const next = lang === 'en' ? 'ar' : 'en'
-    onLangChange?.(next)
-  }
+  const toggleLang = () => onLangChange?.(lang === 'en' ? 'ar' : 'en')
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="hidden lg:block bg-brand-blue text-white text-xs py-2">
+      {/* Top strip */}
+      <div className="hidden lg:block bg-[var(--brand-navy)] text-white/70 text-xs py-2">
         <div className="container-custom flex items-center justify-between">
           <div className={clsx('flex items-center gap-6', isRTL && 'flex-row-reverse')}>
-            <a
-              href="tel:+97317612221"
-              className="flex items-center gap-1.5 hover:text-brand-gold transition-colors"
-            >
-              <Phone size={12} />
-              <span>+973 1761 2221</span>
+            <a href="tel:+97317612221" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Phone size={11} />
+              +973 1761 2221
             </a>
-            <a
-              href="mailto:info@afs.edu.bh"
-              className="hover:text-brand-gold transition-colors"
-            >
+            <a href="mailto:info@afs.edu.bh" className="hover:text-white transition-colors">
               info@afs.edu.bh
             </a>
           </div>
-          <div className={clsx('flex items-center gap-4', isRTL && 'flex-row-reverse')}>
-            <span className="opacity-70">
-              {isRTL ? 'طريق البديع، بربر، البحرين' : 'Budaiya Highway, Barbar, Bahrain'}
-            </span>
-          </div>
+          <span className="opacity-60 text-xs">
+            {isRTL ? 'طريق البديع، بربر، البحرين' : 'Budaiya Highway, Barbar, Bahrain'}
+          </span>
         </div>
       </div>
 
-      {/* Main Navigation */}
+      {/* Main header */}
       <header
         className={clsx(
-          'sticky top-0 z-50 w-full transition-all duration-300',
+          'sticky top-0 z-50 w-full transition-all duration-300 border-b',
           scrolled
-            ? 'glass-white shadow-glass border-b border-white/40'
-            : 'bg-white/95 backdrop-blur-sm border-b border-neutral-100',
+            ? 'glass border-neutral-200 shadow-[0_2px_20px_rgba(0,0,0,0.08)]'
+            : 'bg-white border-neutral-100',
         )}
       >
         <div className="container-custom">
@@ -190,127 +174,105 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
 
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue to-brand-blue-dark flex items-center justify-center shadow-brand overflow-hidden">
+              <div className="relative w-10 h-10 bg-[var(--brand-navy)] flex items-center justify-center overflow-hidden">
                 <span className="text-white font-bold text-lg font-playfair">A</span>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-brand-gold" />
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[var(--brand-gold)]" />
               </div>
               <div className={clsx(isRTL ? 'text-right' : 'text-left')}>
-                <div className="font-bold text-sm text-neutral-900 leading-tight font-playfair group-hover:text-brand-blue transition-colors">
+                <div className="font-bold text-sm text-[var(--brand-navy)] leading-tight font-playfair tracking-wide">
                   Al Fajer
                 </div>
-                <div className="text-xs text-neutral-500 leading-tight">
-                  {isRTL ? 'مدرسة الفجر الخاصة' : 'Private School'}
+                <div className="text-[10px] text-neutral-500 leading-tight uppercase tracking-widest">
+                  {isRTL ? 'مدرسة الفجر الخاصة' : 'Private School · Bahrain'}
                 </div>
               </div>
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className={clsx('hidden lg:flex items-center gap-1', isRTL && 'flex-row-reverse')}>
+            {/* Desktop nav */}
+            <nav className={clsx('hidden lg:flex items-center', isRTL && 'flex-row-reverse')}>
               {links.map((link) => (
                 <div key={link.href} className="relative group">
                   {link.children ? (
-                    <Link
-                      href={link.href}
-                      className={clsx(
-                        'flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative',
-                        isActive(link.href)
-                          ? 'text-brand-blue bg-blue-50 font-semibold'
-                          : 'text-neutral-700 hover:text-brand-blue hover:bg-blue-50',
-                        isRTL && 'flex-row-reverse',
-                      )}
-                      onMouseEnter={() => setActiveDropdown(link.label)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      {link.label}
-                      {isActive(link.href) && (
-                        <span className="absolute bottom-0.5 left-3 right-3 h-0.5 rounded-full bg-brand-blue" />
-                      )}
-                      <ChevronDown
-                        size={14}
+                    <>
+                      <Link
+                        href={link.href}
                         className={clsx(
-                          'transition-transform duration-200',
-                          activeDropdown === link.label && 'rotate-180',
+                          'flex items-center gap-1 px-3 py-6 text-sm font-medium transition-colors duration-200 border-b-2',
+                          isActive(link.href)
+                            ? 'text-[var(--brand-navy)] border-[var(--brand-gold)]'
+                            : 'text-neutral-600 border-transparent hover:text-[var(--brand-navy)]',
+                          isRTL && 'flex-row-reverse',
                         )}
-                      />
-                    </Link>
+                      >
+                        {link.label}
+                        <ChevronDown size={13} className="transition-transform duration-200 group-hover:rotate-180 opacity-60" />
+                      </Link>
+
+                      {/* Dropdown */}
+                      <div
+                        className={clsx(
+                          'absolute top-full w-52 bg-white border border-neutral-100 shadow-[0_8px_32px_rgba(0,0,0,0.10)] py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 -translate-y-1 group-hover:translate-y-0',
+                          isRTL ? 'right-0' : 'left-0',
+                        )}
+                      >
+                        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--brand-gold)]" />
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={clsx(
+                              'block px-4 py-2.5 text-sm text-neutral-600 hover:text-[var(--brand-navy)] hover:bg-neutral-50 transition-colors',
+                              isRTL && 'text-right',
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </>
                   ) : (
                     <Link
                       href={link.href}
                       className={clsx(
-                        'relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 block',
+                        'block px-3 py-6 text-sm font-medium transition-colors duration-200 border-b-2',
                         isActive(link.href)
-                          ? 'text-brand-blue bg-blue-50 font-semibold'
-                          : 'text-neutral-700 hover:text-brand-blue hover:bg-blue-50',
+                          ? 'text-[var(--brand-navy)] border-[var(--brand-gold)]'
+                          : 'text-neutral-600 border-transparent hover:text-[var(--brand-navy)]',
                       )}
                     >
                       {link.label}
-                      {isActive(link.href) && (
-                        <span className="absolute bottom-0.5 left-3 right-3 h-0.5 rounded-full bg-brand-blue" />
-                      )}
                     </Link>
-                  )}
-
-                  {/* Dropdown */}
-                  {link.children && (
-                    <div
-                      className={clsx(
-                        'absolute top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] border border-neutral-100 py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 scale-95 group-hover:scale-100 origin-top',
-                        isRTL ? 'right-0 origin-top-right' : 'left-0 origin-top-left',
-                        'translate-y-1 group-hover:translate-y-0',
-                      )}
-                      onMouseEnter={() => setActiveDropdown(link.label)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      {/* Top accent */}
-                      <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent" />
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={clsx(
-                            'flex items-center gap-2.5 px-4 py-2.5 text-sm text-neutral-600 hover:text-brand-blue hover:bg-blue-50/70 transition-all duration-150 group/item',
-                            isRTL && 'text-right flex-row-reverse',
-                          )}
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-blue/30 group-hover/item:bg-brand-blue group-hover/item:scale-125 transition-all duration-150 flex-shrink-0" />
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
                   )}
                 </div>
               ))}
             </nav>
 
-            {/* Right side actions */}
+            {/* Actions */}
             <div className={clsx('hidden lg:flex items-center gap-3', isRTL && 'flex-row-reverse')}>
-              {/* Language Toggle */}
               <button
                 onClick={toggleLang}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200 text-xs font-semibold text-neutral-600 hover:border-brand-blue hover:text-brand-blue hover:bg-blue-50 transition-all duration-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-200 text-xs font-semibold text-neutral-600 hover:border-[var(--brand-navy)] hover:text-[var(--brand-navy)] transition-colors"
               >
-                <Globe size={13} />
+                <Globe size={12} />
                 {lang === 'en' ? 'العربية' : 'English'}
               </button>
-
-              {/* CTA Button */}
               <Link href="/admissions" className="btn-primary text-xs px-5 py-2.5">
-                {isRTL ? 'التسجيل الآن' : 'Apply Now'}
+                {isRTL ? 'التسجيل' : 'Apply Now'}
               </Link>
             </div>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile toggle */}
             <div className="flex lg:hidden items-center gap-2">
               <button
                 onClick={toggleLang}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-neutral-200 text-xs font-semibold text-neutral-600"
+                className="flex items-center gap-1 px-2.5 py-1.5 border border-neutral-200 text-xs font-semibold text-neutral-600"
               >
                 <Globe size={12} />
                 {lang === 'en' ? 'AR' : 'EN'}
               </button>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="p-2 rounded-xl text-neutral-700 hover:text-brand-blue hover:bg-blue-50 transition-all"
+                className="p-2 text-neutral-700 hover:text-[var(--brand-navy)] transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -319,38 +281,38 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <div
           className={clsx(
-            'lg:hidden absolute top-full left-0 right-0 glass-white border-b border-white/40 shadow-glass overflow-hidden transition-all duration-300',
+            'lg:hidden absolute top-full left-0 right-0 bg-white border-b border-neutral-100 shadow-lg overflow-hidden transition-all duration-300',
             mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none',
           )}
         >
-          <div className="container-custom py-4 space-y-1">
+          <div className="container-custom py-4 space-y-0.5">
             {links.map((link) => (
               <div key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={clsx(
-                      'block px-4 py-3 rounded-xl text-sm font-medium transition-all',
-                      isActive(link.href)
-                        ? 'text-brand-blue bg-blue-50 font-semibold border-l-2 border-brand-blue'
-                        : 'text-neutral-700 hover:text-brand-blue hover:bg-blue-50',
-                      isRTL && 'text-right',
-                    )}
-                  >
-                    {link.label}
-                  </Link>
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={clsx(
+                    'block px-4 py-2.5 text-sm font-medium transition-colors border-l-2',
+                    isActive(link.href)
+                      ? 'text-[var(--brand-navy)] bg-neutral-50 border-[var(--brand-gold)]'
+                      : 'text-neutral-600 border-transparent hover:text-[var(--brand-navy)] hover:bg-neutral-50',
+                    isRTL && 'text-right border-l-0 border-r-2',
+                  )}
+                >
+                  {link.label}
+                </Link>
                 {link.children && (
-                  <div className="ml-4 space-y-1">
+                  <div className={clsx('space-y-0.5', isRTL ? 'mr-4' : 'ml-4')}>
                     {link.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
                         className={clsx(
-                          'block px-4 py-2 rounded-lg text-xs text-neutral-500 hover:text-brand-blue hover:bg-blue-50 transition-all',
+                          'block px-4 py-2 text-xs text-neutral-500 hover:text-[var(--brand-navy)] hover:bg-neutral-50 transition-colors',
                           isRTL && 'text-right',
                         )}
                       >

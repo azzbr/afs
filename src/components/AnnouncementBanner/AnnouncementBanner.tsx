@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { X, Megaphone } from 'lucide-react'
+import { X } from 'lucide-react'
 
 const STORAGE_KEY = 'afs-banner-dismissed-v1'
 
@@ -25,31 +25,26 @@ export default function AnnouncementBanner() {
   if (!visible) return null
 
   return (
-    <div className="relative z-[200] w-full bg-gradient-to-r from-brand-blue via-blue-600 to-indigo-700 text-white overflow-hidden">
-      {/* Subtle shimmer sweep */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_3s_ease-in-out_infinite]" />
-      <div className="relative container-custom flex items-center justify-between gap-4 py-2.5 px-4">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <Megaphone size={14} className="text-brand-gold flex-shrink-0 animate-pulse" />
-          <p className="text-xs font-semibold truncate">
-            <span className="hidden sm:inline">🎉 </span>
-            Enrollment is now open for 2025–2026 — Limited seats available.{' '}
-            <Link href="/admissions" className="underline underline-offset-2 hover:text-brand-gold transition-colors font-bold">
-              Apply Now →
+    <div className="relative z-[200] w-full bg-[var(--brand-navy)] text-white">
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--brand-gold)]" />
+      <div className="container-custom flex items-center justify-between gap-4 py-2.5 px-4">
+        <p className="text-xs font-medium text-white/80 truncate">
+          Enrollment open for 2025–2026 — Limited seats.{' '}
+          <Link href="/admissions" className="font-bold text-[var(--brand-gold-light)] hover:text-white transition-colors">
+            Apply Now →
+          </Link>
+          <span className="mx-3 opacity-30 hidden md:inline">|</span>
+          <span className="hidden md:inline opacity-70">
+            التسجيل مفتوح ·{' '}
+            <Link href="/admissions" className="font-bold text-[var(--brand-gold-light)] hover:text-white transition-colors">
+              سجّل الآن
             </Link>
-            <span className="mx-3 opacity-40 hidden md:inline">|</span>
-            <span className="hidden md:inline opacity-80 arabic-text">
-              التسجيل مفتوح الآن · {' '}
-              <Link href="/admissions" className="underline underline-offset-2 hover:text-brand-gold transition-colors font-bold">
-                سجّل الآن
-              </Link>
-            </span>
-          </p>
-        </div>
+          </span>
+        </p>
         <button
           onClick={dismiss}
-          aria-label="Dismiss announcement"
-          className="flex-shrink-0 w-6 h-6 rounded-full hover:bg-white/15 flex items-center justify-center transition-colors duration-150"
+          aria-label="Dismiss"
+          className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-white/50 hover:text-white transition-colors"
         >
           <X size={13} />
         </button>

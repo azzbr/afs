@@ -6,7 +6,7 @@ import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import {
   User, Users, FileText, CheckCircle, ArrowRight, ArrowLeft,
-  Sparkles, GraduationCap, AlertCircle, Loader2,
+  GraduationCap, AlertCircle, Loader2,
 } from 'lucide-react'
 import { clsx } from 'clsx'
 
@@ -83,7 +83,7 @@ function Input({ value, onChange, ...rest }: React.InputHTMLAttributes<HTMLInput
     <input
       value={value}
       onChange={onChange}
-      className="w-full px-4 py-3 rounded-xl border border-neutral-200 text-sm text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all duration-200 hover:border-neutral-300"
+      className="w-full px-4 py-3 border border-[var(--border)] text-sm text-[var(--ink)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--brand-navy)]/20 focus:border-[var(--brand-navy)] transition-all duration-200 hover:border-neutral-300"
       {...rest}
     />
   )
@@ -94,7 +94,7 @@ function Select({ value, onChange, children, ...rest }: React.SelectHTMLAttribut
     <select
       value={value}
       onChange={onChange}
-      className="w-full px-4 py-3 rounded-xl border border-neutral-200 text-sm text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all duration-200 hover:border-neutral-300 appearance-none cursor-pointer"
+      className="w-full px-4 py-3 border border-[var(--border)] text-sm text-[var(--ink)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--brand-navy)]/20 focus:border-[var(--brand-navy)] transition-all duration-200 hover:border-neutral-300 appearance-none cursor-pointer"
       {...rest}
     >
       {children}
@@ -160,21 +160,21 @@ export default function ApplyPage() {
     return (
       <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen">
         <Header lang={lang} onLangChange={setLang} />
-        <main className="py-24 bg-neutral-50 min-h-[80vh] flex items-center">
+        <main className="py-24 bg-[var(--cream)] min-h-[80vh] flex items-center">
           <div className="container-custom">
-            <div className="max-w-lg mx-auto text-center animate-scale-in">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center mx-auto mb-6 shadow-[0_8px_30px_rgba(52,211,153,0.4)]">
+            <div className="max-w-lg mx-auto text-center">
+              <div className="w-20 h-20 bg-[var(--brand-navy)] flex items-center justify-center mx-auto mb-6">
                 <CheckCircle size={36} className="text-white" />
               </div>
-              <h1 className={clsx('text-3xl font-bold text-neutral-900 mb-3', !isRTL && 'font-playfair')}>
+              <h1 className={clsx('text-3xl font-bold text-[var(--ink)] mb-3', !isRTL && 'font-playfair')}>
                 {isRTL ? 'تم استلام طلبك!' : 'Application Received!'}
               </h1>
               <p className="text-neutral-500 mb-2">
                 {isRTL ? 'سيتواصل معك فريق القبول في غضون 2–3 أيام عمل.' : 'Our admissions team will be in touch within 2–3 business days.'}
               </p>
-              <div className="inline-flex items-center gap-2 mt-4 mb-8 px-5 py-2.5 bg-white rounded-full border border-neutral-200 shadow-sm">
+              <div className="inline-flex items-center gap-2 mt-4 mb-8 px-5 py-2.5 bg-white border border-[var(--border)]">
                 <span className="text-xs text-neutral-500 font-medium">{isRTL ? 'رقم المرجع:' : 'Reference:'}</span>
-                <span className="text-sm font-bold text-brand-blue font-mono">{refNumber}</span>
+                <span className="text-sm font-bold text-[var(--brand-navy)] font-mono">{refNumber}</span>
               </div>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link href="/" className="btn-primary text-sm px-6 py-3">
@@ -198,46 +198,34 @@ export default function ApplyPage() {
       <main>
 
         {/* Hero */}
-        <section className="mesh-bg noise relative overflow-hidden py-20 lg:py-28">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 right-0 w-[400px] h-[250px] rounded-full bg-brand-gold/8 blur-[90px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
-          <div className="container-custom relative z-10">
+        <section className="hero-dark py-20 lg:py-28">
+          <div className="container-custom">
             <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Sparkles size={11} className="text-brand-gold" />
+              <div className={clsx('flex mb-6', isRTL && 'justify-end')}>
+                <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>
                   {isRTL ? 'طلب القبول' : 'Enrollment Application'}
-                </span>
+                </div>
               </div>
               <h1 className={clsx('font-bold leading-tight mb-4', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>
+                <span className="block text-4xl md:text-5xl text-white">
                   {isRTL ? 'ابدأ رحلة طفلك' : "Start Your Child's"}
                 </span>
-                <span className="block text-4xl md:text-5xl text-gradient-gold text-glow animate-slide-up" style={{ animationDelay: '250ms' }}>
+                <span className="block text-4xl md:text-5xl text-[var(--brand-gold-light)]">
                   {isRTL ? 'في مدرسة الفجر' : 'Journey at AFS'}
                 </span>
               </h1>
-              <p className="text-white/60 text-base leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <p className="text-white/70 text-base leading-relaxed">
                 {isRTL
                   ? 'أكمل النموذج أدناه — سيتواصل معك فريق القبول في غضون يومي عمل.'
                   : 'Complete the form below — our admissions team will follow up within 2 business days.'}
               </p>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
-          </div>
         </section>
 
         {/* Form area */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10 max-w-3xl mx-auto">
+        <section className="section-padding section-cream">
+          <div className="container-custom max-w-3xl mx-auto">
 
             {/* Step indicator */}
             <div className="mb-10">
@@ -247,27 +235,29 @@ export default function ApplyPage() {
                     <button
                       onClick={() => i < step && setStep(i)}
                       className={clsx(
-                        'flex flex-col items-center gap-1 flex-shrink-0 group cursor-default',
+                        'flex flex-col items-center gap-1 flex-shrink-0 cursor-default',
                         i < step && 'cursor-pointer',
                       )}
                     >
                       <div className={clsx(
-                        'w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-300 font-bold text-sm',
-                        step === i ? 'bg-brand-blue text-white shadow-brand scale-110'
-                          : i < step ? 'bg-emerald-500 text-white'
-                          : 'bg-white border-2 border-neutral-200 text-neutral-400',
+                        'w-10 h-10 flex items-center justify-center transition-all duration-300 font-bold text-sm',
+                        step === i
+                          ? 'bg-[var(--brand-navy)] text-white scale-110'
+                          : i < step
+                          ? 'bg-[var(--brand-gold)] text-white'
+                          : 'bg-white border-2 border-[var(--border)] text-neutral-400',
                       )}>
                         {i < step ? <CheckCircle size={16} /> : <s.icon size={16} />}
                       </div>
                       <span className={clsx(
                         'text-[10px] font-bold hidden sm:block',
-                        step === i ? 'text-brand-blue' : i < step ? 'text-emerald-600' : 'text-neutral-400',
+                        step === i ? 'text-[var(--brand-navy)]' : i < step ? 'text-[var(--brand-gold)]' : 'text-neutral-400',
                       )}>{s.label}</span>
                     </button>
                     {i < stepList.length - 1 && (
                       <div className={clsx(
                         'flex-1 h-0.5 mx-2 transition-colors duration-300',
-                        i < step ? 'bg-emerald-400' : 'bg-neutral-200',
+                        i < step ? 'bg-[var(--brand-gold)]' : 'bg-[var(--border)]',
                       )} />
                     )}
                   </div>
@@ -282,13 +272,13 @@ export default function ApplyPage() {
             </div>
 
             {/* Card */}
-            <div className="bg-white rounded-3xl border border-neutral-100 shadow-[0_8px_40px_rgba(0,0,0,0.06)] p-8 md:p-10">
+            <div className="bg-white border border-[var(--border)] shadow-[0_8px_40px_rgba(0,0,0,0.06)] p-8 md:p-10">
 
               {/* ── STEP 0: Student ── */}
               {step === 0 && (
                 <div className="space-y-5">
                   <div>
-                    <h2 className={clsx('text-xl font-bold text-neutral-900 mb-1', !isRTL && 'font-playfair')}>
+                    <h2 className={clsx('text-xl font-bold text-[var(--ink)] mb-1', !isRTL && 'font-playfair')}>
                       {isRTL ? 'بيانات الطالب' : 'Student Information'}
                     </h2>
                     <p className="text-sm text-neutral-500">{isRTL ? 'الأسماء كما في جواز السفر أو شهادة الميلاد' : 'Names as they appear on passport or birth certificate'}</p>
@@ -345,7 +335,7 @@ export default function ApplyPage() {
               {step === 1 && (
                 <div className="space-y-5">
                   <div>
-                    <h2 className={clsx('text-xl font-bold text-neutral-900 mb-1', !isRTL && 'font-playfair')}>
+                    <h2 className={clsx('text-xl font-bold text-[var(--ink)] mb-1', !isRTL && 'font-playfair')}>
                       {isRTL ? 'بيانات ولي الأمر' : 'Parent / Guardian Information'}
                     </h2>
                     <p className="text-sm text-neutral-500">{isRTL ? 'يكفي تعبئة أحد الوالدين كجهة اتصال رئيسية' : 'At least one parent name is required as the primary contact'}</p>
@@ -390,7 +380,7 @@ export default function ApplyPage() {
               {step === 2 && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className={clsx('text-xl font-bold text-neutral-900 mb-1', !isRTL && 'font-playfair')}>
+                    <h2 className={clsx('text-xl font-bold text-[var(--ink)] mb-1', !isRTL && 'font-playfair')}>
                       {isRTL ? 'قائمة المستندات' : 'Documents Checklist'}
                     </h2>
                     <p className="text-sm text-neutral-500">
@@ -404,17 +394,17 @@ export default function ApplyPage() {
                       <label
                         key={doc.key}
                         className={clsx(
-                          'flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all duration-200',
+                          'flex items-center gap-3 p-4 border cursor-pointer transition-all duration-200',
                           checkedDocs[doc.key as DocKey]
-                            ? 'border-brand-blue/30 bg-brand-blue/4'
-                            : 'border-neutral-200 bg-white hover:border-neutral-300',
+                            ? 'border-[var(--brand-navy)]/30 bg-[var(--brand-navy)]/4'
+                            : 'border-[var(--border)] bg-white hover:border-neutral-300',
                           isRTL && 'flex-row-reverse',
                         )}
                       >
                         <div className={clsx(
-                          'w-5 h-5 rounded-lg border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200',
+                          'w-5 h-5 border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200',
                           checkedDocs[doc.key as DocKey]
-                            ? 'bg-brand-blue border-brand-blue'
+                            ? 'bg-[var(--brand-navy)] border-[var(--brand-navy)]'
                             : 'border-neutral-300',
                         )}>
                           {checkedDocs[doc.key as DocKey] && <CheckCircle size={12} className="text-white" strokeWidth={3} />}
@@ -439,7 +429,7 @@ export default function ApplyPage() {
                         ? 'أي احتياجات خاصة، حالات طبية، أو أسئلة للفريق الأكاديمي...'
                         : 'Any special needs, medical conditions, or questions for the admissions team...'}
                       className={clsx(
-                        'w-full px-4 py-3 rounded-xl border border-neutral-200 text-sm text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all duration-200 resize-none',
+                        'w-full px-4 py-3 border border-[var(--border)] text-sm text-[var(--ink)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--brand-navy)]/20 focus:border-[var(--brand-navy)] transition-all duration-200 resize-none',
                         isRTL && 'text-right',
                       )}
                     />
@@ -451,17 +441,17 @@ export default function ApplyPage() {
               {step === 3 && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className={clsx('text-xl font-bold text-neutral-900 mb-1', !isRTL && 'font-playfair')}>
+                    <h2 className={clsx('text-xl font-bold text-[var(--ink)] mb-1', !isRTL && 'font-playfair')}>
                       {isRTL ? 'مراجعة الطلب' : 'Review & Submit'}
                     </h2>
                     <p className="text-sm text-neutral-500">{isRTL ? 'يرجى مراجعة البيانات قبل الإرسال.' : 'Please review your information before submitting.'}</p>
                   </div>
 
                   {/* Student summary */}
-                  <div className={clsx('rounded-2xl border border-neutral-100 p-5', isRTL && 'text-right')}>
+                  <div className={clsx('border border-[var(--border)] p-5', isRTL && 'text-right')}>
                     <div className={clsx('flex items-center gap-2 mb-3', isRTL && 'flex-row-reverse')}>
-                      <div className="w-7 h-7 rounded-xl bg-brand-blue/10 flex items-center justify-center">
-                        <GraduationCap size={13} className="text-brand-blue" />
+                      <div className="w-7 h-7 bg-[var(--brand-navy)] flex items-center justify-center">
+                        <GraduationCap size={13} className="text-white" />
                       </div>
                       <h3 className="text-xs font-bold text-neutral-500 uppercase tracking-wider">{isRTL ? 'الطالب' : 'Student'}</h3>
                     </div>
@@ -476,17 +466,17 @@ export default function ApplyPage() {
                       ].map(([k, v]) => (
                         <div key={k}>
                           <span className="text-neutral-400 text-xs">{k}</span>
-                          <div className="font-semibold text-neutral-800">{v}</div>
+                          <div className="font-semibold text-[var(--ink)]">{v}</div>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Parent summary */}
-                  <div className={clsx('rounded-2xl border border-neutral-100 p-5', isRTL && 'text-right')}>
+                  <div className={clsx('border border-[var(--border)] p-5', isRTL && 'text-right')}>
                     <div className={clsx('flex items-center gap-2 mb-3', isRTL && 'flex-row-reverse')}>
-                      <div className="w-7 h-7 rounded-xl bg-violet-100 flex items-center justify-center">
-                        <Users size={13} className="text-violet-600" />
+                      <div className="w-7 h-7 bg-[var(--brand-navy)] flex items-center justify-center">
+                        <Users size={13} className="text-white" />
                       </div>
                       <h3 className="text-xs font-bold text-neutral-500 uppercase tracking-wider">{isRTL ? 'الوالدان' : 'Parent / Guardian'}</h3>
                     </div>
@@ -500,23 +490,23 @@ export default function ApplyPage() {
                       ].map(([k, v]) => (
                         <div key={k}>
                           <span className="text-neutral-400 text-xs">{k}</span>
-                          <div className="font-semibold text-neutral-800 break-words">{v}</div>
+                          <div className="font-semibold text-[var(--ink)] break-words">{v}</div>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Docs summary */}
-                  <div className={clsx('rounded-2xl border border-neutral-100 p-5', isRTL && 'text-right')}>
+                  <div className={clsx('border border-[var(--border)] p-5', isRTL && 'text-right')}>
                     <div className={clsx('flex items-center gap-2 mb-3', isRTL && 'flex-row-reverse')}>
-                      <div className="w-7 h-7 rounded-xl bg-emerald-100 flex items-center justify-center">
-                        <FileText size={13} className="text-emerald-600" />
+                      <div className="w-7 h-7 bg-[var(--brand-navy)] flex items-center justify-center">
+                        <FileText size={13} className="text-white" />
                       </div>
                       <h3 className="text-xs font-bold text-neutral-500 uppercase tracking-wider">{isRTL ? 'المستندات المتوفرة' : 'Documents Ready'}</h3>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {docList.filter((d) => checkedDocs[d.key as DocKey]).map((d) => (
-                        <span key={d.key} className="inline-flex items-center gap-1.5 text-xs font-medium bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-100">
+                        <span key={d.key} className="inline-flex items-center gap-1.5 text-xs font-medium bg-[var(--cream)] text-[var(--brand-navy)] px-3 py-1.5 border border-[var(--border)]">
                           <CheckCircle size={10} /> {d.label.split('(')[0].trim()}
                         </span>
                       ))}
@@ -527,7 +517,7 @@ export default function ApplyPage() {
                   </div>
 
                   {submitError && (
-                    <div className="flex items-center gap-2.5 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm">
+                    <div className="flex items-center gap-2.5 p-4 bg-rose-50 border border-rose-200 text-rose-700 text-sm">
                       <AlertCircle size={16} className="flex-shrink-0" /> {submitError}
                     </div>
                   )}
@@ -541,17 +531,17 @@ export default function ApplyPage() {
               )}
 
               {/* Navigation buttons */}
-              <div className={clsx('flex items-center justify-between mt-8 pt-6 border-t border-neutral-100', isRTL && 'flex-row-reverse')}>
+              <div className={clsx('flex items-center justify-between mt-8 pt-6 border-t border-[var(--border)]', isRTL && 'flex-row-reverse')}>
                 {step > 0 ? (
                   <button
                     onClick={() => setStep(s => s - 1)}
-                    className={clsx('inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-neutral-200 text-sm font-semibold text-neutral-600 hover:border-neutral-300 hover:text-neutral-900 transition-all duration-200', isRTL && 'flex-row-reverse')}
+                    className={clsx('btn-ghost inline-flex items-center gap-2 text-sm', isRTL && 'flex-row-reverse')}
                   >
                     {isRTL ? <ArrowRight size={15} /> : <ArrowLeft size={15} />}
                     {isRTL ? 'السابق' : 'Back'}
                   </button>
                 ) : (
-                  <Link href="/admissions" className="text-sm text-neutral-400 hover:text-brand-blue transition-colors">
+                  <Link href="/admissions" className="text-sm text-neutral-400 hover:text-[var(--brand-navy)] transition-colors">
                     {isRTL ? '← صفحة القبول' : '← Admissions info'}
                   </Link>
                 )}
@@ -561,10 +551,8 @@ export default function ApplyPage() {
                     onClick={() => canNext() && setStep(s => s + 1)}
                     disabled={!canNext()}
                     className={clsx(
-                      'shimmer-btn inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300',
-                      canNext()
-                        ? 'bg-brand-blue text-white hover:bg-brand-blue-dark hover:shadow-[0_8px_24px_rgba(0,40,255,0.3)] hover:-translate-y-0.5'
-                        : 'bg-neutral-200 text-neutral-400 cursor-not-allowed',
+                      'btn-primary inline-flex items-center gap-2 text-sm',
+                      !canNext() && 'opacity-40 cursor-not-allowed',
                       isRTL && 'flex-row-reverse',
                     )}
                   >
@@ -575,7 +563,7 @@ export default function ApplyPage() {
                     onClick={handleSubmit}
                     disabled={submitting}
                     className={clsx(
-                      'shimmer-btn inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-brand-gold text-neutral-900 font-bold text-sm hover:shadow-[0_8px_30px_rgba(255,215,0,0.5)] hover:-translate-y-0.5 transition-all duration-300',
+                      'btn-primary inline-flex items-center gap-2 text-sm',
                       submitting && 'opacity-70 cursor-not-allowed',
                       isRTL && 'flex-row-reverse',
                     )}
