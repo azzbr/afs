@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
-import { ArrowRight, ArrowLeft, Sparkles, Calendar, Tag, Clock } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Calendar, Tag, Clock } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -71,11 +71,11 @@ const newsItems = [
   },
 ]
 
-const categoryColors: Record<string, string> = {
-  Achievement: 'bg-brand-blue/8 text-brand-blue',
-  Event:       'bg-amber-50 text-amber-600',
-  Admissions:  'bg-emerald-50 text-emerald-600',
-  Community:   'bg-cyan-50 text-cyan-600',
+const categoryBadge: Record<string, string> = {
+  Achievement: 'bg-[var(--cream)] text-[var(--brand-navy)] border border-[var(--border)]',
+  Event:       'bg-[var(--cream)] text-[var(--brand-gold)] border border-[var(--border)]',
+  Admissions:  'bg-[var(--cream)] text-[var(--brand-navy)] border border-[var(--border)]',
+  Community:   'bg-[var(--cream)] text-[var(--brand-navy)] border border-[var(--border)]',
 }
 
 const t = {
@@ -125,53 +125,49 @@ export default function NewsPage() {
       <main>
 
         {/* ── Hero ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-28 lg:py-36">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full bg-brand-gold/8 blur-[90px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
+        <section className="hero-dark relative overflow-hidden py-28 lg:py-36">
           <div className="container-custom relative z-10">
             <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Sparkles size={11} className="text-brand-gold" />{c.hero.tag}
-                </span>
+              <div className={clsx('mb-5', isRTL && 'flex justify-end')}>
+                <div className={clsx('section-tag', isRTL && 'flex-row-reverse')}>
+                  {c.hero.tag}
+                </div>
               </div>
               <h1 className={clsx('font-bold leading-tight mb-5', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>{c.hero.title}</span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-gradient-gold text-glow animate-slide-up" style={{ animationDelay: '250ms' }}>{c.hero.titleAccent}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92">{c.hero.title}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-[var(--brand-gold)]">{c.hero.titleAccent}</span>
               </h1>
-              <p className="text-white/60 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>{c.hero.subtitle}</p>
+              <p className="text-white/60 text-lg leading-relaxed">{c.hero.subtitle}</p>
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
           </div>
         </section>
 
         {/* ── Content ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-25 pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-[var(--cream)]">
+          <div className="container-custom">
 
             {/* Featured Post */}
             <div data-reveal="scale" className="mb-14">
-              <Link href={`/news/${featured.slug}`} className={clsx('group relative rounded-3xl overflow-hidden hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.14)] transition-all duration-500 block border border-neutral-100', isRTL && 'text-right')}>
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-blue via-brand-gold to-brand-blue" />
+              <Link
+                href={`/news/${featured.slug}`}
+                className={clsx(
+                  'group overflow-hidden border border-[var(--border)] bg-white hover:shadow-[0_12px_40px_rgba(0,0,0,0.09)] hover:-translate-y-1 transition-all duration-300 block',
+                  isRTL && 'text-right'
+                )}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-5">
-                  {/* Visual */}
-                  <div className={clsx('relative md:col-span-2 min-h-[200px] md:min-h-[320px] flex items-center justify-center bg-gradient-to-br overflow-hidden', featured.color)}>
-                    <div className="animate-spin-slow absolute -top-10 -right-10 w-40 h-40 rounded-full border border-white/10 pointer-events-none" />
-                    <span className="text-7xl">{featured.emoji}</span>
-                    <span className="absolute top-4 left-4 text-xs font-bold bg-white/15 border border-white/25 rounded-full px-3 py-1 text-white backdrop-blur-sm">{c.featured}</span>
+                  {/* Visual placeholder */}
+                  <div className={clsx(
+                    'relative md:col-span-2 min-h-[200px] md:min-h-[280px] flex flex-col items-center justify-center bg-[var(--cream)] border-b md:border-b-0 overflow-hidden',
+                    isRTL ? 'md:border-l border-[var(--border)]' : 'md:border-r border-[var(--border)]'
+                  )}>
+                    <span className="text-6xl mb-3">{featured.emoji}</span>
+                    <span className="text-xs font-bold bg-[var(--brand-navy)] text-white rounded-full px-3 py-1">{c.featured}</span>
                   </div>
                   {/* Content */}
                   <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-center bg-white">
                     <div className={clsx('flex flex-wrap items-center gap-3 mb-4', isRTL && 'flex-row-reverse')}>
-                      <span className={clsx('inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full', categoryColors[featured.category] || 'bg-neutral-100 text-neutral-600')}>
+                      <span className={clsx('inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full', categoryBadge[featured.category] || 'bg-[var(--cream)] text-[var(--ink)] border border-[var(--border)]')}>
                         <Tag size={10} />{lang === 'ar' ? featured.categoryAr : featured.category}
                       </span>
                       <span className="flex items-center gap-1.5 text-xs text-neutral-400">
@@ -181,13 +177,13 @@ export default function NewsPage() {
                         <Clock size={10} />{featured.readMin} {c.readMin}
                       </span>
                     </div>
-                    <h2 className={clsx('text-2xl md:text-3xl font-bold text-neutral-900 mb-4 leading-snug', !isRTL && 'font-playfair')}>
+                    <h2 className={clsx('text-2xl md:text-3xl font-bold text-[var(--ink)] mb-4 leading-snug', !isRTL && 'font-playfair')}>
                       {lang === 'ar' ? featured.titleAr : featured.title}
                     </h2>
                     <p className="text-neutral-500 leading-relaxed mb-6 text-sm">
                       {lang === 'ar' ? featured.excerptAr : featured.excerpt}
                     </p>
-                    <span className={clsx('inline-flex items-center gap-2 text-brand-blue font-semibold text-sm group-hover:gap-3 transition-all duration-200', isRTL && 'flex-row-reverse')}>
+                    <span className={clsx('inline-flex items-center gap-2 text-[var(--brand-gold)] font-semibold text-sm group-hover:gap-3 transition-all duration-200', isRTL && 'flex-row-reverse')}>
                       {c.readMore} <Arr size={14} />
                     </span>
                   </div>
@@ -202,16 +198,16 @@ export default function NewsPage() {
                   key={f}
                   onClick={() => setActiveFilter(i)}
                   className={clsx(
-                    'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300',
+                    'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200',
                     activeFilter === i
-                      ? 'bg-brand-blue text-white shadow-[0_4px_16px_rgba(0,40,255,0.3)] scale-105'
-                      : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200',
+                      ? 'bg-[var(--brand-navy)] text-white'
+                      : 'bg-white border border-[var(--border)] text-neutral-600 hover:border-[var(--brand-gold)] hover:text-[var(--brand-navy)]',
                   )}
                 >
                   {f}
                   <span className={clsx(
                     'text-xs font-bold px-1.5 py-0.5 rounded-full leading-none',
-                    activeFilter === i ? 'bg-white/25 text-white' : 'bg-neutral-200 text-neutral-500',
+                    activeFilter === i ? 'bg-white/20 text-white' : 'bg-[var(--cream)] text-neutral-500',
                   )}>
                     {countFor(i)}
                   </span>
@@ -230,18 +226,16 @@ export default function NewsPage() {
                     href={`/news/${item.slug}`}
                     data-reveal
                     data-delay={String((i % 3) * 120)}
-                    className={clsx('group relative rounded-3xl overflow-hidden border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:border-neutral-200 hover:-translate-y-2 transition-all duration-500 block', isRTL && 'text-right')}
+                    className={clsx('group overflow-hidden border border-[var(--border)] bg-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 block', isRTL && 'text-right')}
                   >
-                    {/* Visual */}
-                    <div className={clsx('relative h-44 flex items-center justify-center bg-gradient-to-br overflow-hidden', item.color)}>
-                      <div className="animate-spin-slow absolute -top-8 -right-8 w-32 h-32 rounded-full border border-white/10 pointer-events-none" />
+                    {/* Visual placeholder */}
+                    <div className="relative h-44 flex items-center justify-center bg-[var(--cream)] border-b border-[var(--border)]">
                       <span className="text-5xl">{item.emoji}</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                     </div>
                     {/* Content */}
                     <div className="p-6">
                       <div className={clsx('flex flex-wrap items-center gap-2.5 mb-3', isRTL && 'flex-row-reverse')}>
-                        <span className={clsx('inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full', categoryColors[item.category] || 'bg-neutral-100 text-neutral-600')}>
+                        <span className={clsx('inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full', categoryBadge[item.category] || 'bg-[var(--cream)] text-[var(--ink)] border border-[var(--border)]')}>
                           <Tag size={9} />{lang === 'ar' ? item.categoryAr : item.category}
                         </span>
                         <span className="flex items-center gap-1 text-xs text-neutral-400">
@@ -251,16 +245,15 @@ export default function NewsPage() {
                           <Clock size={9} />{item.readMin} {c.readMin}
                         </span>
                       </div>
-                      <h3 className={clsx('font-bold text-neutral-900 text-base mb-2 leading-snug group-hover:text-brand-blue transition-colors duration-200', !isRTL && 'font-playfair')}>
+                      <h3 className={clsx('font-bold text-[var(--ink)] text-base mb-2 leading-snug group-hover:text-[var(--brand-navy)] transition-colors duration-200', !isRTL && 'font-playfair')}>
                         {lang === 'ar' ? item.titleAr : item.title}
                       </h3>
                       <p className="text-neutral-500 text-sm leading-relaxed mb-4 line-clamp-2">
                         {lang === 'ar' ? item.excerptAr : item.excerpt}
                       </p>
-                      <span className={clsx('inline-flex items-center gap-1.5 text-brand-blue text-xs font-semibold group-hover:gap-2.5 transition-all duration-200', isRTL && 'flex-row-reverse')}>
+                      <span className={clsx('inline-flex items-center gap-1.5 text-[var(--brand-gold)] text-xs font-semibold group-hover:gap-2.5 transition-all duration-200', isRTL && 'flex-row-reverse')}>
                         {c.readMore} <Arr size={12} />
                       </span>
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                     </div>
                   </Link>
                 ))}

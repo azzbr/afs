@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
-import { Sparkles, CheckCircle, XCircle, ChevronDown, ChevronUp, Phone, Mail, ArrowRight, ArrowLeft, DollarSign, Shield, Clock, Users } from 'lucide-react'
+import { CheckCircle, XCircle, ChevronDown, ChevronUp, Phone, Mail, ArrowRight, ArrowLeft, DollarSign, Shield, Clock, Users } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -164,18 +164,18 @@ const t = {
 function FAQItem({ q, a, isRTL }: { q: string; a: string; isRTL: boolean }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={clsx('border border-neutral-200 rounded-2xl overflow-hidden transition-all duration-300', open && 'border-brand-blue/30 shadow-[0_4px_20px_rgba(0,40,255,0.06)]')}>
+    <div className="border border-[var(--border)] bg-white overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className={clsx('w-full flex items-center justify-between gap-4 px-6 py-5 text-left bg-white hover:bg-neutral-50 transition-colors', isRTL && 'flex-row-reverse text-right')}
+        className={clsx('w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-neutral-50 transition-colors', isRTL && 'flex-row-reverse text-right')}
       >
-        <span className="font-semibold text-neutral-800 text-sm">{q}</span>
-        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-blue/8 flex items-center justify-center text-brand-blue">
-          {open ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+        <span className="font-semibold text-[var(--ink)] text-sm">{q}</span>
+        <span className="flex-shrink-0 text-neutral-400">
+          {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
         </span>
       </button>
       {open && (
-        <div className={clsx('px-6 pb-5 text-sm text-neutral-600 leading-relaxed bg-white border-t border-neutral-100', isRTL && 'text-right')}>
+        <div className={clsx('px-6 pb-5 text-sm text-neutral-500 leading-relaxed bg-white border-t border-[var(--border)]', isRTL && 'text-right')}>
           <p className="pt-4">{a}</p>
         </div>
       )}
@@ -203,30 +203,16 @@ export default function FeesPage() {
       <main>
 
         {/* ── Hero ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-28 lg:py-36">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full bg-brand-gold/8 blur-[90px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
+        <section className="hero-dark relative overflow-hidden py-24">
           <div className="container-custom relative z-10">
             <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Sparkles size={11} className="text-brand-gold" />{c.hero.tag}
-                </span>
-              </div>
+              <div className={clsx('section-tag animate-fade-in', isRTL && 'flex-row-reverse')}>{c.hero.tag}</div>
               <h1 className={clsx('font-bold leading-tight mb-5', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>{c.hero.title}</span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-gradient-gold text-glow animate-slide-up" style={{ animationDelay: '250ms' }}>{c.hero.titleAccent}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white animate-slide-up">{c.hero.title}</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-[var(--brand-gold)] animate-slide-up" style={{ animationDelay: '140ms' }}>{c.hero.titleAccent}</span>
               </h1>
-              <p className="text-white/60 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>{c.hero.subtitle}</p>
+              <p className="text-white/55 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '280ms' }}>{c.hero.subtitle}</p>
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
           </div>
         </section>
 
@@ -243,28 +229,24 @@ export default function FeesPage() {
         </section>
 
         {/* ── What's Included ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.included.tag}</span>
-              <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.included.title}</h2>
+        <section className="section-padding bg-white">
+          <div className="container-custom">
+            <div className={clsx('max-w-2xl mb-12', isRTL ? 'text-right ml-auto' : 'text-center mx-auto')} data-reveal="fade">
+              <div className={clsx('section-tag', isRTL ? 'flex-row-reverse' : 'justify-center')}>{c.included.tag}</div>
+              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.included.title}</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {c.included.items.map((item, i) => (
                 <div
                   key={item.title}
                   data-reveal
-                  data-delay={String(i * 80)}
-                  className={clsx(
-                    'group p-6 rounded-2xl bg-white border border-neutral-100 hover:border-emerald-200 hover:shadow-[0_12px_40px_rgba(16,185,129,0.08)] transition-all duration-400 hover:-translate-y-1',
-                    isRTL && 'text-right',
-                  )}
+                  data-delay={String(i * 70)}
+                  className={clsx('group p-6 bg-white border border-[var(--border)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300', isRTL && 'text-right')}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4 group-hover:bg-emerald-100 transition-colors">
-                    <CheckCircle size={18} className="text-emerald-600" />
+                  <div className={clsx('w-10 h-10 bg-[var(--brand-navy)] flex items-center justify-center mb-4', isRTL && 'mr-auto')}>
+                    <CheckCircle size={16} className="text-white" />
                   </div>
-                  <h3 className="font-bold text-neutral-800 text-sm mb-2">{item.title}</h3>
+                  <h3 className="font-bold text-[var(--ink)] text-sm mb-2">{item.title}</h3>
                   <p className="text-neutral-500 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -273,27 +255,24 @@ export default function FeesPage() {
         </section>
 
         {/* ── Charged Separately ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.separate.tag}</span>
-              <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.separate.title}</h2>
+        <section className="section-padding section-cream">
+          <div className="container-custom">
+            <div className={clsx('max-w-2xl mb-12', isRTL ? 'text-right ml-auto' : 'text-center mx-auto')} data-reveal="fade">
+              <div className={clsx('section-tag', isRTL ? 'flex-row-reverse' : 'justify-center')}>{c.separate.tag}</div>
+              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.separate.title}</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
               {c.separate.items.map((item, i) => (
                 <div
                   key={item.title}
                   data-reveal
-                  data-delay={String(i * 80)}
-                  className={clsx(
-                    'group p-6 rounded-2xl bg-white border border-neutral-200 hover:border-orange-200 hover:shadow-[0_8px_30px_rgba(249,115,22,0.07)] transition-all duration-300',
-                    isRTL && 'text-right',
-                  )}
+                  data-delay={String(i * 70)}
+                  className={clsx('group p-6 bg-white border border-[var(--border)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300', isRTL && 'text-right')}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center mb-4 group-hover:bg-orange-100 transition-colors">
-                    <XCircle size={18} className="text-orange-500" />
+                  <div className={clsx('w-10 h-10 bg-neutral-200 flex items-center justify-center mb-4', isRTL && 'mr-auto')}>
+                    <XCircle size={16} className="text-neutral-500" />
                   </div>
-                  <h3 className="font-bold text-neutral-800 text-sm mb-2">{item.title}</h3>
+                  <h3 className="font-bold text-[var(--ink)] text-sm mb-2">{item.title}</h3>
                   <p className="text-neutral-500 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -302,28 +281,24 @@ export default function FeesPage() {
         </section>
 
         {/* ── Payment Terms ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.payment.tag}</span>
-              <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.payment.title}</h2>
+        <section className="section-padding bg-white">
+          <div className="container-custom">
+            <div className={clsx('max-w-2xl mb-12', isRTL ? 'text-right ml-auto' : 'text-center mx-auto')} data-reveal="fade">
+              <div className={clsx('section-tag', isRTL ? 'flex-row-reverse' : 'justify-center')}>{c.payment.tag}</div>
+              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.payment.title}</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {c.payment.terms.map((term, i) => (
                 <div
                   key={term.label}
                   data-reveal
-                  data-delay={String(i * 80)}
-                  className={clsx(
-                    'group p-6 rounded-2xl bg-gradient-to-br from-brand-blue/5 to-indigo-50 border border-brand-blue/10 hover:border-brand-blue/25 hover:shadow-[0_12px_40px_rgba(0,40,255,0.08)] transition-all duration-400 hover:-translate-y-1',
-                    isRTL && 'text-right',
-                  )}
+                  data-delay={String(i * 70)}
+                  className={clsx('group p-6 bg-white border border-[var(--border)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300', isRTL && 'text-right')}
                 >
-                  <div className="w-11 h-11 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-4 group-hover:bg-brand-blue/15 transition-colors">
-                    <term.icon size={18} className="text-brand-blue" />
+                  <div className={clsx('w-10 h-10 bg-[var(--brand-navy)] flex items-center justify-center mb-4', isRTL && 'mr-auto')}>
+                    <term.icon size={16} className="text-white" />
                   </div>
-                  <h3 className="font-bold text-neutral-800 text-sm mb-2">{term.label}</h3>
+                  <h3 className="font-bold text-[var(--ink)] text-sm mb-2">{term.label}</h3>
                   <p className="text-neutral-500 text-xs leading-relaxed">{term.desc}</p>
                 </div>
               ))}
@@ -332,28 +307,24 @@ export default function FeesPage() {
         </section>
 
         {/* ── Request Fee Schedule ── */}
-        <section className="section-padding bg-neutral-50">
+        <section className="section-padding section-cream">
           <div className="container-custom">
-            <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden border border-neutral-200 shadow-[0_8px_40px_rgba(0,0,0,0.06)]" data-reveal="scale">
-              <div className="bg-gradient-to-br from-brand-blue to-indigo-700 p-10 text-center">
-                <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-white/70 text-xs font-semibold tracking-widest uppercase mb-6">
-                  <Sparkles size={11} className="text-brand-gold" />{c.schedule.tag}
-                </div>
+            <div className="max-w-3xl mx-auto border border-[var(--border)] overflow-hidden" data-reveal="scale">
+              <div className="hero-dark p-10 text-center">
+                <div className={clsx('section-tag-light justify-center mb-4', isRTL && 'flex-row-reverse')}>{c.schedule.tag}</div>
                 <h2 className={clsx('text-2xl md:text-3xl font-bold text-white mb-4', !isRTL && 'font-playfair')}>{c.schedule.title}</h2>
-                <p className="text-white/70 text-sm leading-relaxed mb-8 max-w-xl mx-auto">{c.schedule.subtitle}</p>
+                <p className="text-white/55 text-sm leading-relaxed mb-8 max-w-xl mx-auto">{c.schedule.subtitle}</p>
                 <div className={clsx('flex flex-col sm:flex-row items-center justify-center gap-4', isRTL && 'sm:flex-row-reverse')}>
                   <Link
                     href="/contact"
-                    className={clsx(
-                      'inline-flex items-center gap-2 bg-white text-brand-blue font-bold text-sm px-7 py-3.5 rounded-xl hover:shadow-[0_8px_30px_rgba(255,255,255,0.25)] hover:-translate-y-0.5 transition-all duration-300',
-                    )}
+                    className="inline-flex items-center gap-2 bg-[var(--brand-gold)] text-white font-bold text-sm px-7 py-3.5 hover:bg-[var(--brand-gold-light)] transition-colors"
                   >
                     {c.schedule.cta}
                     {isRTL ? <ArrowLeft size={15} /> : <ArrowRight size={15} />}
                   </Link>
                   <a
                     href="tel:+97317612221"
-                    className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold text-sm px-7 py-3.5 rounded-xl hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300"
+                    className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold text-sm px-7 py-3.5 hover:border-white/50 transition-colors"
                   >
                     <Phone size={14} />
                     {c.schedule.cta2}
@@ -362,17 +333,17 @@ export default function FeesPage() {
               </div>
               <div className={clsx('bg-white p-6 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs text-neutral-500', isRTL && 'sm:flex-row-reverse')}>
                 <div className={clsx('flex items-center gap-2', isRTL && 'flex-row-reverse')}>
-                  <Phone size={13} className="text-brand-blue" />
+                  <Phone size={13} className="text-[var(--brand-gold)]" />
                   <span>+973 1761 2221</span>
                 </div>
-                <div className="hidden sm:block w-px h-4 bg-neutral-200" />
+                <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
                 <div className={clsx('flex items-center gap-2', isRTL && 'flex-row-reverse')}>
-                  <Mail size={13} className="text-brand-blue" />
+                  <Mail size={13} className="text-[var(--brand-gold)]" />
                   <span>info@afs.edu.bh</span>
                 </div>
-                <div className="hidden sm:block w-px h-4 bg-neutral-200" />
+                <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
                 <div className={clsx('flex items-center gap-2', isRTL && 'flex-row-reverse')}>
-                  <Clock size={13} className="text-brand-blue" />
+                  <Clock size={13} className="text-[var(--brand-gold)]" />
                   <span>{isRTL ? 'الأحد – الخميس، 7:30ص – 3:30م' : 'Sun–Thu, 7:30am–3:30pm'}</span>
                 </div>
               </div>
@@ -385,12 +356,12 @@ export default function FeesPage() {
           <section className="section-padding bg-neutral-50 relative overflow-hidden">
             <div className="container-custom relative z-10">
               <div className={clsx('mb-10', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-                <span className="section-tag mx-auto">{isRTL ? 'جدول الرسوم' : 'Fee Schedule'}</span>
+                <div className={clsx('section-tag', isRTL ? 'flex-row-reverse' : 'justify-center')}>{isRTL ? 'جدول الرسوم' : 'Fee Schedule'}</div>
                 <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>
                   {isRTL ? 'رسوم العام الدراسي 2025–2026' : '2025–2026 Academic Year Fees'}
                 </h2>
               </div>
-              <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white shadow-sm" data-reveal="scale">
+              <div className="overflow-x-auto border border-[var(--border)] bg-white" data-reveal="scale">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-neutral-100 bg-neutral-50">
@@ -404,7 +375,7 @@ export default function FeesPage() {
                       <tr key={g.grade} className={clsx('border-b border-neutral-50 last:border-0', i % 2 === 0 ? 'bg-white' : 'bg-neutral-50/50')}>
                         <td className={clsx('px-6 py-4 text-sm font-semibold text-neutral-800', isRTL && 'text-right')}>{isRTL ? g.gradeAr : g.grade}</td>
                         <td className={clsx('px-6 py-4', isRTL && 'text-right')}>
-                          <span className="text-sm font-bold text-brand-blue">{feesData.currency} {g.annualFee.toLocaleString()}</span>
+                          <span className="text-sm font-bold text-[var(--brand-navy)]">{feesData.currency} {g.annualFee.toLocaleString()}</span>
                           <span className="text-xs text-neutral-400 ml-1">{isRTL ? '/سنة' : '/year'}</span>
                         </td>
                         <td className={clsx('px-6 py-4 text-sm text-neutral-600', isRTL && 'text-right')}>
@@ -427,11 +398,10 @@ export default function FeesPage() {
         )}
 
         {/* ── FAQ ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
+        <section className="section-padding bg-white">
+          <div className="container-custom">
             <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag mx-auto">{c.faq.tag}</span>
+              <div className={clsx('section-tag', isRTL ? 'flex-row-reverse' : 'justify-center')}>{c.faq.tag}</div>
               <h2 className={clsx('section-title mx-auto', !isRTL && 'font-playfair')}>{c.faq.title}</h2>
             </div>
             <div className="max-w-2xl mx-auto space-y-3">
@@ -445,20 +415,14 @@ export default function FeesPage() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="section-padding mesh-bg noise relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-brand-blue/15 blur-[100px]" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[200px] rounded-full bg-brand-gold/8 blur-[80px]" />
-          </div>
-          <div className="container-custom relative z-10">
+        <section className="hero-dark section-padding">
+          <div className="container-custom">
             <div className={clsx('max-w-2xl mx-auto text-center', isRTL && 'text-right')} data-reveal="fade">
               <h2 className={clsx('text-3xl md:text-4xl font-bold text-white mb-4', !isRTL && 'font-playfair')}>{c.cta.title}</h2>
               <p className="text-white/60 text-base mb-8">{c.cta.subtitle}</p>
               <Link
                 href="/contact"
-                className={clsx(
-                  'shimmer-btn ripple-btn inline-flex items-center gap-2 bg-brand-gold text-neutral-900 font-bold text-sm px-8 py-4 rounded-xl hover:shadow-[0_8px_30px_rgba(255,193,7,0.4)] hover:-translate-y-0.5 transition-all duration-300',
-                )}
+                className={clsx('btn-secondary inline-flex items-center gap-2', isRTL && 'flex-row-reverse')}
               >
                 {c.cta.btn}
                 {isRTL ? <ArrowLeft size={15} /> : <ArrowRight size={15} />}
