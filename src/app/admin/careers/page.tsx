@@ -22,7 +22,7 @@ const blank: Omit<Career, 'id' | 'postedAt'> = {
   requirementsEn: [], requirementsAr: [], active: true,
 }
 
-const inputCls = 'w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+const inputCls = 'w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500'
 const labelCls = 'block text-xs font-medium text-gray-400 mb-1'
 
 const typeMap: Record<string, string> = {
@@ -91,7 +91,7 @@ export default function CareersAdminPage() {
             <h1 className="text-2xl font-bold text-gray-100">Career Postings</h1>
             <p className="text-gray-400 text-sm mt-1">Manage open positions shown on the public careers page.</p>
           </div>
-          <button onClick={openNew} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+          <button onClick={openNew} className="flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
             <Plus size={15} /> Add Position
           </button>
         </div>
@@ -161,7 +161,7 @@ export default function CareersAdminPage() {
               </div>
               <div className="flex items-end gap-3">
                 <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
-                  <input type="checkbox" checked={editing.active ?? true} onChange={e => set('active', e.target.checked)} className="w-4 h-4 rounded bg-gray-800 border-gray-600 accent-indigo-600" />
+                  <input type="checkbox" checked={editing.active ?? true} onChange={e => set('active', e.target.checked)} className="w-4 h-4 rounded bg-gray-800 border-gray-600 accent-brand-600" />
                   Active (visible on site)
                 </label>
               </div>
@@ -182,7 +182,7 @@ export default function CareersAdminPage() {
 
             <div className="flex gap-3 justify-end">
               <button onClick={closeForm} className="px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors">Cancel</button>
-              <button onClick={save} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+              <button onClick={save} className="flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
                 <CheckCircle size={14} /> {isNew ? 'Create' : 'Update'}
               </button>
             </div>

@@ -13,7 +13,7 @@ interface StatsData {
   updatedAt: string
 }
 
-const inputCls = 'w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+const inputCls = 'w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500'
 const labelCls = 'block text-sm font-medium text-gray-300 mb-1.5'
 
 const fields: { key: keyof StatsData; label: string; desc: string; suffix?: string }[] = [
@@ -70,7 +70,7 @@ export default function StatsAdminPage() {
             <h1 className="text-2xl font-bold text-gray-100">School Stats</h1>
             <p className="text-gray-400 text-sm mt-1">Numbers shown on the homepage, about page, and staff page.</p>
           </div>
-          <button onClick={save} disabled={saving} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-60 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+          <button onClick={save} disabled={saving} className="flex items-center gap-2 bg-brand-600 hover:bg-brand-500 disabled:opacity-60 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
             {saved ? <><CheckCircle size={15} /> Saved</> : saving ? 'Saving…' : <><Save size={15} /> Save Changes</>}
           </button>
         </div>

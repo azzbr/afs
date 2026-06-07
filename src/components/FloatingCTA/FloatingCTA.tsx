@@ -46,16 +46,15 @@ export default function FloatingCTA({ lang = 'en' }: FloatingCTAProps) {
     >
       {/* Apply Now — appears on scroll */}
       <div className={clsx(
-        'transition-all duration-500',
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
+        'transition-all duration-300',
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none',
       )}>
         <Link
           href="/admissions"
-          className="group relative flex items-center gap-2 px-5 py-3 rounded-2xl bg-brand-gold text-neutral-900 font-bold text-sm shadow-[0_8px_30px_rgba(255,200,0,0.45)] hover:shadow-[0_12px_50px_rgba(255,200,0,0.7)] transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+          className="group flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-card transition-all duration-200 hover:bg-brand-700 hover:shadow-card-hover"
         >
-          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600 ease-in-out" />
-          <span className="relative z-10">{applyLabel}</span>
-          <Arr size={14} className="relative z-10 group-hover:translate-x-0.5 transition-transform duration-200" />
+          <span>{applyLabel}</span>
+          <Arr size={14} className="transition-transform duration-200 group-hover:translate-x-0.5" />
         </Link>
       </div>
 
@@ -65,11 +64,10 @@ export default function FloatingCTA({ lang = 'en' }: FloatingCTAProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={waLabel}
-        className="group relative flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#25D366] text-white font-bold text-sm shadow-[0_8px_30px_rgba(37,211,102,0.45)] hover:shadow-[0_12px_50px_rgba(37,211,102,0.65)] transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+        className="group flex items-center gap-2.5 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-card transition-all duration-200 hover:brightness-105 hover:shadow-card-hover"
       >
-        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600 ease-in-out" />
-        <span className="relative z-10 flex-shrink-0"><WhatsAppIcon size={18} /></span>
-        <span className="relative z-10 hidden sm:block">{waLabel}</span>
+        <span className="flex-shrink-0"><WhatsAppIcon size={18} /></span>
+        <span className="hidden sm:block">{waLabel}</span>
       </a>
     </div>
   )

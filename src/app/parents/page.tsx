@@ -4,9 +4,11 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
+import PageHero from '@/components/PageHero/PageHero'
+import SectionHeading from '@/components/SectionHeading/SectionHeading'
 import {
   Phone, Mail, Clock, Bus, Shirt, UtensilsCrossed, Users, BookOpen,
-  ChevronDown, ArrowRight, ArrowLeft, Sparkles, GraduationCap,
+  ChevronDown, ArrowRight, ArrowLeft, GraduationCap, Newspaper,
   Calendar, MessageCircle, FileText, AlertCircle, CheckCircle, Globe,
 } from 'lucide-react'
 import { clsx } from 'clsx'
@@ -24,152 +26,132 @@ const WA_URL = 'https://wa.me/97317612221?text=Hello%2C%20I%27m%20a%20parent%20a
 
 const content = {
   en: {
-    hero: {
-      tag: 'Parent Hub',
-      title: 'Everything You Need',
-      titleAccent: 'In One Place',
-      subtitle: 'Resources, contacts, and information to help you stay connected with your child\'s school journey.',
-    },
+    hero: { tag: 'Parent Hub', title: 'Everything You Need In One Place', subtitle: "Resources, contacts, and information to help you stay connected with your child's school journey." },
     quickActions: {
-      tag: 'Quick Actions',
-      title: 'What Can We Help With?',
+      tag: 'Quick Actions', title: 'What Can We Help With?',
       items: [
-        { icon: GraduationCap, label: 'Enroll a Child',   desc: 'Apply for the 2025–2026 academic year',   href: '/admissions',  color: 'from-brand-blue to-blue-700',    bg: 'bg-brand-blue/8',  text: 'text-brand-blue' },
-        { icon: MessageCircle, label: 'WhatsApp Us',      desc: 'Chat with the school office directly',     href: WA_URL,         color: 'from-[#25D366] to-[#1aad55]',   bg: 'bg-[#25D366]/10', text: 'text-[#25D366]', external: true },
-        { icon: Phone,         label: 'Call the Office',  desc: '+973 1761 2221  ·  Sun–Thu 7AM–3:30PM',  href: 'tel:+97317612221', color: 'from-emerald-500 to-teal-600', bg: 'bg-emerald-50',  text: 'text-emerald-700', external: true },
-        { icon: Calendar,      label: 'View Calendar',    desc: 'Academic dates, holidays & events',        href: '/calendar',    color: 'from-violet-500 to-purple-600',  bg: 'bg-violet-50',   text: 'text-violet-700' },
+        { icon: GraduationCap, label: 'Enroll a Child', desc: 'Apply for the 2025–2026 academic year', href: '/admissions' },
+        { icon: MessageCircle, label: 'WhatsApp Us', desc: 'Chat with the school office directly', href: WA_URL, external: true },
+        { icon: Phone, label: 'Call the Office', desc: '+973 1761 2221  ·  Sun–Thu 7AM–3:30PM', href: 'tel:+97317612221', external: true },
+        { icon: Calendar, label: 'View Calendar', desc: 'Academic dates, holidays & events', href: '/calendar' },
       ],
     },
     essentials: {
-      tag: 'Essential Info',
-      title: 'Daily School Life',
+      tag: 'Essential Info', title: 'Daily School Life',
       items: [
-        { icon: Clock,          title: 'School Hours',    color: 'from-brand-blue to-blue-700',   detail: 'Students: 7:00 AM – 2:30 PM\nAdmin Office: 7:00 AM – 3:30 PM\nSunday – Thursday' },
-        { icon: Bus,            title: 'School Bus',      color: 'from-amber-400 to-orange-500',  detail: 'Available for major Bahrain areas.\nContact the office for current routes,\ntimetables, and fees.' },
-        { icon: Shirt,          title: 'Uniform',         color: 'from-violet-500 to-purple-600', detail: 'School uniform is required for all\nstudents. Available from the school\noffice at nominal cost.' },
-        { icon: UtensilsCrossed,title: 'Canteen',         color: 'from-emerald-400 to-teal-600',  detail: 'On-campus canteen offers healthy\ndaily options. Lunch orders can be\nplaced at the start of each week.' },
+        { icon: Clock, title: 'School Hours', detail: 'Students: 7:00 AM – 2:30 PM\nAdmin Office: 7:00 AM – 3:30 PM\nSunday – Thursday' },
+        { icon: Bus, title: 'School Bus', detail: 'Available for major Bahrain areas.\nContact the office for current routes,\ntimetables, and fees.' },
+        { icon: Shirt, title: 'Uniform', detail: 'School uniform is required for all\nstudents. Available from the school\noffice at nominal cost.' },
+        { icon: UtensilsCrossed, title: 'Canteen', detail: 'On-campus canteen offers healthy\ndaily options. Lunch orders can be\nplaced at the start of each week.' },
       ],
     },
     contacts: {
-      tag: 'Contacts',
-      title: 'Who to Reach',
+      tag: 'Contacts', title: 'Who to Reach',
       items: [
-        { role: 'School Office',       desc: 'General enquiries, absences, daily matters', phone: '+973 1761 2221', email: 'info@afs.edu.bh',       hours: 'Sun–Thu, 7:00 AM – 3:30 PM' },
-        { role: 'Admissions',          desc: 'Enrollment, new applications, tours',        phone: '+973 1761 2221', email: 'info@afs.edu.bh',       hours: 'Sun–Thu, 7:30 AM – 3:00 PM' },
-        { role: "Principal's Office",  desc: 'Academic concerns, formal matters',          phone: '+973 1761 2221', email: 'info@afs.edu.bh',       hours: 'By appointment' },
+        { role: 'School Office', desc: 'General enquiries, absences, daily matters', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'Sun–Thu, 7:00 AM – 3:30 PM' },
+        { role: 'Admissions', desc: 'Enrollment, new applications, tours', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'Sun–Thu, 7:30 AM – 3:00 PM' },
+        { role: "Principal's Office", desc: 'Academic concerns, formal matters', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'By appointment' },
       ],
     },
     policies: {
-      tag: 'School Policies',
-      title: 'Good to Know',
+      tag: 'School Policies', title: 'Good to Know',
       items: [
-        { icon: CheckCircle, title: 'Attendance',   desc: 'Students are expected to maintain at least 95% attendance. Absences must be reported to the office before 8:00 AM on the day.' },
-        { icon: Shirt,       title: 'Uniform',      desc: 'Full school uniform is compulsory every day. No modifications are permitted. Lost uniform items can be reported to the office.' },
-        { icon: AlertCircle, title: 'Electronics',  desc: 'Mobile phones and personal electronics are not permitted during school hours. Devices will be held at the office until pickup.' },
-        { icon: Users,       title: 'Behaviour',    desc: 'AFS upholds a respectful, inclusive environment. Bullying or disruptive behaviour is addressed through our school behaviour policy.' },
-        { icon: Globe,       title: 'Communication',desc: 'All official communication is through WhatsApp parent groups and email. Ensure your contact details are always up to date.' },
-        { icon: BookOpen,    title: 'Homework',     desc: 'Homework is assigned regularly across all grades. Parents are encouraged to support a consistent daily study routine at home.' },
+        { icon: CheckCircle, title: 'Attendance', desc: 'Students are expected to maintain at least 95% attendance. Absences must be reported to the office before 8:00 AM on the day.' },
+        { icon: Shirt, title: 'Uniform', desc: 'Full school uniform is compulsory every day. No modifications are permitted. Lost uniform items can be reported to the office.' },
+        { icon: AlertCircle, title: 'Electronics', desc: 'Mobile phones and personal electronics are not permitted during school hours. Devices will be held at the office until pickup.' },
+        { icon: Users, title: 'Behaviour', desc: 'AFS upholds a respectful, inclusive environment. Bullying or disruptive behaviour is addressed through our school behaviour policy.' },
+        { icon: Globe, title: 'Communication', desc: 'All official communication is through WhatsApp parent groups and email. Ensure your contact details are always up to date.' },
+        { icon: BookOpen, title: 'Homework', desc: 'Homework is assigned regularly across all grades. Parents are encouraged to support a consistent daily study routine at home.' },
       ],
     },
     faq: {
-      tag: 'FAQ',
-      title: 'Parent Questions',
+      tag: 'FAQ', title: 'Parent Questions',
       items: [
-        { q: 'How do I report my child\'s absence?',           a: 'Call or WhatsApp the school office before 8:00 AM on the day of absence at +973 1761 2221. An absence note or doctor\'s certificate may be required for extended absences.' },
-        { q: 'When are parent-teacher meetings held?',          a: 'Parent-teacher meetings are held twice per term. Exact dates are shared via the parent WhatsApp groups and the school calendar at least two weeks in advance.' },
-        { q: 'How do I update my contact information?',        a: 'Email info@afs.edu.bh or visit the admin office in person. Keeping your contact details current ensures you receive all school communications.' },
-        { q: 'Is there a parent portal or app?',               a: 'A dedicated parent portal is currently in development. In the meantime, all communication is managed via WhatsApp parent groups and direct contact with the office.' },
-        { q: 'How do I join my child\'s class WhatsApp group?',a: "Contact your child's class teacher or the school office at the start of the academic year. You will be added to the relevant group once verified." },
-        { q: 'What happens if my child is unwell at school?',  a: 'The school nurse will assess your child and contact you immediately if needed. Please ensure your emergency contact details are always current with the office.' },
+        { q: "How do I report my child's absence?", a: "Call or WhatsApp the school office before 8:00 AM on the day of absence at +973 1761 2221. An absence note or doctor's certificate may be required for extended absences." },
+        { q: 'When are parent-teacher meetings held?', a: 'Parent-teacher meetings are held twice per term. Exact dates are shared via the parent WhatsApp groups and the school calendar at least two weeks in advance.' },
+        { q: 'How do I update my contact information?', a: 'Email info@afs.edu.bh or visit the admin office in person. Keeping your contact details current ensures you receive all school communications.' },
+        { q: 'Is there a parent portal or app?', a: 'A dedicated parent portal is currently in development. In the meantime, all communication is managed via WhatsApp parent groups and direct contact with the office.' },
+        { q: "How do I join my child's class WhatsApp group?", a: "Contact your child's class teacher or the school office at the start of the academic year. You will be added to the relevant group once verified." },
+        { q: 'What happens if my child is unwell at school?', a: 'The school nurse will assess your child and contact you immediately if needed. Please ensure your emergency contact details are always current with the office.' },
       ],
     },
     links: {
-      tag: 'Explore',
-      title: 'Helpful Pages',
+      tag: 'Explore', title: 'Helpful Pages',
       items: [
-        { label: 'Academic Programs',  href: '/academics',  icon: BookOpen   },
-        { label: 'Admissions',         href: '/admissions', icon: FileText   },
-        { label: 'School Calendar',    href: '/calendar',   icon: Calendar   },
-        { label: 'School Fees',        href: '/fees',       icon: GraduationCap },
-        { label: 'Photo Gallery',      href: '/gallery',    icon: Globe      },
-        { label: 'News & Events',      href: '/news',       icon: Sparkles   },
+        { label: 'Academic Programs', href: '/academics', icon: BookOpen },
+        { label: 'Admissions', href: '/admissions', icon: FileText },
+        { label: 'School Calendar', href: '/calendar', icon: Calendar },
+        { label: 'School Fees', href: '/fees', icon: GraduationCap },
+        { label: 'Photo Gallery', href: '/gallery', icon: Globe },
+        { label: 'News & Events', href: '/news', icon: Newspaper },
       ],
     },
     cta: { title: 'Have a Question?', subtitle: "We're always happy to hear from AFS families.", wa: 'Chat on WhatsApp', email: 'Send an Email' },
+    go: 'Go',
   },
   ar: {
-    hero: {
-      tag: 'مركز الأهالي',
-      title: 'كل ما تحتاجه',
-      titleAccent: 'في مكان واحد',
-      subtitle: 'موارد ومعلومات ومعلومات اتصال لمساعدتك على البقاء على تواصل مع رحلة طفلك الدراسية.',
-    },
+    hero: { tag: 'مركز الأهالي', title: 'كل ما تحتاجه في مكان واحد', subtitle: 'موارد ومعلومات ومعلومات اتصال لمساعدتك على البقاء على تواصل مع رحلة طفلك الدراسية.' },
     quickActions: {
-      tag: 'إجراءات سريعة',
-      title: 'كيف يمكننا مساعدتك؟',
+      tag: 'إجراءات سريعة', title: 'كيف يمكننا مساعدتك؟',
       items: [
-        { icon: GraduationCap, label: 'تسجيل طفل',     desc: 'تقدم للعام الدراسي 2025–2026',             href: '/admissions',  color: 'from-brand-blue to-blue-700',  bg: 'bg-brand-blue/8', text: 'text-brand-blue' },
-        { icon: MessageCircle, label: 'واتساب',          desc: 'تحدث مع مكتب المدرسة مباشرة',              href: WA_URL,         color: 'from-[#25D366] to-[#1aad55]', bg: 'bg-[#25D366]/10', text: 'text-[#25D366]', external: true },
-        { icon: Phone,         label: 'اتصل بالمكتب',   desc: '+973 1761 2221  ·  الأحد–الخميس 7ص–3:30م', href: 'tel:+97317612221', color: 'from-emerald-500 to-teal-600', bg: 'bg-emerald-50', text: 'text-emerald-700', external: true },
-        { icon: Calendar,      label: 'التقويم المدرسي', desc: 'المواعيد والإجازات والفعاليات',              href: '/calendar',    color: 'from-violet-500 to-purple-600', bg: 'bg-violet-50', text: 'text-violet-700' },
+        { icon: GraduationCap, label: 'تسجيل طفل', desc: 'تقدم للعام الدراسي 2025–2026', href: '/admissions' },
+        { icon: MessageCircle, label: 'واتساب', desc: 'تحدث مع مكتب المدرسة مباشرة', href: WA_URL, external: true },
+        { icon: Phone, label: 'اتصل بالمكتب', desc: '+973 1761 2221  ·  الأحد–الخميس 7ص–3:30م', href: 'tel:+97317612221', external: true },
+        { icon: Calendar, label: 'التقويم المدرسي', desc: 'المواعيد والإجازات والفعاليات', href: '/calendar' },
       ],
     },
     essentials: {
-      tag: 'معلومات أساسية',
-      title: 'الحياة اليومية في المدرسة',
+      tag: 'معلومات أساسية', title: 'الحياة اليومية في المدرسة',
       items: [
-        { icon: Clock,          title: 'أوقات الدوام',  color: 'from-brand-blue to-blue-700',   detail: 'الطلاب: 7:00 ص – 2:30 م\nالمكتب الإداري: 7:00 ص – 3:30 م\nالأحد – الخميس' },
-        { icon: Bus,            title: 'الحافلة المدرسية', color: 'from-amber-400 to-orange-500', detail: 'متاحة لمناطق رئيسية في البحرين.\nتواصل مع المكتب للاستفسار عن المسارات\nوالجداول الزمنية والرسوم.' },
-        { icon: Shirt,          title: 'الزي المدرسي',  color: 'from-violet-500 to-purple-600', detail: 'الزي المدرسي إلزامي لجميع الطلاب.\nمتاح من مكتب المدرسة\nبتكلفة رمزية.' },
-        { icon: UtensilsCrossed,title: 'الكافيتيريا',   color: 'from-emerald-400 to-teal-600',  detail: 'تقدم الكافيتيريا خيارات صحية يومية.\nيمكن طلب الغداء في بداية\nكل أسبوع.' },
+        { icon: Clock, title: 'أوقات الدوام', detail: 'الطلاب: 7:00 ص – 2:30 م\nالمكتب الإداري: 7:00 ص – 3:30 م\nالأحد – الخميس' },
+        { icon: Bus, title: 'الحافلة المدرسية', detail: 'متاحة لمناطق رئيسية في البحرين.\nتواصل مع المكتب للاستفسار عن المسارات\nوالجداول الزمنية والرسوم.' },
+        { icon: Shirt, title: 'الزي المدرسي', detail: 'الزي المدرسي إلزامي لجميع الطلاب.\nمتاح من مكتب المدرسة\nبتكلفة رمزية.' },
+        { icon: UtensilsCrossed, title: 'الكافيتيريا', detail: 'تقدم الكافيتيريا خيارات صحية يومية.\nيمكن طلب الغداء في بداية\nكل أسبوع.' },
       ],
     },
     contacts: {
-      tag: 'جهات الاتصال',
-      title: 'من تتواصل معه',
+      tag: 'جهات الاتصال', title: 'من تتواصل معه',
       items: [
-        { role: 'مكتب المدرسة',   desc: 'الاستفسارات العامة والغيابات والشؤون اليومية', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'الأحد–الخميس، 7:00 ص – 3:30 م' },
-        { role: 'القبول والتسجيل', desc: 'التسجيل والطلبات الجديدة والجولات',             phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'الأحد–الخميس، 7:30 ص – 3:00 م' },
-        { role: 'مكتب المديرة',    desc: 'الشؤون الأكاديمية والمسائل الرسمية',            phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'بموعد مسبق' },
+        { role: 'مكتب المدرسة', desc: 'الاستفسارات العامة والغيابات والشؤون اليومية', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'الأحد–الخميس، 7:00 ص – 3:30 م' },
+        { role: 'القبول والتسجيل', desc: 'التسجيل والطلبات الجديدة والجولات', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'الأحد–الخميس، 7:30 ص – 3:00 م' },
+        { role: 'مكتب المديرة', desc: 'الشؤون الأكاديمية والمسائل الرسمية', phone: '+973 1761 2221', email: 'info@afs.edu.bh', hours: 'بموعد مسبق' },
       ],
     },
     policies: {
-      tag: 'سياسات المدرسة',
-      title: 'معلومات مهمة',
+      tag: 'سياسات المدرسة', title: 'معلومات مهمة',
       items: [
-        { icon: CheckCircle, title: 'الحضور',         desc: 'يُتوقع من الطلاب الحفاظ على حضور لا يقل عن 95٪. يجب الإبلاغ عن الغياب قبل 8:00 ص في يوم الغياب.' },
-        { icon: Shirt,       title: 'الزي المدرسي',   desc: 'ارتداء الزي الرسمي إلزامي في جميع الأيام. لا يُسمح بأي تعديلات. يمكن الإبلاغ عن فقدان الزي للمكتب.' },
+        { icon: CheckCircle, title: 'الحضور', desc: 'يُتوقع من الطلاب الحفاظ على حضور لا يقل عن 95٪. يجب الإبلاغ عن الغياب قبل 8:00 ص في يوم الغياب.' },
+        { icon: Shirt, title: 'الزي المدرسي', desc: 'ارتداء الزي الرسمي إلزامي في جميع الأيام. لا يُسمح بأي تعديلات. يمكن الإبلاغ عن فقدان الزي للمكتب.' },
         { icon: AlertCircle, title: 'الأجهزة الإلكترونية', desc: 'لا يُسمح بالهواتف والأجهزة الشخصية خلال أوقات الدراسة. ستُحتجز الأجهزة في المكتب حتى موعد الانصراف.' },
-        { icon: Users,       title: 'السلوك',         desc: 'تلتزم الفجر ببيئة محترمة وشاملة. يُعالج التنمر والسلوك المخل وفق سياسة السلوك المدرسية.' },
-        { icon: Globe,       title: 'التواصل',        desc: 'يتم التواصل الرسمي عبر مجموعات واتساب وإيميلات الأهالي. احرص على تحديث بياناتك دائماً.' },
-        { icon: BookOpen,    title: 'الواجبات المنزلية', desc: 'تُعطى الواجبات المنزلية بانتظام في جميع الصفوف. يُشجع الأهالي على دعم روتين مذاكرة يومي منتظم.' },
+        { icon: Users, title: 'السلوك', desc: 'تلتزم الفجر ببيئة محترمة وشاملة. يُعالج التنمر والسلوك المخل وفق سياسة السلوك المدرسية.' },
+        { icon: Globe, title: 'التواصل', desc: 'يتم التواصل الرسمي عبر مجموعات واتساب وإيميلات الأهالي. احرص على تحديث بياناتك دائماً.' },
+        { icon: BookOpen, title: 'الواجبات المنزلية', desc: 'تُعطى الواجبات المنزلية بانتظام في جميع الصفوف. يُشجع الأهالي على دعم روتين مذاكرة يومي منتظم.' },
       ],
     },
     faq: {
-      tag: 'أسئلة شائعة',
-      title: 'أسئلة الأهالي',
+      tag: 'أسئلة شائعة', title: 'أسئلة الأهالي',
       items: [
-        { q: 'كيف أبلغ عن غياب طفلي؟',                     a: 'اتصل أو أرسل واتساب لمكتب المدرسة قبل 8:00 ص في يوم الغياب على +973 1761 2221. قد تُطلب مذكرة غياب أو شهادة طبية للغيابات الممتدة.' },
+        { q: 'كيف أبلغ عن غياب طفلي؟', a: 'اتصل أو أرسل واتساب لمكتب المدرسة قبل 8:00 ص في يوم الغياب على +973 1761 2221. قد تُطلب مذكرة غياب أو شهادة طبية للغيابات الممتدة.' },
         { q: 'متى تُعقد اجتماعات أولياء الأمور والمعلمين؟', a: 'تُعقد مرتين في كل فصل دراسي. تُشارك المواعيد الدقيقة عبر مجموعات واتساب وتقويم المدرسة قبل أسبوعين على الأقل.' },
-        { q: 'كيف أحدّث بيانات الاتصال الخاصة بي؟',         a: 'أرسل بريداً إلى info@afs.edu.bh أو قم بزيارة المكتب الإداري. الحفاظ على بياناتك محدّثة يضمن وصول جميع مراسلات المدرسة.' },
-        { q: 'هل يوجد تطبيق أو بوابة للأهالي؟',             a: 'بوابة الأهالي المخصصة قيد التطوير حالياً. في الوقت الحالي يتم التواصل عبر مجموعات واتساب والتواصل المباشر مع المكتب.' },
-        { q: 'كيف أنضم إلى مجموعة واتساب صف طفلي؟',        a: 'تواصل مع معلم الفصل أو مكتب المدرسة في بداية العام الدراسي وستُضاف إلى المجموعة المناسبة بعد التحقق.' },
-        { q: 'ماذا يحدث إذا أُصيب طفلي بمرض في المدرسة؟',  a: 'ستتولى ممرضة المدرسة تقييم الحالة وستتواصل معك فوراً عند الحاجة. احرص دائماً على تحديث بيانات الطوارئ لدى المكتب.' },
+        { q: 'كيف أحدّث بيانات الاتصال الخاصة بي؟', a: 'أرسل بريداً إلى info@afs.edu.bh أو قم بزيارة المكتب الإداري. الحفاظ على بياناتك محدّثة يضمن وصول جميع مراسلات المدرسة.' },
+        { q: 'هل يوجد تطبيق أو بوابة للأهالي؟', a: 'بوابة الأهالي المخصصة قيد التطوير حالياً. في الوقت الحالي يتم التواصل عبر مجموعات واتساب والتواصل المباشر مع المكتب.' },
+        { q: 'كيف أنضم إلى مجموعة واتساب صف طفلي؟', a: 'تواصل مع معلم الفصل أو مكتب المدرسة في بداية العام الدراسي وستُضاف إلى المجموعة المناسبة بعد التحقق.' },
+        { q: 'ماذا يحدث إذا أُصيب طفلي بمرض في المدرسة؟', a: 'ستتولى ممرضة المدرسة تقييم الحالة وستتواصل معك فوراً عند الحاجة. احرص دائماً على تحديث بيانات الطوارئ لدى المكتب.' },
       ],
     },
     links: {
-      tag: 'استكشف',
-      title: 'صفحات مفيدة',
+      tag: 'استكشف', title: 'صفحات مفيدة',
       items: [
-        { label: 'البرامج الأكاديمية',   href: '/academics',  icon: BookOpen   },
-        { label: 'القبول والتسجيل',      href: '/admissions', icon: FileText   },
-        { label: 'التقويم المدرسي',       href: '/calendar',   icon: Calendar   },
-        { label: 'الرسوم الدراسية',      href: '/fees',       icon: GraduationCap },
-        { label: 'معرض الصور',           href: '/gallery',    icon: Globe      },
-        { label: 'الأخبار والفعاليات',   href: '/news',       icon: Sparkles   },
+        { label: 'البرامج الأكاديمية', href: '/academics', icon: BookOpen },
+        { label: 'القبول والتسجيل', href: '/admissions', icon: FileText },
+        { label: 'التقويم المدرسي', href: '/calendar', icon: Calendar },
+        { label: 'الرسوم الدراسية', href: '/fees', icon: GraduationCap },
+        { label: 'معرض الصور', href: '/gallery', icon: Globe },
+        { label: 'الأخبار والفعاليات', href: '/news', icon: Newspaper },
       ],
     },
     cta: { title: 'هل لديك سؤال؟', subtitle: 'يسعدنا دائماً التواصل مع أسر الفجر.', wa: 'تحدث معنا على واتساب', email: 'أرسل بريداً إلكترونياً' },
+    go: 'انتقل',
   },
 }
 
@@ -182,47 +164,18 @@ export default function ParentsPage() {
   useScrollReveal()
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen">
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen bg-canvas">
       <Header lang={lang} onLangChange={setLang} />
       <main>
+        <PageHero tag={c.hero.tag} title={c.hero.title} subtitle={c.hero.subtitle} isRTL={isRTL} align="left" />
 
-        {/* ── Hero ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-28 lg:py-36">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-float-slow absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-brand-blue/20 blur-[110px]" />
-            <div className="animate-pulse-glow absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full bg-brand-gold/8 blur-[90px]" />
-            <div className="absolute inset-0 dot-pattern opacity-25" />
-          </div>
-          <div className="container-custom relative z-10">
-            <div className={clsx('max-w-2xl', isRTL && 'text-right')}>
-              <div className={clsx('flex mb-5 animate-bounce-in', isRTL && 'justify-end')}>
-                <span className="inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-4 py-2 text-white/65 text-xs font-semibold tracking-widest uppercase backdrop-blur-sm">
-                  <Sparkles size={11} className="text-brand-gold" />{c.hero.tag}
-                </span>
-              </div>
-              <h1 className={clsx('font-bold leading-tight mb-5', !isRTL && 'font-playfair')}>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-white/92 animate-slide-up" style={{ animationDelay: '100ms' }}>{c.hero.title}</span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl text-gradient-gold text-glow animate-slide-up" style={{ animationDelay: '250ms' }}>{c.hero.titleAccent}</span>
-              </h1>
-              <p className="text-white/60 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>{c.hero.subtitle}</p>
+        {/* Quick actions */}
+        <section className="section-padding bg-canvas">
+          <div className="container-custom">
+            <div data-reveal="fade" className="mb-12">
+              <SectionHeading tag={c.quickActions.tag} title={c.quickActions.title} isRTL={isRTL} />
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-            <svg viewBox="0 0 1440 70" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-              <path d="M0 70L1440 70L1440 25C1250 65 980 5 720 32C460 59 200 5 0 28L0 70Z" />
-            </svg>
-          </div>
-        </section>
-
-        {/* ── Quick Actions ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.quickActions.tag}</span>
-              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.quickActions.title}</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {c.quickActions.items.map((item, i) => (
                 <a
                   key={item.label}
@@ -230,16 +183,16 @@ export default function ParentsPage() {
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noopener noreferrer' : undefined}
                   data-reveal="scale"
-                  data-delay={String(i * 100)}
-                  className={clsx('group relative rounded-3xl p-6 border border-neutral-100 bg-white hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 overflow-hidden', isRTL && 'text-right')}
+                  data-delay={String(i * 80)}
+                  className={clsx('group card card-hover p-6', isRTL && 'text-right')}
                 >
-                  <div className={clsx('w-12 h-12 rounded-2xl bg-gradient-to-br flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm', item.color)}>
-                    <item.icon size={20} className="text-white" />
-                  </div>
-                  <h3 className="font-bold text-neutral-900 text-sm mb-1">{item.label}</h3>
-                  <p className="text-neutral-500 text-xs leading-relaxed">{item.desc}</p>
-                  <div className={clsx('flex items-center gap-1.5 mt-3 font-semibold text-xs group-hover:gap-2.5 transition-all duration-200', item.text, isRTL && 'flex-row-reverse')}>
-                    {isRTL ? 'انتقل' : 'Go'} <Arr size={11} />
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-600 text-white">
+                    <item.icon size={20} />
+                  </span>
+                  <h3 className="mb-1 mt-4 text-sm font-semibold text-ink">{item.label}</h3>
+                  <p className="text-xs leading-relaxed text-muted">{item.desc}</p>
+                  <div className={clsx('mt-3 flex items-center gap-1.5 text-xs font-semibold text-brand-600', isRTL && 'flex-row-reverse')}>
+                    {c.go} <Arr size={11} />
                   </div>
                 </a>
               ))}
@@ -247,62 +200,45 @@ export default function ParentsPage() {
           </div>
         </section>
 
-        {/* ── Daily Essentials ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-brand-blue/3 rounded-full blur-3xl pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.essentials.tag}</span>
-              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.essentials.title}</h2>
+        {/* Daily essentials */}
+        <section className="section-padding dawn-soft">
+          <div className="container-custom">
+            <div data-reveal="fade" className="mb-12">
+              <SectionHeading tag={c.essentials.tag} title={c.essentials.title} isRTL={isRTL} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {c.essentials.items.map((item, i) => (
-                <div
-                  key={item.title}
-                  data-reveal
-                  data-delay={String(i * 100)}
-                  className={clsx('group relative rounded-3xl p-6 bg-white border border-neutral-100 hover:shadow-[0_20px_60px_rgba(0,0,0,0.09)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden cursor-default', isRTL && 'text-right')}
-                >
-                  <div className={clsx('w-12 h-12 rounded-2xl bg-gradient-to-br flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm', item.color)}>
-                    <item.icon size={20} className="text-white" />
-                  </div>
-                  <h3 className="font-bold text-neutral-900 text-sm mb-2">{item.title}</h3>
-                  <p className="text-neutral-500 text-xs leading-relaxed whitespace-pre-line">{item.detail}</p>
-                  <div className={clsx('absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-400', item.color)} />
+                <div key={item.title} data-reveal data-delay={String(i * 80)} className={clsx('card card-hover p-6', isRTL && 'text-right')}>
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                    <item.icon size={20} />
+                  </span>
+                  <h3 className="mb-2 mt-4 text-sm font-semibold text-ink">{item.title}</h3>
+                  <p className="whitespace-pre-line text-xs leading-relaxed text-muted">{item.detail}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── Contacts ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.contacts.tag}</span>
-              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.contacts.title}</h2>
+        {/* Contacts */}
+        <section className="section-padding bg-canvas">
+          <div className="container-custom">
+            <div data-reveal="fade" className="mb-12">
+              <SectionHeading tag={c.contacts.tag} title={c.contacts.title} isRTL={isRTL} />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
               {c.contacts.items.map((item, i) => (
-                <div
-                  key={item.role}
-                  data-reveal
-                  data-delay={String(i * 120)}
-                  className={clsx('group relative rounded-3xl p-7 bg-white border border-neutral-100 hover:shadow-[0_20px_60px_rgba(0,40,255,0.08)] hover:border-brand-blue/20 hover:-translate-y-1.5 transition-all duration-500 overflow-hidden', isRTL && 'text-right')}
-                >
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-blue/25 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                  <h3 className="font-bold text-neutral-900 text-sm mb-1">{item.role}</h3>
-                  <p className="text-neutral-500 text-xs mb-4">{item.desc}</p>
+                <div key={item.role} data-reveal data-delay={String(i * 100)} className={clsx('card card-hover border-t-4 border-t-brand-600 p-7', isRTL && 'text-right')}>
+                  <h3 className="mb-1 text-sm font-bold text-ink">{item.role}</h3>
+                  <p className="mb-4 text-xs text-muted">{item.desc}</p>
                   <div className="space-y-2">
-                    <a href={`tel:${item.phone.replace(/\s/g, '')}`} className={clsx('flex items-center gap-2 text-xs text-neutral-600 hover:text-brand-blue transition-colors', isRTL && 'flex-row-reverse')}>
-                      <Phone size={12} className="text-brand-blue flex-shrink-0" /> {item.phone}
+                    <a href={`tel:${item.phone.replace(/\s/g, '')}`} className={clsx('flex items-center gap-2 text-xs text-muted transition-colors hover:text-brand-600', isRTL && 'flex-row-reverse')}>
+                      <Phone size={12} className="flex-shrink-0 text-brand-600" /> <span dir="ltr">{item.phone}</span>
                     </a>
-                    <a href={`mailto:${item.email}`} className={clsx('flex items-center gap-2 text-xs text-neutral-600 hover:text-brand-blue transition-colors', isRTL && 'flex-row-reverse')}>
-                      <Mail size={12} className="text-brand-blue flex-shrink-0" /> {item.email}
+                    <a href={`mailto:${item.email}`} className={clsx('flex items-center gap-2 text-xs text-muted transition-colors hover:text-brand-600', isRTL && 'flex-row-reverse')}>
+                      <Mail size={12} className="flex-shrink-0 text-brand-600" /> {item.email}
                     </a>
-                    <div className={clsx('flex items-center gap-2 text-xs text-neutral-400', isRTL && 'flex-row-reverse')}>
+                    <div className={clsx('flex items-center gap-2 text-xs text-faint', isRTL && 'flex-row-reverse')}>
                       <Clock size={12} className="flex-shrink-0" /> {item.hours}
                     </div>
                   </div>
@@ -312,30 +248,22 @@ export default function ParentsPage() {
           </div>
         </section>
 
-        {/* ── School Policies ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-blue/3 rounded-full blur-3xl pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.policies.tag}</span>
-              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.policies.title}</h2>
+        {/* Policies */}
+        <section className="section-padding dawn-soft">
+          <div className="container-custom">
+            <div data-reveal="fade" className="mb-12">
+              <SectionHeading tag={c.policies.tag} title={c.policies.title} isRTL={isRTL} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {c.policies.items.map((item, i) => (
-                <div
-                  key={item.title}
-                  data-reveal
-                  data-delay={String((i % 3) * 100)}
-                  className={clsx('group relative rounded-2xl p-6 bg-white border border-neutral-100 hover:border-brand-blue/20 hover:shadow-[0_12px_40px_rgba(0,40,255,0.07)] transition-all duration-400 hover:-translate-y-1 overflow-hidden', isRTL && 'text-right')}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                <div key={item.title} data-reveal data-delay={String((i % 3) * 80)} className={clsx('card p-6', isRTL && 'text-right')}>
                   <div className={clsx('flex items-start gap-3', isRTL && 'flex-row-reverse')}>
-                    <div className="w-9 h-9 rounded-xl bg-brand-blue/8 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-blue/15 transition-colors">
-                      <item.icon size={15} className="text-brand-blue" />
-                    </div>
+                    <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
+                      <item.icon size={15} />
+                    </span>
                     <div>
-                      <h3 className="font-bold text-neutral-900 text-sm mb-1">{item.title}</h3>
-                      <p className="text-neutral-500 text-xs leading-relaxed">{item.desc}</p>
+                      <h3 className="mb-1 text-sm font-semibold text-ink">{item.title}</h3>
+                      <p className="text-xs leading-relaxed text-muted">{item.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -344,35 +272,26 @@ export default function ParentsPage() {
           </div>
         </section>
 
-        {/* ── FAQ ── */}
-        <section className="section-padding bg-white relative overflow-hidden">
-          <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.faq.tag}</span>
-              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.faq.title}</h2>
+        {/* FAQ */}
+        <section className="section-padding bg-canvas">
+          <div className="container-custom">
+            <div data-reveal="fade" className="mb-12">
+              <SectionHeading tag={c.faq.tag} title={c.faq.title} isRTL={isRTL} />
             </div>
-            <div className="max-w-3xl mx-auto space-y-3">
+            <div className="mx-auto max-w-3xl space-y-3">
               {c.faq.items.map((item, i) => (
-                <div
-                  key={i}
-                  data-reveal
-                  data-delay={String(i * 70)}
-                  className="group rounded-2xl border border-neutral-100 bg-white overflow-hidden hover:border-brand-blue/20 transition-colors duration-300"
-                >
+                <div key={i} data-reveal data-delay={String(i * 50)} className="overflow-hidden rounded-xl border border-line bg-white">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className={clsx(
-                      'w-full flex items-center justify-between gap-4 px-6 py-5 text-left font-semibold text-sm transition-colors duration-200',
-                      openFaq === i ? 'text-brand-blue' : 'text-neutral-800 hover:text-brand-blue',
-                      isRTL && 'text-right flex-row-reverse',
-                    )}
+                    className={clsx('flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-sm font-semibold transition-colors', openFaq === i ? 'text-brand-600' : 'text-ink hover:text-brand-600', isRTL && 'flex-row-reverse text-right')}
                   >
                     <span>{item.q}</span>
-                    <ChevronDown size={16} className={clsx('flex-shrink-0 text-neutral-400 transition-transform duration-300', openFaq === i ? 'rotate-180 text-brand-blue' : 'group-hover:text-brand-blue')} />
+                    <ChevronDown size={16} className={clsx('flex-shrink-0 text-faint transition-transform duration-300', openFaq === i && 'rotate-180 text-brand-600')} />
                   </button>
-                  <div className={clsx('overflow-hidden transition-all duration-400', openFaq === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0')}>
-                    <p className={clsx('px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-50 pt-3', isRTL && 'text-right')}>{item.a}</p>
+                  <div className={clsx('grid transition-all duration-300', openFaq === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}>
+                    <div className="overflow-hidden">
+                      <p className={clsx('border-t border-line px-6 py-4 text-sm leading-relaxed text-muted', isRTL && 'text-right')}>{item.a}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -380,55 +299,36 @@ export default function ParentsPage() {
           </div>
         </section>
 
-        {/* ── Helpful Links ── */}
-        <section className="section-padding bg-neutral-50 relative overflow-hidden">
-          <div className="container-custom relative z-10">
-            <div className={clsx('mb-12', isRTL ? 'text-right' : 'text-center')} data-reveal="fade">
-              <span className="section-tag">{c.links.tag}</span>
-              <h2 className={clsx('section-title', !isRTL && 'font-playfair')}>{c.links.title}</h2>
+        {/* Helpful links */}
+        <section className="section-padding dawn-soft">
+          <div className="container-custom">
+            <div data-reveal="fade" className="mb-12">
+              <SectionHeading tag={c.links.tag} title={c.links.title} isRTL={isRTL} />
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
               {c.links.items.map((item, i) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  data-reveal="scale"
-                  data-delay={String(i * 60)}
-                  className={clsx('group flex flex-col items-center gap-3 p-5 rounded-2xl bg-white border border-neutral-100 hover:border-brand-blue/25 hover:shadow-[0_12px_40px_rgba(0,40,255,0.08)] hover:-translate-y-1.5 transition-all duration-400 text-center overflow-hidden relative', isRTL && 'text-center')}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                  <div className="w-10 h-10 rounded-xl bg-brand-blue/8 flex items-center justify-center group-hover:bg-brand-blue/15 group-hover:scale-110 transition-all duration-300">
-                    <item.icon size={16} className="text-brand-blue" />
-                  </div>
-                  <span className="text-xs font-bold text-neutral-700 group-hover:text-brand-blue transition-colors leading-tight">{item.label}</span>
+                <Link key={item.label} href={item.href} data-reveal="scale" data-delay={String(i * 50)} className="group flex flex-col items-center gap-3 card card-hover p-5 text-center">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                    <item.icon size={16} />
+                  </span>
+                  <span className="text-xs font-semibold leading-tight text-ink transition-colors group-hover:text-brand-600">{item.label}</span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── CTA ── */}
-        <section className="mesh-bg noise relative overflow-hidden py-24">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="animate-pulse-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-blue/18 blur-[100px] rounded-full" />
-            <div className="absolute inset-0 dot-pattern opacity-18" />
-          </div>
-          <div className="container-custom relative z-10 text-center" data-reveal="scale">
-            <h2 className={clsx('text-3xl md:text-4xl font-bold text-white mb-4', !isRTL && 'font-playfair')}>{c.cta.title}</h2>
-            <p className="text-white/60 mb-10 max-w-md mx-auto">{c.cta.subtitle}</p>
-            <div className={clsx('flex flex-wrap gap-4 justify-center', isRTL && 'flex-row-reverse')}>
-              <a
-                href={WA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shimmer-btn inline-flex items-center gap-2.5 px-8 py-4 bg-[#25D366] text-white font-bold rounded-2xl text-sm hover:shadow-[0_0_50px_rgba(37,211,102,0.5)] transition-all duration-300 hover:-translate-y-1"
-              >
+        {/* CTA */}
+        <section className="dawn-hero relative overflow-hidden py-20 text-white">
+          <div className="absolute inset-0 grid-faint opacity-40 pointer-events-none" />
+          <div data-reveal="scale" className="container-custom relative text-center">
+            <h2 className="mb-4 font-display text-3xl font-bold md:text-4xl">{c.cta.title}</h2>
+            <p className="mx-auto mb-10 max-w-md text-white/70">{c.cta.subtitle}</p>
+            <div className={clsx('flex flex-wrap justify-center gap-4', isRTL && 'flex-row-reverse')}>
+              <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-xl bg-[#25D366] px-8 py-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5">
                 <WhatsAppIcon size={16} /> {c.cta.wa}
               </a>
-              <a
-                href="mailto:info@afs.edu.bh"
-                className="inline-flex items-center gap-2 px-8 py-4 border border-white/25 text-white font-semibold rounded-2xl text-sm hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
-              >
+              <a href="mailto:info@afs.edu.bh" className="btn-ghost px-8 py-4">
                 <Mail size={15} /> {c.cta.email}
               </a>
             </div>

@@ -1,23 +1,23 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Cairo } from 'next/font/google'
+import { Poppins, Cairo } from 'next/font/google'
 import './globals.css'
 import ScrollProgress from '@/components/ScrollProgress/ScrollProgress'
 import FloatingCTA from '@/components/FloatingCTA/FloatingCTA'
 import AnnouncementBanner from '@/components/AnnouncementBanner/AnnouncementBanner'
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll'
 
-const playfair = Playfair_Display({
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 const cairo = Cairo({
   subsets: ['latin', 'arabic'],
   variable: '--font-cairo',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -86,8 +86,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" dir="ltr" className={`${playfair.variable} ${cairo.variable}`}>
-      <body className="antialiased">
+    <html lang="en" dir="ltr" className={`${poppins.variable} ${cairo.variable}`}>
+      <body className="antialiased bg-canvas text-ink">
         <AnnouncementBanner />
         <ScrollProgress />
         <SmoothScroll>

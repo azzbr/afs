@@ -3,8 +3,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Phone, ChevronDown, Globe } from 'lucide-react'
+import { Menu, X, Phone, Mail, ChevronDown, Globe } from 'lucide-react'
 import { clsx } from 'clsx'
+import Logo from '@/components/Logo/Logo'
 
 const navLinks = {
   en: [
@@ -13,46 +14,46 @@ const navLinks = {
       label: 'Our School',
       href: '/about',
       children: [
-        { label: 'Who We Are',        href: '/about' },
-        { label: 'Vision & Values',   href: '/about#mission' },
-        { label: 'From the Principal',href: '/about#principal' },
+        { label: 'Who We Are', href: '/about' },
+        { label: 'Vision & Values', href: '/about#mission' },
+        { label: 'From the Principal', href: '/about#principal' },
       ],
     },
     {
       label: 'Learning',
       href: '/academics',
       children: [
-        { label: 'Our Curriculum',     href: '/academics' },
-        { label: 'Programs & Languages',href: '/academics#programs' },
-        { label: 'Assessment',         href: '/academics#star360' },
+        { label: 'Our Curriculum', href: '/academics' },
+        { label: 'Programs & Languages', href: '/academics#programs' },
+        { label: 'Assessment', href: '/academics#star360' },
       ],
     },
     {
       label: 'Admissions',
       href: '/admissions',
       children: [
-        { label: 'How to Apply',      href: '/admissions' },
+        { label: 'How to Apply', href: '/admissions' },
         { label: 'Start Application', href: '/apply' },
-        { label: 'School Fees',       href: '/fees' },
-        { label: 'FAQ',               href: '/admissions#faq' },
+        { label: 'School Fees', href: '/fees' },
+        { label: 'FAQ', href: '/admissions#faq' },
       ],
     },
     {
       label: 'Families',
       href: '/parents',
       children: [
-        { label: 'Parent Hub',       href: '/parents' },
-        { label: 'School Calendar',  href: '/calendar' },
-        { label: 'News & Stories',   href: '/news' },
-        { label: 'Photo Gallery',    href: '/gallery' },
+        { label: 'Parent Hub', href: '/parents' },
+        { label: 'School Calendar', href: '/calendar' },
+        { label: 'News & Stories', href: '/news' },
+        { label: 'Photo Gallery', href: '/gallery' },
       ],
     },
     {
       label: 'Our Team',
       href: '/staff',
       children: [
-        { label: 'Staff & Faculty',  href: '/staff' },
-        { label: 'Careers',          href: '/careers' },
+        { label: 'Staff & Faculty', href: '/staff' },
+        { label: 'Careers', href: '/careers' },
       ],
     },
     { label: 'Contact', href: '/contact' },
@@ -63,38 +64,38 @@ const navLinks = {
       label: 'مدرستنا',
       href: '/about',
       children: [
-        { label: 'من نحن',        href: '/about' },
+        { label: 'من نحن', href: '/about' },
         { label: 'الرؤية والقيم', href: '/about#mission' },
-        { label: 'كلمة المديرة',  href: '/about#principal' },
+        { label: 'كلمة المديرة', href: '/about#principal' },
       ],
     },
     {
       label: 'التعلّم',
       href: '/academics',
       children: [
-        { label: 'مناهجنا',        href: '/academics' },
+        { label: 'مناهجنا', href: '/academics' },
         { label: 'البرامج واللغات', href: '/academics#programs' },
-        { label: 'التقييم',        href: '/academics#star360' },
+        { label: 'التقييم', href: '/academics#star360' },
       ],
     },
     {
       label: 'القبول',
       href: '/admissions',
       children: [
-        { label: 'كيفية التقديم',   href: '/admissions' },
-        { label: 'تقديم الطلب',     href: '/apply' },
+        { label: 'كيفية التقديم', href: '/admissions' },
+        { label: 'تقديم الطلب', href: '/apply' },
         { label: 'الرسوم الدراسية', href: '/fees' },
-        { label: 'أسئلة شائعة',    href: '/admissions#faq' },
+        { label: 'أسئلة شائعة', href: '/admissions#faq' },
       ],
     },
     {
       label: 'الأسرة',
       href: '/parents',
       children: [
-        { label: 'مركز الأهالي',   href: '/parents' },
+        { label: 'مركز الأهالي', href: '/parents' },
         { label: 'التقويم المدرسي', href: '/calendar' },
-        { label: 'الأخبار',        href: '/news' },
-        { label: 'معرض الصور',     href: '/gallery' },
+        { label: 'الأخبار', href: '/news' },
+        { label: 'معرض الصور', href: '/gallery' },
       ],
     },
     {
@@ -102,7 +103,7 @@ const navLinks = {
       href: '/staff',
       children: [
         { label: 'الكادر التعليمي', href: '/staff' },
-        { label: 'الوظائف',         href: '/careers' },
+        { label: 'الوظائف', href: '/careers' },
       ],
     },
     { label: 'تواصل معنا', href: '/contact' },
@@ -126,7 +127,7 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 20)
+    setScrolled(window.scrollY > 16)
   }, [])
 
   useEffect(() => {
@@ -135,183 +136,139 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
   }, [handleScroll])
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  const toggleLang = () => {
-    const next = lang === 'en' ? 'ar' : 'en'
-    onLangChange?.(next)
-  }
+  const toggleLang = () => onLangChange?.(lang === 'en' ? 'ar' : 'en')
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="hidden lg:block bg-brand-blue text-white text-xs py-2">
-        <div className="container-custom flex items-center justify-between">
+      {/* Top contact bar */}
+      <div className="hidden lg:block border-b border-line bg-white text-xs text-muted">
+        <div className="container-custom flex h-9 items-center justify-between">
           <div className={clsx('flex items-center gap-6', isRTL && 'flex-row-reverse')}>
-            <a
-              href="tel:+97317612221"
-              className="flex items-center gap-1.5 hover:text-brand-gold transition-colors"
-            >
+            <a href="tel:+97317612221" className="flex items-center gap-1.5 hover:text-brand-600 transition-colors">
               <Phone size={12} />
-              <span>+973 1761 2221</span>
+              <span dir="ltr">+973 1761 2221</span>
             </a>
-            <a
-              href="mailto:info@afs.edu.bh"
-              className="hover:text-brand-gold transition-colors"
-            >
+            <a href="mailto:info@afs.edu.bh" className="flex items-center gap-1.5 hover:text-brand-600 transition-colors">
+              <Mail size={12} />
               info@afs.edu.bh
             </a>
           </div>
-          <div className={clsx('flex items-center gap-4', isRTL && 'flex-row-reverse')}>
-            <span className="opacity-70">
-              {isRTL ? 'طريق البديع، بربر، البحرين' : 'Budaiya Highway, Barbar, Bahrain'}
-            </span>
-          </div>
+          <span className="text-faint">
+            {isRTL ? 'الأحد – الخميس · 7:00 ص – 3:00 م' : 'Sun – Thu · 7:00 AM – 3:00 PM'}
+          </span>
         </div>
       </div>
 
-      {/* Main Navigation */}
+      {/* Main navigation */}
       <header
         className={clsx(
-          'sticky top-0 z-50 w-full transition-all duration-300',
-          scrolled
-            ? 'glass-white shadow-glass border-b border-white/40'
-            : 'bg-white/95 backdrop-blur-sm border-b border-neutral-100',
+          'sticky top-0 z-50 w-full border-b bg-white transition-shadow duration-300',
+          scrolled ? 'border-line shadow-card' : 'border-line/70',
         )}
       >
         <div className="container-custom">
-          <div className={clsx('flex items-center justify-between h-18 py-3', isRTL && 'flex-row-reverse')}>
+          <div className={clsx('flex h-[68px] items-center justify-between', isRTL && 'flex-row-reverse')}>
 
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue to-brand-blue-dark flex items-center justify-center shadow-brand overflow-hidden">
-                <span className="text-white font-bold text-lg font-playfair">A</span>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-brand-gold" />
-              </div>
-              <div className={clsx(isRTL ? 'text-right' : 'text-left')}>
-                <div className="font-bold text-sm text-neutral-900 leading-tight font-playfair group-hover:text-brand-blue transition-colors">
-                  Al Fajer
-                </div>
-                <div className="text-xs text-neutral-500 leading-tight">
-                  {isRTL ? 'مدرسة الفجر الخاصة' : 'Private School'}
-                </div>
-              </div>
-            </Link>
+            <Logo lang={lang} theme="light" />
 
-            {/* Desktop Nav */}
-            <nav className={clsx('hidden lg:flex items-center gap-1', isRTL && 'flex-row-reverse')}>
+            {/* Desktop nav */}
+            <nav className={clsx('hidden items-center gap-1 lg:flex', isRTL && 'flex-row-reverse')}>
               {links.map((link) => (
-                <div key={link.href} className="relative group">
-                  {link.children ? (
-                    <Link
-                      href={link.href}
-                      className={clsx(
-                        'flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative',
-                        isActive(link.href)
-                          ? 'text-brand-blue bg-blue-50 font-semibold'
-                          : 'text-neutral-700 hover:text-brand-blue hover:bg-blue-50',
-                        isRTL && 'flex-row-reverse',
-                      )}
-                      onMouseEnter={() => setActiveDropdown(link.label)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      {link.label}
-                      {isActive(link.href) && (
-                        <span className="absolute bottom-0.5 left-3 right-3 h-0.5 rounded-full bg-brand-blue" />
-                      )}
+                <div
+                  key={link.href}
+                  className="relative"
+                  onMouseEnter={() => link.children && setActiveDropdown(link.label)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <Link
+                    href={link.href}
+                    className={clsx(
+                      'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                      isActive(link.href)
+                        ? 'text-brand-600'
+                        : 'text-ink/80 hover:text-brand-600',
+                      isRTL && 'flex-row-reverse',
+                    )}
+                  >
+                    {link.label}
+                    {link.children && (
                       <ChevronDown
                         size={14}
                         className={clsx(
-                          'transition-transform duration-200',
+                          'text-faint transition-transform duration-200',
                           activeDropdown === link.label && 'rotate-180',
                         )}
                       />
-                    </Link>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className={clsx(
-                        'relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 block',
-                        isActive(link.href)
-                          ? 'text-brand-blue bg-blue-50 font-semibold'
-                          : 'text-neutral-700 hover:text-brand-blue hover:bg-blue-50',
-                      )}
-                    >
-                      {link.label}
-                      {isActive(link.href) && (
-                        <span className="absolute bottom-0.5 left-3 right-3 h-0.5 rounded-full bg-brand-blue" />
-                      )}
-                    </Link>
+                    )}
+                  </Link>
+                  {isActive(link.href) && (
+                    <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-brand-600" />
                   )}
 
                   {/* Dropdown */}
                   {link.children && (
                     <div
                       className={clsx(
-                        'absolute top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] border border-neutral-100 py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 scale-95 group-hover:scale-100 origin-top',
-                        isRTL ? 'right-0 origin-top-right' : 'left-0 origin-top-left',
-                        'translate-y-1 group-hover:translate-y-0',
+                        'absolute top-full w-56 pt-2 transition-all duration-200',
+                        isRTL ? 'right-0' : 'left-0',
+                        activeDropdown === link.label
+                          ? 'visible translate-y-0 opacity-100'
+                          : 'invisible -translate-y-1 opacity-0',
                       )}
-                      onMouseEnter={() => setActiveDropdown(link.label)}
-                      onMouseLeave={() => setActiveDropdown(null)}
                     >
-                      {/* Top accent */}
-                      <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent" />
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={clsx(
-                            'flex items-center gap-2.5 px-4 py-2.5 text-sm text-neutral-600 hover:text-brand-blue hover:bg-blue-50/70 transition-all duration-150 group/item',
-                            isRTL && 'text-right flex-row-reverse',
-                          )}
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-blue/30 group-hover/item:bg-brand-blue group-hover/item:scale-125 transition-all duration-150 flex-shrink-0" />
-                          {child.label}
-                        </Link>
-                      ))}
+                      <div className="overflow-hidden rounded-xl border border-line bg-white py-2 shadow-lift">
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={clsx(
+                              'flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted transition-colors hover:bg-brand-50 hover:text-brand-600',
+                              isRTL && 'flex-row-reverse text-right',
+                            )}
+                          >
+                            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-200" />
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
               ))}
             </nav>
 
-            {/* Right side actions */}
-            <div className={clsx('hidden lg:flex items-center gap-3', isRTL && 'flex-row-reverse')}>
-              {/* Language Toggle */}
+            {/* Right actions */}
+            <div className={clsx('hidden items-center gap-2.5 lg:flex', isRTL && 'flex-row-reverse')}>
               <button
                 onClick={toggleLang}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200 text-xs font-semibold text-neutral-600 hover:border-brand-blue hover:text-brand-blue hover:bg-blue-50 transition-all duration-200"
+                className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:border-brand-300 hover:text-brand-600"
               >
                 <Globe size={13} />
                 {lang === 'en' ? 'العربية' : 'English'}
               </button>
-
-              {/* CTA Button */}
-              <Link href="/admissions" className="btn-primary text-xs px-5 py-2.5">
-                {isRTL ? 'التسجيل الآن' : 'Apply Now'}
+              <Link href="/admissions" className="btn-primary px-5 py-2.5 text-sm">
+                {isRTL ? 'سجّل الآن' : 'Apply Now'}
               </Link>
             </div>
 
-            {/* Mobile Menu Toggle */}
-            <div className="flex lg:hidden items-center gap-2">
+            {/* Mobile toggles */}
+            <div className="flex items-center gap-2 lg:hidden">
               <button
                 onClick={toggleLang}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-neutral-200 text-xs font-semibold text-neutral-600"
+                className="flex items-center gap-1 rounded-lg border border-line px-2.5 py-1.5 text-xs font-semibold text-muted"
               >
                 <Globe size={12} />
                 {lang === 'en' ? 'AR' : 'EN'}
               </button>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="p-2 rounded-xl text-neutral-700 hover:text-brand-blue hover:bg-blue-50 transition-all"
+                className="grid h-9 w-9 place-items-center rounded-lg text-ink hover:bg-brand-50 hover:text-brand-600 transition-colors"
                 aria-label="Toggle menu"
+                aria-expanded={mobileOpen}
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
@@ -319,38 +276,36 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <div
           className={clsx(
-            'lg:hidden absolute top-full left-0 right-0 glass-white border-b border-white/40 shadow-glass overflow-hidden transition-all duration-300',
-            mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none',
+            'absolute left-0 right-0 top-full overflow-hidden border-b border-line bg-white shadow-lift transition-all duration-300 lg:hidden',
+            mobileOpen ? 'max-h-[85vh] overflow-y-auto opacity-100' : 'max-h-0 opacity-0 pointer-events-none',
           )}
         >
-          <div className="container-custom py-4 space-y-1">
+          <div className="container-custom space-y-1 py-4">
             {links.map((link) => (
               <div key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={clsx(
-                      'block px-4 py-3 rounded-xl text-sm font-medium transition-all',
-                      isActive(link.href)
-                        ? 'text-brand-blue bg-blue-50 font-semibold border-l-2 border-brand-blue'
-                        : 'text-neutral-700 hover:text-brand-blue hover:bg-blue-50',
-                      isRTL && 'text-right',
-                    )}
-                  >
-                    {link.label}
-                  </Link>
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={clsx(
+                    'block rounded-lg px-4 py-3 text-sm font-semibold transition-colors',
+                    isActive(link.href) ? 'bg-brand-50 text-brand-600' : 'text-ink hover:bg-brand-50 hover:text-brand-600',
+                    isRTL && 'text-right',
+                  )}
+                >
+                  {link.label}
+                </Link>
                 {link.children && (
-                  <div className="ml-4 space-y-1">
+                  <div className={clsx('space-y-0.5 py-0.5', isRTL ? 'mr-4' : 'ml-4')}>
                     {link.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
                         className={clsx(
-                          'block px-4 py-2 rounded-lg text-xs text-neutral-500 hover:text-brand-blue hover:bg-blue-50 transition-all',
+                          'block rounded-lg px-4 py-2 text-[13px] text-muted transition-colors hover:bg-brand-50 hover:text-brand-600',
                           isRTL && 'text-right',
                         )}
                       >
@@ -361,13 +316,13 @@ export default function Header({ lang = 'en', onLangChange }: HeaderProps) {
                 )}
               </div>
             ))}
-            <div className="pt-3 pb-1 border-t border-neutral-100">
+            <div className="border-t border-line pt-3">
               <Link
                 href="/admissions"
                 onClick={() => setMobileOpen(false)}
-                className="btn-primary w-full justify-center"
+                className="btn-primary w-full"
               >
-                {isRTL ? 'التسجيل الآن' : 'Apply Now'}
+                {isRTL ? 'سجّل الآن' : 'Apply Now'}
               </Link>
             </div>
           </div>

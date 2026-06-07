@@ -17,15 +17,10 @@ export default function ScrollProgress() {
   }, [])
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[200] h-[3px] bg-transparent pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 z-[200] h-[2px] bg-transparent pointer-events-none">
       <div
-        className="h-full bg-gradient-to-r from-brand-blue via-brand-gold to-brand-blue transition-none"
+        className="h-full bg-gradient-to-r from-brand-600 to-accent-500"
         style={{ width: `${progress}%` }}
-      />
-      {/* Glowing tip */}
-      <div
-        className="absolute top-0 h-[3px] w-12 bg-white/60 blur-[3px] -translate-x-full"
-        style={{ left: `${progress}%` }}
       />
     </div>
   )

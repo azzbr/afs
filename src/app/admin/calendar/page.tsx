@@ -21,7 +21,7 @@ const blank: Omit<CalEvent, 'id'> = {
   typeEn: 'Event', typeAr: 'فعالية', descriptionEn: '', descriptionAr: '',
 }
 
-const inputCls = 'w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+const inputCls = 'w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500'
 const labelCls = 'block text-xs font-medium text-gray-400 mb-1'
 
 const typeBadge: Record<string, string> = {
@@ -89,7 +89,7 @@ export default function CalendarAdminPage() {
             <h1 className="text-2xl font-bold text-gray-100">Calendar Events</h1>
             <p className="text-gray-400 text-sm mt-1">Add holidays, events, assessments and meetings to the school calendar.</p>
           </div>
-          <button onClick={openNew} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+          <button onClick={openNew} className="flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
             <Plus size={15} /> Add Event
           </button>
         </div>
@@ -117,7 +117,7 @@ export default function CalendarAdminPage() {
                     <div className="text-xs text-gray-500 mt-0.5" dir="rtl">{ev.titleAr}</div>
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-400">
-                    {fmtDate(ev.date)}{ev.endDate ? ` → ${fmtDate(ev.endDate)}` : ''}
+                    {fmtDate(ev.date)}{ev.endDate ? ` – ${fmtDate(ev.endDate)}` : ''}
                   </td>
                   <td className="px-4 py-3">
                     <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${typeBadge[ev.typeEn] ?? typeBadge.Other}`}>{ev.typeEn}</span>
@@ -168,7 +168,7 @@ export default function CalendarAdminPage() {
 
             <div className="flex gap-3 justify-end">
               <button onClick={closeForm} className="px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors">Cancel</button>
-              <button onClick={save} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+              <button onClick={save} className="flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
                 <CheckCircle size={14} /> {isNew ? 'Create' : 'Update'}
               </button>
             </div>

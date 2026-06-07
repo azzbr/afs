@@ -22,12 +22,17 @@ A modern, bilingual (English/Arabic) informational website for Al Fajer Private 
 - **Assessment:** Renaissance STAR 360 (Reading, Early Literacy & Math)
 - **KG1 Entry Age:** 2 years 9 months, diaper free
 
-### Brand Identity
+### Brand Identity ("Dawn" design system)
 
-- **Primary Colors:** 
-  - Royal Blue: #0028FF
-  - Gold: #FFD700
-- **Logo:** [Available in assets/logo/]
+"Al Fajer" means *the dawn* — the redesign uses a refined sunrise concept: a confident
+blue anchored by a warm yellow accent, warm neutrals, and restrained motion.
+
+- **Primary (blue):** `#1A47B8` brand · `#11317A` deep navy · `#2C5CE0` highlight
+- **Accent (yellow):** `#F7B71D` sunny · `#E0A412` deep amber (used sparingly)
+- **Neutrals:** canvas `#FBFBFD` · ink `#15223B` · muted `#5A6B85` · hairline `#E6EAF1`
+- **Typography:** Poppins (Latin display headings) + Cairo (body & all Arabic)
+- **Tokens:** defined in `tailwind.config.ts` and `src/app/globals.css`
+- **Imagery:** photo-ready via `MediaPlaceholder` — drop real images into `src` later
 
 ## Tech Stack
 
@@ -152,22 +157,21 @@ afs/
 ## Design System
 
 ### Typography
-- **Primary Font:** [To be determined based on font preferences]
-- **Secondary Font:** [To be determined]
-- **Font Sizes:** Responsive scale from 0.75rem to 3rem
-- **Line Heights:** 1.2 to 1.6 for optimal readability
+- **Display (headings, Latin):** Poppins — warm, geometric, professional
+- **Body & Arabic:** Cairo — strong Arabic support, clean Latin
+- **Headings** use the display font in LTR and Cairo in RTL (Arabic)
 
 ### Color Palette
-- **Primary Blue:** #0028FF (Royal Blue)
-- **Accent Gold:** #FFD700 (Gold)
-- **Text Colors:** #333333 (Dark), #666666 (Medium), #999999 (Light)
-- **Backgrounds:** #FFFFFF (White), #F8F9FA (Light Gray)
+- **Brand blue:** `#1A47B8` (primary) · `#11317A` (deep navy) · `#2C5CE0` (highlight) · `#E8EEFC` (tint)
+- **Accent yellow:** `#F7B71D` (sunny) · `#E0A412` (deep amber) · `#FDF1D4` (soft tint)
+- **Text:** `#15223B` (ink) · `#5A6B85` (muted) · `#8A97AC` (faint)
+- **Surfaces:** `#FBFBFD` (canvas) · `#FFFFFF` (cards) · `#F4F6FA` (alt sections) · `#E6EAF1` (hairline)
 
 ### Components
-- **Buttons:** Primary, Secondary, Ghost variants
-- **Cards:** Image cards, text cards, statistic cards
-- **Forms:** Contact forms, registration forms
-- **Navigation:** Main nav, footer nav, breadcrumbs
+- **Buttons:** `.btn-primary` / `.btn-secondary` / `.btn-outline` / `.btn-ghost`
+- **`MediaPlaceholder`:** photo-ready image slots (pass `src` to swap in real photos)
+- **`Logo` / `SectionHeading` / `PageHero`:** shared building blocks for consistent pages
+- **Motion:** restrained — scroll-reveal (`data-reveal` + `useScrollReveal`) and gentle hover only
 
 ## Content Strategy
 

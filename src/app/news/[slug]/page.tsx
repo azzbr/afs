@@ -1,12 +1,21 @@
 'use client'
 
-import { useState, use } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
-import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, Share2, ChevronRight } from 'lucide-react'
+import MediaPlaceholder from '@/components/MediaPlaceholder/MediaPlaceholder'
+import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, Share2, ChevronRight, Award, GraduationCap, FileText, Users, type LucideIcon } from 'lucide-react'
 import { clsx } from 'clsx'
+
+type Tone = 'soft' | 'blue' | 'navy' | 'accent'
+const catMeta: Record<string, { icon: LucideIcon; tone: Tone }> = {
+  Achievement: { icon: Award, tone: 'blue' },
+  Event: { icon: GraduationCap, tone: 'accent' },
+  Admissions: { icon: FileText, tone: 'soft' },
+  Community: { icon: Users, tone: 'blue' },
+}
 
 const articles = [
   {
@@ -16,8 +25,7 @@ const articles = [
     titleAr: 'طلاب الفجر يتفوقون في تقييم STAR 360',
     excerpt: 'Our students demonstrated exceptional growth in reading and mathematics in the latest STAR 360 assessment cycle, surpassing national benchmarks.',
     excerptAr: 'أظهر طلابنا نمواً استثنائياً في القراءة والرياضيات في دورة تقييم STAR 360 الأخيرة، متجاوزين المعايير الوطنية.',
-    date: 'March 2025', dateAr: 'مارس 2025',
-    color: 'from-brand-blue to-blue-700', emoji: '⭐', readMin: 3,
+    date: 'March 2025', dateAr: 'مارس 2025', readMin: 3,
     body: {
       en: [
         "Al Fajer Private School is proud to announce outstanding results from the latest STAR 360 assessment cycle. Across all grade levels, AFS students demonstrated measurable, significant growth in both reading and mathematics — surpassing national and regional benchmarks.",
@@ -42,8 +50,7 @@ const articles = [
     titleAr: 'حفل التخرج السنوي 2024–2025',
     excerpt: 'We proudly celebrated our Grade 5 graduates at a heartwarming ceremony attended by families and staff.',
     excerptAr: 'احتفلنا بفخر بخريجي الصف الخامس في حفل دافئ حضره الأهالي وأعضاء هيئة التدريس.',
-    date: 'June 2025', dateAr: 'يونيو 2025',
-    color: 'from-amber-400 to-orange-500', emoji: '🎓', readMin: 2,
+    date: 'June 2025', dateAr: 'يونيو 2025', readMin: 2,
     body: {
       en: [
         "Al Fajer Private School held its Annual Graduation Ceremony for the Class of 2024–2025 on June 12th. The hall was filled with the warmth of proud families, dedicated teachers, and beaming graduates who have grown so much over their years at AFS.",
@@ -68,8 +75,7 @@ const articles = [
     titleAr: 'التسجيل مفتوح للعام 2025–2026',
     excerpt: "Applications for the upcoming academic year are now being accepted. Secure your child's place before seats fill up.",
     excerptAr: 'يتم الآن قبول طلبات العام الدراسي القادم. أمّن مقعد طفلك قبل امتلاء الأماكن.',
-    date: 'January 2025', dateAr: 'يناير 2025',
-    color: 'from-emerald-400 to-teal-600', emoji: '📋', readMin: 2,
+    date: 'January 2025', dateAr: 'يناير 2025', readMin: 2,
     body: {
       en: [
         "Al Fajer Private School is pleased to announce that enrollment for the 2025–2026 academic year is now open. We are accepting applications for all grade levels from KG1 through Grade 5.",
@@ -94,8 +100,7 @@ const articles = [
     titleAr: 'يوم الثقافة يحتفل بالتنوع',
     excerpt: 'Students, parents, and teachers came together to celebrate the rich cultural tapestry of our school community.',
     excerptAr: 'اجتمع الطلاب والأهالي والمعلمون معاً للاحتفال بالنسيج الثقافي الغني لمجتمع مدرستنا.',
-    date: 'February 2025', dateAr: 'فبراير 2025',
-    color: 'from-rose-400 to-pink-600', emoji: '🌍', readMin: 3,
+    date: 'February 2025', dateAr: 'فبراير 2025', readMin: 3,
     body: {
       en: [
         "Al Fajer Private School's Annual Cultural Day brought together students, parents, and teachers in a vibrant celebration of the many nationalities and traditions that make up our school community.",
@@ -120,8 +125,7 @@ const articles = [
     titleAr: 'برنامج اللغة الفرنسية يمتد إلى الروضة',
     excerpt: 'AFS is proud to announce the expansion of our trilingual program, introducing French immersion from KG1.',
     excerptAr: 'يسعد الفجر بالإعلان عن توسيع برنامجنا ثلاثي اللغات بإدخال الفرنسية منذ KG1.',
-    date: 'September 2024', dateAr: 'سبتمبر 2024',
-    color: 'from-violet-400 to-purple-600', emoji: '🇫🇷', readMin: 2,
+    date: 'September 2024', dateAr: 'سبتمبر 2024', readMin: 2,
     body: {
       en: [
         "Al Fajer Private School is proud to announce a significant milestone: the expansion of our trilingual education program to include formal French language instruction beginning in KG1.",
@@ -146,8 +150,7 @@ const articles = [
     titleAr: 'يوم التعاون بين الأهالي والمعلمين',
     excerpt: 'A productive day of workshops and discussions helped strengthen the partnership between AFS families and teachers.',
     excerptAr: 'يومٌ مثمر من ورش العمل والنقاشات ساعد على تعزيز الشراكة بين أسر الفجر والمعلمين.',
-    date: 'November 2024', dateAr: 'نوفمبر 2024',
-    color: 'from-cyan-400 to-blue-500', emoji: '🤝', readMin: 2,
+    date: 'November 2024', dateAr: 'نوفمبر 2024', readMin: 2,
     body: {
       en: [
         "AFS hosted its annual Parent-Teacher Collaboration Day on November 14th, bringing together over 200 parents and all full-time staff for a day of workshops, dialogue, and partnership building.",
@@ -167,15 +170,15 @@ const articles = [
   },
 ]
 
-const categoryColors: Record<string, string> = {
-  Achievement: 'bg-brand-blue/8 text-brand-blue',
-  Event:       'bg-amber-50 text-amber-600',
-  Admissions:  'bg-emerald-50 text-emerald-600',
-  Community:   'bg-cyan-50 text-cyan-600',
+const categoryChip: Record<string, string> = {
+  Achievement: 'bg-brand-50 text-brand-600',
+  Event: 'bg-accent-100 text-accent-700',
+  Admissions: 'bg-brand-50 text-brand-600',
+  Community: 'bg-brand-50 text-brand-600',
 }
 
-export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params)
+export default function ArticlePage({ params }: { params: { slug: string } }) {
+  const { slug } = params
   const [lang, setLang] = useState<'en' | 'ar'>('en')
   const isRTL = lang === 'ar'
   const Arr = isRTL ? ArrowRight : ArrowLeft
@@ -199,77 +202,57 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
       <main className="flex-1">
 
         {/* Hero */}
-        <section className={clsx('relative bg-gradient-to-br overflow-hidden py-24', article.color)}>
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] opacity-5 select-none pointer-events-none">
-              {article.emoji}
-            </div>
-          </div>
+        <section className="dawn-hero relative overflow-hidden py-16 text-white md:py-20">
+          <div className="absolute inset-0 grid-faint opacity-40 pointer-events-none" />
           <div className="relative container-custom">
-            {/* Breadcrumb */}
-            <div className={clsx('flex items-center gap-2 text-white/60 text-xs mb-6', isRTL && 'flex-row-reverse')}>
-              <Link href="/" className="hover:text-white transition-colors">{isRTL ? 'الرئيسية' : 'Home'}</Link>
+            <div className={clsx('mb-6 flex items-center gap-2 text-xs text-white/55', isRTL && 'flex-row-reverse')}>
+              <Link href="/" className="transition-colors hover:text-white">{isRTL ? 'الرئيسية' : 'Home'}</Link>
               <ChevronRight size={12} className={clsx(isRTL && 'rotate-180')} />
-              <Link href="/news" className="hover:text-white transition-colors">{isRTL ? 'الأخبار' : 'News'}</Link>
+              <Link href="/news" className="transition-colors hover:text-white">{isRTL ? 'الأخبار' : 'News'}</Link>
               <ChevronRight size={12} className={clsx(isRTL && 'rotate-180')} />
-              <span className="text-white/40 truncate max-w-[200px]">{isRTL ? article.titleAr : article.title}</span>
+              <span className="max-w-[200px] truncate text-white/40">{isRTL ? article.titleAr : article.title}</span>
             </div>
-
             <div className={clsx('max-w-3xl', isRTL && 'text-right')}>
-              <div className={clsx('flex flex-wrap items-center gap-3 mb-5', isRTL && 'flex-row-reverse')}>
-                <span className={clsx('inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-white/20 text-white border border-white/30')}>
-                  <Tag size={10} />
-                  {isRTL ? article.categoryAr : article.category}
+              <div className={clsx('mb-5 flex flex-wrap items-center gap-3', isRTL && 'flex-row-reverse')}>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
+                  <Tag size={10} />{isRTL ? article.categoryAr : article.category}
                 </span>
-                <span className="flex items-center gap-1.5 text-xs text-white/70">
-                  <Calendar size={10} />
-                  {isRTL ? article.dateAr : article.date}
-                </span>
-                <span className="flex items-center gap-1 text-xs text-white/70">
-                  <Clock size={10} />
-                  {article.readMin} {isRTL ? 'د قراءة' : 'min read'}
-                </span>
+                <span className="flex items-center gap-1.5 text-xs text-white/70"><Calendar size={10} />{isRTL ? article.dateAr : article.date}</span>
+                <span className="flex items-center gap-1 text-xs text-white/70"><Clock size={10} />{article.readMin} {isRTL ? 'د قراءة' : 'min read'}</span>
               </div>
-              <h1 className={clsx('text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6', !isRTL && 'font-playfair')}>
+              <h1 className="mb-6 font-display text-3xl font-bold leading-tight text-balance md:text-4xl lg:text-5xl">
                 {isRTL ? article.titleAr : article.title}
               </h1>
-              <p className="text-white/70 text-lg leading-relaxed">
-                {isRTL ? article.excerptAr : article.excerpt}
-              </p>
+              <p className="text-lg leading-relaxed text-white/70">{isRTL ? article.excerptAr : article.excerpt}</p>
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 50" fill="white" className="w-full block" preserveAspectRatio="none" height="40">
-              <path d="M0,50 C360,0 1080,0 1440,50 L1440,50 L0,50 Z" />
-            </svg>
           </div>
         </section>
 
         {/* Article body */}
-        <section className="py-16 bg-white">
+        <section className="section-padding bg-canvas">
           <div className="container-custom">
-            <div className="max-w-3xl mx-auto">
-              <div className={clsx('prose prose-lg max-w-none', isRTL && 'text-right')}>
+            <div className="mx-auto max-w-3xl">
+              <MediaPlaceholder aspect="16/9" tone={catMeta[article.category].tone} icon={catMeta[article.category].icon} className="mb-10" />
+              <div className={clsx('max-w-none', isRTL && 'text-right')}>
                 {(isRTL ? article.body.ar : article.body.en).map((para, i) => (
-                  <p key={i} className="text-neutral-700 leading-relaxed mb-6 text-base">
+                  <p key={i} className="mb-6 text-base leading-relaxed text-ink/80">
                     {para}
                   </p>
                 ))}
               </div>
 
               {/* Share + back */}
-              <div className={clsx('flex flex-wrap items-center justify-between gap-4 mt-12 pt-8 border-t border-neutral-100', isRTL && 'flex-row-reverse')}>
+              <div className={clsx('mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8', isRTL && 'flex-row-reverse')}>
                 <Link
                   href="/news"
-                  className={clsx('inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-brand-blue-dark transition-colors', isRTL && 'flex-row-reverse')}
+                  className={clsx('inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700', isRTL && 'flex-row-reverse')}
                 >
                   <Arr size={14} />
                   {isRTL ? 'العودة إلى الأخبار' : 'Back to News'}
                 </Link>
                 <button
                   onClick={handleShare}
-                  className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-brand-blue transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-brand-600"
                 >
                   <Share2 size={14} />
                   {isRTL ? 'مشاركة المقال' : 'Share Article'}
@@ -281,31 +264,28 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
 
         {/* More articles */}
         {otherArticles.length > 0 && (
-          <section className="py-16 bg-neutral-50 border-t border-neutral-100">
+          <section className="border-t border-line dawn-soft py-16">
             <div className="container-custom">
-              <h2 className={clsx('text-xl font-bold font-playfair text-neutral-900 mb-8', isRTL && 'text-right')}>
+              <h2 className={clsx('mb-8 font-display text-xl font-bold text-ink', isRTL && 'text-right')}>
                 {isRTL ? 'مقالات أخرى' : 'More Stories'}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {otherArticles.map((item) => (
-                  <Link
-                    key={item.slug}
-                    href={`/news/${item.slug}`}
-                    className={clsx('group rounded-2xl border border-neutral-100 bg-white hover:shadow-lg hover:border-brand-blue/20 transition-all duration-300 overflow-hidden hover:-translate-y-1', isRTL && 'text-right')}
-                  >
-                    <div className={clsx('h-28 bg-gradient-to-br flex items-center justify-center', item.color)}>
-                      <span className="text-4xl">{item.emoji}</span>
-                    </div>
-                    <div className="p-4">
-                      <span className={clsx('text-xs font-bold px-2 py-1 rounded-full mb-2 inline-block', categoryColors[item.category] || 'bg-neutral-100 text-neutral-600')}>
-                        {isRTL ? item.categoryAr : item.category}
-                      </span>
-                      <h3 className={clsx('font-semibold text-sm text-neutral-900 group-hover:text-brand-blue transition-colors leading-snug', !isRTL && 'font-playfair')}>
-                        {isRTL ? item.titleAr : item.title}
-                      </h3>
-                    </div>
-                  </Link>
-                ))}
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+                {otherArticles.map((item) => {
+                  const meta = catMeta[item.category]
+                  return (
+                    <Link key={item.slug} href={`/news/${item.slug}`} className={clsx('group block overflow-hidden card card-hover', isRTL && 'text-right')}>
+                      <MediaPlaceholder aspect="16/9" tone={meta.tone} icon={meta.icon} rounded="rounded-none" />
+                      <div className="p-4">
+                        <span className={clsx('mb-2 inline-block rounded-full px-2 py-1 text-xs font-bold', categoryChip[item.category])}>
+                          {isRTL ? item.categoryAr : item.category}
+                        </span>
+                        <h3 className="font-display text-sm font-semibold leading-snug text-ink transition-colors group-hover:text-brand-600">
+                          {isRTL ? item.titleAr : item.title}
+                        </h3>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </section>
